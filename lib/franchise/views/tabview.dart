@@ -12,6 +12,13 @@ class TabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(length: 4, child: Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(onPressed: (){
+          },
+            icon: Icon(Icons.logout_outlined),
+            iconSize: 25,
+          )
+        ],
         elevation: 0,
         backgroundColor: Colors.blue[900],
         title: Text("Franchise" ,
