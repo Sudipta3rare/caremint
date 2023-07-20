@@ -290,7 +290,7 @@ class _HomePageState extends State<HomePage> {
       height: 30.h,
       child: GestureDetector(
         onTap: () {
-          Get.off(TabView());
+          // Get.off(TabView());
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
