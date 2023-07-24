@@ -1,4 +1,4 @@
-package com.example.caremint
+package com.threeraredynamics.caremint
 
 import io.flutter.embedding.android.FlutterActivity
 

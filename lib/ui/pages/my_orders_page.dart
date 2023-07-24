@@ -44,7 +44,7 @@ class MyOrdersPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SingleChildScrollView(
@@ -56,6 +56,7 @@ class MyOrdersPage extends StatelessWidget {
                   listComponetCol(ordCtrl.myOrderList[index].sName,ordCtrl.myOrderList[index].sCategory,"Service Name", "Service Category",context),
                   listComponetCol(ordCtrl.myOrderList[index].providerId,ordCtrl.myOrderList[index].price.toString(),"Provider Name", "Order Value",context),
                   listComponetCol(ordCtrl.myOrderList[index].date,ordCtrl.myOrderList[index].status == "1" ? "Completed" : "Ongoing","Order Date", "Order Status",context),
+
                 ],
               ),
             ),
@@ -85,6 +86,20 @@ class MyOrdersPage extends StatelessWidget {
             //       ElevatedButton(onPressed: (){}, child: Text("Re-Order"))
             //     ],),
             // )
+
+          Row(
+            children: [
+              TextButton(onPressed:() {}, child: Text("Cancel Order", style: GoogleFonts.poppins(
+                color: Colors.red,
+              ),)
+              ),
+              Spacer(),
+              ElevatedButton(onPressed:() {}, child: Text("Contact Provider", style: GoogleFonts.poppins(
+
+              ),)
+              ),
+            ],
+          )
           ],
         ),
       ),
