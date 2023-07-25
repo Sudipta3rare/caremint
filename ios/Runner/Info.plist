@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>The need to access the photo library is to submit selected pictures by the user to submit for the functioning of the application.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -16,6 +18,12 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>caremint</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>Upload images for screen background</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Upload image from camera for screen background</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Post videos to profile</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

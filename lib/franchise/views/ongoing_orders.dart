@@ -1,4 +1,5 @@
 import 'package:caremint/franchise/controllers/customerInfo_controller.dart';
+import 'package:caremint/franchise/views/submit_pictures_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
@@ -108,7 +109,11 @@ class CustomerInfo extends StatelessWidget {
                   ],
                 ),
               ),
-              ElevatedButton(onPressed: (){}, child: Text("Order Completed",
+              ElevatedButton(onPressed: (){
+                Get.to(
+                  SubmitPictures()
+                );
+              }, child: Text("Order Completed",
               style:  GoogleFonts.poppins(),))
             ],
           ),

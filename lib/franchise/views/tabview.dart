@@ -47,13 +47,16 @@ class TabView extends StatelessWidget {
           ],
         ),
       ),
-      body: const TabBarView(
-        children: [
-          Orders(),
-          CustomerInfo(),
-          ListingServices(),
-          CompletedOrderPage(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: const TabBarView(
+          children: [
+            Orders(),
+            CustomerInfo(),
+            ListingServices(),
+            CompletedOrderPage(),
+          ],
+        ),
       ),
     ));
   }
