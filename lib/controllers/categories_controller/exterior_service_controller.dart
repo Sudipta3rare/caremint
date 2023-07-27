@@ -72,8 +72,8 @@ class ExteriorServiceController extends GetxController{
   void gotoServiceWithLocation(String catId, String catN, cty, st){
     categoryId = catId;
     catName = catN;
-    city =capitalizeAllWord(cty);
-    pincode = st;
+    city =capitalizeAllWord(cty).trim();
+    pincode = st.trim();
     // state =capitalizeAllWord(st);
     // print(catId);
     itemList = [];
@@ -84,7 +84,7 @@ class ExteriorServiceController extends GetxController{
   void gotoService(String catId, String catN, pin){
     categoryId = catId;
     catName = catN;
-   pincode = pin;
+   pincode = pin.trim();
    // print(pincode);
     // print(catId);
     itemList = [];
