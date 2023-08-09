@@ -1,29 +1,27 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class UserDataModel {
   String email;
   String phone;
   String firstName;
   String pincode;
-  UserDataModel(
-      {
-        this.email = '',
-        this.firstName = '',
-        this.phone = '',
-        this.pincode = '',
-      });
 
-  toJson(){
-    return{
+  UserDataModel({
+    this.email = '',
+    this.firstName = '',
+    this.phone = '',
+    this.pincode = '',
+  });
+
+  toJson() {
+    return {
       "email": email,
       "phone": phone,
-      "firstname":firstName,
-      "pincode" : pincode,
+      "firstname": firstName,
+      "pincode": pincode,
     };
   }
 
 
-
+/*
   factory UserDataModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document){
     final data = document.data();
@@ -47,4 +45,6 @@ class UserDataModel {
       // time: data["time"],
     );
   }
+}*/
+
 }

@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Providers {
   final String id;
   final String city;
@@ -31,7 +29,7 @@ class Providers {
     };
   }
 
-  factory Providers.fromSnapshot(
+ /* factory Providers.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document){
     final data = document.data()!;
     return Providers(
@@ -45,7 +43,7 @@ class Providers {
       state: data["state"],
     );
   }
-
+*/
 
 }
 

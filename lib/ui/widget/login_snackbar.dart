@@ -3,8 +3,6 @@ import 'package:caremint/controllers/controllers.dart';
 import 'package:caremint/controllers/home_controller.dart';
 import 'package:caremint/ui/components/loading_overlay_components.dart';
 import 'package:caremint/ui/widget/signup_snackbar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -120,7 +118,7 @@ class LoginSnackBar {
                   SizedBox(
                     height: 5,
                   ),
-                  GetBuilder<SignUpController>(builder: (ctrl) {
+                  /*GetBuilder<SignUpController>(builder: (ctrl) {
                     return GetBuilder<HomeController>(
                       builder: (hmCtrl) {
                         return LoadingOverlay(
@@ -222,7 +220,7 @@ class LoginSnackBar {
                         );
                       }
                     );
-                  }),
+                  }),*/
                   SizedBox(
                     height: 16,
                   ),

@@ -11,12 +11,16 @@ class AppRoutes {
   AppRoutes._(); //this is to prevent anyone from instantiating this object
   static final routes = [
     GetPage(name: '/', page: () =>  SplashPage(), transition: Transition.fade),
+/*
     GetPage(name: '/home', page: () =>  HomePage(), transition: Transition.fade),
+*/
     GetPage(name: '/service', page: () =>  ExteriorServices(), transition: Transition.fade),
     // GetPage(name: '/auth', page: () => const AuthPage()),
     // GetPage(name: '/dashboard', page: () => const DashboardPage()),
     // GetPage(name: '/orders', page: () =>  const ListOrders(), transition: Transition.fade),
+/*
     GetPage(name: '/order', page: () =>   MyOrdersPage(), transition: Transition.fade),
+*/
     GetPage(name: '/cart', page: () =>   CartPage(), transition: Transition.fade),
   ];
 }

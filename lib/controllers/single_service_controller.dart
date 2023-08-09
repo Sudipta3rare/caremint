@@ -1,14 +1,9 @@
 import 'package:caremint/models/service_person.dart';
 import 'package:caremint/ui/pages/single_service_detail/service_detail_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 class SingleServiceController extends GetxController{
 static SingleServiceController to =Get.find();
   RxInt selectedIndex = 0.obs;
-
-
-  FirebaseFirestore db = FirebaseFirestore.instance;
-
 
 
 List<Service> searchList=[];

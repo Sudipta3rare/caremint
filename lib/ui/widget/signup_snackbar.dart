@@ -1,7 +1,4 @@
 import 'package:caremint/ui/widget/login_snackbar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:get/get.dart';
@@ -105,7 +102,7 @@ class SignUpSnackBar {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
-                    onTap: () async {
+                    /*onTap: () async {
                       if (firstnameController.text.isEmpty) {
                         Get.snackbar(
                           'Info',
@@ -225,7 +222,7 @@ class SignUpSnackBar {
                           print('The account already exists for that email.');
                         }
                       }
-                    },
+                    },*/
                     child: CustomButton().customButton200(context, 'Sign Up'),),
                 ),
                 SizedBox(height: 16),

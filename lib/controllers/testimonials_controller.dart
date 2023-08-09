@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,20 +17,22 @@ class TestimonialsController extends GetxController {
   void fetchTestimonials() async {
     try {
       // Fetch data from Firestore collection
-      QuerySnapshot snapshot =
-      await FirebaseFirestore.instance.collection('Testimonials').get();
+     /* QuerySnapshot snapshot =
+      await FirebaseFirestore.instance.collection('Testimonials').get();*/
 
       // Clear existing testimonials
       testimonials.clear();
 
       // Iterate through the documents and create testimonial cards
-      snapshot.docs.forEach((doc) {
+    /*  snapshot.docs.forEach((doc) {
         String description = doc['description'];
         String name = doc['name'];
         String image = doc['image'];
-
+*/
+/*
         testimonials.add(testimonialCard(description, name, image));
-      });
+*/
+     /* });*/
     } catch (e) {
       // Handle any errors during data fetching
       print('Error fetching testimonials: $e');

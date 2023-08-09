@@ -37,7 +37,9 @@ class ServiceDetailCard extends StatelessWidget {
 
 
             // Get.to(ServiceOrderPage());
+/*
            SingleOrderPage(itemIndex, serviceDetial, serviceProviderId).orderSnackBar(context);
+*/
           },
           child: SingleChildScrollView(
             child: Stack(

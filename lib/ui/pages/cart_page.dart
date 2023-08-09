@@ -1,13 +1,10 @@
-import 'package:caremint/controllers/my_orders_controller/my_order_controller.dart';
 import 'package:caremint/ui/components/appBar.dart';
 import 'package:caremint/ui/components/custom_button.dart';
 import 'package:caremint/ui/components/loading_overlay_components.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../constants/app_colors.dart';
-import '../../controllers/cart_controller.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -17,7 +14,7 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppStyle.backgroundColor,
       appBar: AppBarComponent().appBar("Cart"),
-      body: GetBuilder<CartController>(builder: (ctrl) {
+     /* body: GetBuilder<CartController>(builder: (ctrl) {
         return LoadingOverlay(
           isLoading: ctrl.isLoading.value,
           child: Column(
@@ -31,7 +28,7 @@ class CartPage extends StatelessWidget {
             ],
           ),
         );
-      }),
+      }),*/
     );
   }
 
@@ -45,7 +42,7 @@ class CartPage extends StatelessWidget {
     );
   }
 
-  Widget cartList(context, CartController ctrl) {
+  /*Widget cartList(context, CartController ctrl) {
     return ListView.separated(
       itemCount: ctrl.cartList.length,
       itemBuilder: (BuildContext context, int index) => Padding(
@@ -92,9 +89,9 @@ class CartPage extends StatelessWidget {
         );
       },
     );
-  }
+  }*/
 
-  Widget bottomBarTitle() {
+/*  Widget bottomBarTitle() {
     return GetBuilder<CartController>(builder: (controller) {
       return Container(
         margin: const EdgeInsets.only(bottom: 15),
@@ -116,9 +113,9 @@ class CartPage extends StatelessWidget {
         ),
       );
     });
-  }
+  }*/
 
-  Widget bottomBarButton(context) {
+/*  Widget bottomBarButton(context) {
     return GetBuilder<CartController>(builder: (controller) {
       return GetBuilder<MyOrderController>(builder: (ordCtrl) {
         return SizedBox(
@@ -185,5 +182,5 @@ class CartPage extends StatelessWidget {
         );
       });
     });
-  }
+  }*/
 }

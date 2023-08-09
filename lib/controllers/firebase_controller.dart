@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
+/*
 class FirebaseController extends GetxController{
   static FirebaseController to = Get.find();
 
@@ -51,4 +51,4 @@ class FirebaseController extends GetxController{
     print(category.first);
 
   }
-}
+}*/

@@ -1,6 +1,5 @@
 import 'package:caremint/ui/widget/login_snackbar.dart';
 import 'package:caremint/ui/widget/signup_snackbar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +11,6 @@ class ForgetPasswordSnackbar {
   Future forgetPasswordSnackbar(context){
 
     final TextEditingController emailController = TextEditingController();
-    final FirebaseAuth _auth = FirebaseAuth.instance;
 
     void sendPasswordResetEmail(BuildContext context) async {
       String email = emailController.text.trim();
@@ -39,7 +37,9 @@ class ForgetPasswordSnackbar {
       );
 
       try {
+/*
         await _auth.sendPasswordResetEmail(email: email);
+*/
         Get.snackbar(
           'Info',
           'Instruction to reset your password sent',

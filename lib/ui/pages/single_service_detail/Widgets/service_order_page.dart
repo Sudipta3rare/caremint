@@ -1,7 +1,3 @@
-
-
-import 'package:caremint/controllers/cart_controller.dart';
-import 'package:caremint/controllers/service_order_controller.dart';
 import 'package:caremint/models/service_person.dart';
 import 'package:caremint/ui/components/custom_button.dart';
 import 'package:caremint/ui/widget/login_snackbar.dart';
@@ -104,7 +100,7 @@ class SingleOrderPage{
     );
   }
 
-  Future orderSnackBar(BuildContext context){
+/*  Future orderSnackBar(BuildContext context){
     return  Get.dialog(
         GetBuilder<ServiceOrderController>(
           builder: (ctrl) {
@@ -242,5 +238,5 @@ class SingleOrderPage{
             );
           }
         ));
-  }
+  }*/
 }

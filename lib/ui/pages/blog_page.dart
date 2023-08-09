@@ -24,7 +24,7 @@ class BlogPage extends StatelessWidget {
         elevation: 0,
       ),
       backgroundColor: Colors.blue[50],
-      body: GetBuilder<BlogController>(
+      /*body: GetBuilder<BlogController>(
         init: BlogController(), // Instantiate the BlogController
         builder: (blogController) {
           return Obx(
@@ -38,7 +38,7 @@ class BlogPage extends StatelessWidget {
             ),
           );
         },
-      ),
+      ),*/
     );
   }
 }

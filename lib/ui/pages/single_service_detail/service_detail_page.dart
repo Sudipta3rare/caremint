@@ -1,14 +1,11 @@
 import 'package:caremint/controllers/single_service_controller.dart';
-import 'package:caremint/models/service_person.dart';
 import 'package:caremint/ui/widget/login_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
-
-import '../../../controllers/cart_controller.dart';
 import '../../widget/serach_box.dart';
-import '../cart_page.dart';
 import 'Widgets/service_detail_card.dart';
+
 class SingleServiceDetail extends StatelessWidget {
    SingleServiceDetail( );
   // final Providers personDetails;
@@ -24,14 +21,14 @@ class SingleServiceDetail extends StatelessWidget {
             backgroundColor: Colors.blue[900],
             elevation: 0,
             actions: [
-              GetBuilder<CartController>(
+              /*GetBuilder<CartController>(
                 builder: (crCtrl) {
                   return IconButton(onPressed: () async {
                    await crCtrl.isLoggedIn() ? crCtrl.gotoCartPage() :
                    LoginSnackBar().loginSnackBar(context);
                   }, icon: Icon(Icons.shopping_bag_outlined));
                 }
-              )
+              )*/
             ],
             title:Text(ssCtrl.personDetails.name,
             style: GoogleFonts.poppins(

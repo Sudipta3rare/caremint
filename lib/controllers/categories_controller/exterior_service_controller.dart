@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +5,7 @@ import '../../models/service_person.dart';
 
 enum ViewType { grid, list }
 
+/*
 class ExteriorServiceController extends GetxController{
   static ExteriorServiceController to= Get.find();
   List<IconData> listIconTabToggle = [Icons.grid_view_sharp,Icons.list];
@@ -105,4 +105,4 @@ class ExteriorServiceController extends GetxController{
   }
 
 
-}
+}*/

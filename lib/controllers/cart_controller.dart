@@ -1,9 +1,7 @@
 import 'package:caremint/models/service_person.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
+/*
 
 class CartController extends GetxController {
   static CartController to = Get.find();
@@ -97,6 +95,7 @@ class CartController extends GetxController {
 
   }
 }
+*/
 
 
 

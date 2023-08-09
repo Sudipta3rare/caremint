@@ -1,11 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants/app_colors.dart';
 import '../../models/my_orders_model.dart';
 
+/*
 class MyOrderController extends GetxController{
   static MyOrderController to = Get.find();
 
@@ -81,4 +80,4 @@ class MyOrderController extends GetxController{
      Get.back();
      Get.offAndToNamed("/order");
    }
-}
+}*/

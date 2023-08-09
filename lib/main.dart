@@ -13,7 +13,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'controllers/firebase_controller.dart';
 
 import 'controllers/home_controller.dart';
@@ -23,34 +22,41 @@ import 'controllers/service_order_controller.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-  await Firebase.initializeApp(
-    // options: DefaultFirebaseOptions.currentPlatform,
-  );
   _initController();
 
   // _initFirebase();
-  runApp(const MainApp());
+  /*runApp(const MainApp());*/
 }
 // _initFirebase() async {
 //   await Firebase.initializeApp(
 //     // options: DefaultFirebaseOptions.currentPlatform,
 //   );
 // }
-_initController(){
-
+_initController() {
   Get.put(SplashScreenViewModel());
+/*
   Get.put(FirebaseController());
+*/
+/*
   Get.put(HomeController());
+*/
   Get.put(SignUpController());
+/*
   Get.put(ExteriorServiceController());
+*/
   Get.put(SingleServiceController());
+/*
   Get.put<ServiceOrderController>(ServiceOrderController());
-  Get.lazyPut(() => OrderController(),fenix: true);
+*/
+  Get.lazyPut(() => OrderController(), fenix: true);
   Get.put<ListingServicesController>(ListingServicesController());
   Get.put<CustomerInfoController>(CustomerInfoController());
+/*
   Get.put<MyOrderController>(MyOrderController());
+*/
 
 
+/*
   Get.put<CartController>(CartController());}
 class MainApp extends StatefulWidget {
   const MainApp({Key? key}) : super(key: key);
@@ -58,8 +64,9 @@ class MainApp extends StatefulWidget {
   @override
   State<MainApp> createState() => _MainAppState();
 }
+*/
 
-class _MainAppState extends State<MainApp> {
+/*class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return Sizer(
@@ -72,7 +79,7 @@ class _MainAppState extends State<MainApp> {
         );
       },);
   }
-}
+}*/
 
 //
 // class SplashScreen extends StatefulWidget {
@@ -100,3 +107,4 @@ class _MainAppState extends State<MainApp> {
 //     );
 //   }
 // }
+}

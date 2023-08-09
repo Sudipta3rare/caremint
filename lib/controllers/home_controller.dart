@@ -1,11 +1,10 @@
 import 'package:caremint/controllers/firebase_controller.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../models/userDataModel.dart';
 
+/*
 class HomeController extends GetxController {
   static HomeController to = Get.find();
 
@@ -94,3 +93,4 @@ class HomeController extends GetxController {
     Get.toNamed('/service');
   }
 }
+*/

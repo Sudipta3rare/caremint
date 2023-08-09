@@ -118,20 +118,20 @@ class SliderPage3 extends StatelessWidget {
                 const SizedBox(height: 30),
                     //Butoon
                 // get started button
-                GestureDetector(
+                /*GestureDetector(
                   onTap: () => Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(
+                    *//*MaterialPageRoute(
 
-                      builder: (context) {
-                        return HomePage();
-                      },
-                    ),
+                      *//**//*builder: (context) {
+                       // return HomePage();
+                      },*//**//*
+                    ),*//*
                   ),
                   child: CustomButton().customButton200(context, "Get Started"),
 
                   // child: Intro("Get Started").buildButton(context),
-                ),
+                ),*/
 
                 // const Spacer(),
               ],

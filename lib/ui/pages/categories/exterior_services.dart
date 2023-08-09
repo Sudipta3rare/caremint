@@ -1,30 +1,28 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:caremint/controllers/categories_controller/exterior_service_controller.dart';
 import 'package:caremint/controllers/controllers.dart';
-import 'package:caremint/ui/components/appBar.dart';
 import 'package:caremint/ui/components/loading_overlay_components.dart';
-import 'package:caremint/ui/pages/single_service_detail/service_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../constants/app_colors.dart';
 import '../../../models/service_person.dart';
 
 class ExteriorServices extends StatelessWidget {
    ExteriorServices({Key? key}) : super(key: key);
 
+/*
   ExteriorServiceController ctrl = ExteriorServiceController.to;
+*/
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppStyle.backgroundColor,
-      appBar: AppBarComponent().appBar(ctrl.catName),
+    /*  appBar: AppBarComponent().appBar(ctrl.catName),*/
 
-      body: SafeArea(
-        child: GetBuilder<ExteriorServiceController>(builder: (ctrl) {
+      /*body: SafeArea(
+        child: GetBuilder<*//*ExteriorServiceController*//*>(builder: (ctrl) {
           // return listBuilding(context, ctrl, ctrl.itemList);
           return LoadingOverlay(
             isLoading: ctrl.isLoading.value,
@@ -85,7 +83,7 @@ class ExteriorServices extends StatelessWidget {
           );
 
         }),
-      ),
+      ),*/
     );
   }
 

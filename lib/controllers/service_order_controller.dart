@@ -1,12 +1,10 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../constants/app_colors.dart';
 
+/*
 class ServiceOrderController extends GetxController{
   static ServiceOrderController to = Get.find();
 
@@ -74,4 +72,4 @@ class ServiceOrderController extends GetxController{
     // city.text == '' ? getSnackBar() : null;
     // des.text == '' ? getSnackBar() : null;
   }
-}
+}*/

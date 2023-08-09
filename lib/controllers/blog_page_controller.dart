@@ -1,8 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import '../models/blog_model.dart';
 
 
+/*
 class BlogController extends GetxController {
   RxList<Blog> blogs = <Blog>[].obs;
 
@@ -47,6 +47,7 @@ class BlogController extends GetxController {
     }
   }
 }
+*/
 
 
 
