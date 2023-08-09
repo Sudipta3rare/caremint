@@ -1,8 +1,14 @@
 import 'package:caremint/controllers/firebase_controller.dart';
+import 'package:caremint/data/api_category_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'dart:core';
+
+import 'package:caremint/models/category_model.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../models/userDataModel.dart';
 
@@ -25,8 +31,10 @@ class HomeController extends GetxController {
   TextEditingController city = TextEditingController();
   TextEditingController pincode = TextEditingController();
 
-  List category = [];
-  List categoryImage = [];
+
+  List<Category> categoryList = [];
+
+
   List categoryId = [];
 
   Future<void> getUserData() async {
@@ -38,8 +46,6 @@ class HomeController extends GetxController {
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .get();
       userDetails = UserDataModel.fromSnapshot(snapshot);
-      print(snapshot.id);
-
     }
     update();
   }
@@ -52,8 +58,6 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-
-
     isLoggedIn = await FirebaseAuth.instance.currentUser != '' || FirebaseAuth.instance.currentUser != null ? true.obs : false.obs;
     getCategory();
     getUserData();
@@ -63,30 +67,36 @@ class HomeController extends GetxController {
   void onClose() {
     userDetails = UserDataModel();
     categoryId = [];
-    category = [];
-    categoryImage = [];
+    categoryList=[];
   }
 
   void getCategory() async {
     isLoading.value = true;
+    CategoryProvider().getCategory(onSuccess: (categoryItems){
+      if(categoryItems.body != ''){
+        categoryList.clear();
+
+        categoryList.addAll(categoryItems.body as Iterable<Category>);
+        print(categoryList[0].categoryName);
+      }
+    },
+        onError: (error){
+          categoryList.clear();
+          isLoading.value = false;
+          update();
+        });
+
+
     final query = await db.collection('Category').get();
 
-    // final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
-    //   // treasureLocations.add(document.data as Map<String, dynamic>);
-    // print(allData);
 
     for (int i = 0; i < query.docs.length; i++) {
-      var a = query.docs[i].data();
 
-      var cat = a["category"] ?? '';
-      var catImg = a["category_image"] ?? '';
       categoryId.add(query.docs[i].id);
-      categoryImage.add(catImg);
-      category.add(cat);
-      selectItems.add(cat);
+
     }
 
-    print(category);
+    // print(category);
     isLoading.value = false;
   }
 

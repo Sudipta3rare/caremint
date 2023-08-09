@@ -69,14 +69,14 @@ class ExteriorServiceController extends GetxController{
     update();
   }
 
-  void gotoServiceWithLocation(String catId, String catN, cty, st){
-    categoryId = catId;
-    catName = catN;
-    city =capitalizeAllWord(cty).trim();
-    pincode = st.trim();
-    // state =capitalizeAllWord(st);
-    // print(catId);
-    itemList = [];
+  void gotoServiceWithLocation(){
+    // categoryId = catId;
+    // catName = catN;
+    // city =capitalizeAllWord(cty).trim();
+    // pincode = st.trim();
+    // // state =capitalizeAllWord(st);
+    // // print(catId);
+    // itemList = [];
     getProvidersWithLocation();
     Get.toNamed('/service');
   }

@@ -14,14 +14,9 @@ class BlogController extends GetxController {
 
   void fetchBlogs() async {
     try {
-      // Fetch data from Firestore collection
       QuerySnapshot snapshot =
           await FirebaseFirestore.instance.collection('Blog').get();
-
-      // Clear existing blogs
       blogs.clear();
-
-      // Iterate through the documents and create blog objects
       snapshot.docs.forEach((doc1) {
         String image = doc1['image'];
         String image1 = doc1['image1'];

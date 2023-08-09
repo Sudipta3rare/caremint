@@ -232,9 +232,10 @@ class _HomePageState extends State<HomePage> {
                                     childAspectRatio: 0.9,
                                     crossAxisSpacing: 5.0),
                                 delegate: SliverChildBuilderDelegate(
-                                  childCount: ctrl.category.length,
+                                  childCount: ctrl.categoryList.length,
                                       (context, index) => homeCard(context,
-                                      ctrl.category[index], ctrl.categoryId[index], ctrl.categoryImage[index], ),
+                                      ctrl.categoryList[index].categoryName.toString()
+                                        , ctrl.categoryId[index], ctrl.categoryList[index].img.toString(), ),
                                 )),
 
                           SliverList(
@@ -481,12 +482,7 @@ class _HomePageState extends State<HomePage> {
                         ctrl.update();
                    }
                     else {
-                      exCtrl.gotoServiceWithLocation(
-                          ctrl.categoryId[
-                              (ctrl.category.indexOf(ctrl.currentItem))],
-                          ctrl.currentItem,
-                          ctrl.city.text,
-                          ctrl.pincode.text);
+                      exCtrl.gotoServiceWithLocation();
                     }
                   },
                   child: CustomButton()

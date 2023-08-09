@@ -7,13 +7,16 @@ class SplashScreenViewModel extends GetxController
   // late AnimationController animationController;
   // late Animation<double> animation;
 
-  // @override
-  // void onInit() {
-  //   animationInitilization();
-  //   super.onInit();
-  // }
+  @override
+  void onInit() {
+
+    super.onInit();
+  }
+
   late AnimationController controller;
   late Animation<double> animation;
+
+
   // animationInitilization() {
   //   animationController =
   //       AnimationController(vsync: this, duration: const Duration(seconds: 2));

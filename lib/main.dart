@@ -28,14 +28,14 @@ Future<void> main() async {
   );
   _initController();
 
-  // _initFirebase();
+  _initFirebase();
   runApp(const MainApp());
 }
-// _initFirebase() async {
-//   await Firebase.initializeApp(
-//     // options: DefaultFirebaseOptions.currentPlatform,
-//   );
-// }
+_initFirebase() async {
+  await Firebase.initializeApp(
+    // options: DefaultFirebaseOptions.currentPlatform,
+  );
+}
 _initController(){
 
   Get.put(SplashScreenViewModel());
