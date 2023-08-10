@@ -1,3 +1,4 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:caremint/constants/app_colors.dart';
 import 'package:caremint/controllers/categories_controller/exterior_service_controller.dart';
@@ -7,7 +8,6 @@ import 'package:caremint/controllers/my_orders_controller/my_order_controller.da
 import 'package:caremint/franchise/views/tabview.dart';
 import 'package:caremint/ui/components/custom_button.dart';
 import 'package:caremint/ui/pages/blog_page.dart';
-import 'package:caremint/ui/pages/categories/exterior_services.dart';
 import 'package:caremint/ui/pages/testimonial_page.dart';
 import 'package:caremint/ui/widget/login_snackbar.dart';
 import 'package:caremint/ui/widget/signup_snackbar.dart';
@@ -31,7 +31,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final FirebaseAuth auth = FirebaseAuth.instance;
+
 
 
   @override
@@ -52,13 +52,6 @@ class _HomePageState extends State<HomePage> {
                       width: 100,
                       height: 100,
                     ),
-                    // Text(
-                    //   "CareMint",
-                    //   style: GoogleFonts.poppins(
-                    //       fontSize: 30,
-                    //       color: Colors.blue.shade800,
-                    //       fontWeight: FontWeight.w700),
-                    // ),
                   ],
                 ),
               ),
@@ -186,11 +179,12 @@ class _HomePageState extends State<HomePage> {
                             Get.back();
                           },
                           onConfirm: () async {
+                            // perform login
                             ctrl.userDetails = UserDataModel();
                             ctrl.isLoggedIn.value =false;
                             ctrl.update();
 
-                            await auth.signOut().then((value) => Get.offAllNamed('/home'));
+                            // await auth.signOut().then((value) => Get.offAllNamed('/home'));
 
 
                           },

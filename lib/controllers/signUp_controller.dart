@@ -10,4 +10,7 @@ class SignUpController extends GetxController {
   String dropdownValuePackage= 'Package';
   List<String> listOfCategory = ['Ceramic Coating', 'Deep Cleaning', 'Exterior + Interior Service', 'Exterior Service', 'Interior Service','Monthly Subscription'];
   List<String> listOfPackage = ['Silver','Gold','Platinum','Titanium'];
+
+
+
 }
