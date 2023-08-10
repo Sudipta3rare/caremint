@@ -167,7 +167,7 @@ class LoginSnackBar {
                                       beforeSend: () {
                                         // Perform actions before making the request if needed
                                       },
-                                      onSuccess: (response) {
+                                      onSuccess: (response) async {
                                         print(response.data);
                                         if (response.statusCode == 200) {
                                           print("Success");
@@ -175,7 +175,7 @@ class LoginSnackBar {
                                           Map<String, dynamic> responseData = response.data;
 
                                           UserResponse userResponse = UserResponse.fromJson(responseData);
-                                          ctrl.storeUserDetails(userResponse);
+
 
                                           Get.snackbar(
                                             'Message',
@@ -185,11 +185,15 @@ class LoginSnackBar {
                                             backgroundColor: AppStyle().gradientColor2,
                                             duration: Duration(seconds: 2),
                                           );
+                                          await  hmCtrl.storeUserDetails(userResponse);
 
                                           hmCtrl.isLoading.value = false;
                                           ctrl.update();
                                           hmCtrl.update();
                                           Get.offAllNamed('/home');
+
+
+
                                         } else if (response.statusCode == 401) {
                                           print("Unauthorized"); // Handle unauthorized login
                                           Get.snackbar(

@@ -11,6 +11,7 @@ import 'package:caremint/models/category_model.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../models/userDataModel.dart';
+import '../models/user_model.dart';
 
 class HomeController extends GetxController {
   static HomeController to = Get.find();
@@ -50,13 +51,26 @@ class HomeController extends GetxController {
      userDetails.roleId = store.read("user_role");
      userDetails.phone = store.read("user_phone");
      print(userDetails.firstName);
+
+
     }
     update();
+  }
+  Future<void> storeUserDetails(UserResponse userResponse) async {
+    print("here");
+    store.write("user_token", userResponse.token);
+    store.write("user_name", userResponse.user?.userFirstname);
+    store.write("user_email", userResponse.user?.userEmail);
+    store.write("user_pincode", userResponse.user?.userPincode);
+    store.write("user_role", userResponse.user?.roleId);
+    store.write("user_phone", userResponse.user?.userPhonenumber);
+    print(store.read("user_token"));
+    isLoggedIn.value = true;
   }
 
   String showName(UserDataModel user) {
     user.firstName == '' ? isLoggedIn.value = false : isLoggedIn.value = true;
-    //update();
+    // update();
     return user.firstName;
   }
 

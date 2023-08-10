@@ -42,15 +42,6 @@ class SignUpController extends GetxController {
   }
 
 
-  Future<void> storeUserDetails(UserResponse userResponse) async {
-  store.write("user_token", userResponse.token);
-  store.write("user_name", userResponse.user?.userFirstname);
-  store.write("user_email", userResponse.user?.userEmail);
-  store.write("user_pincode", userResponse.user?.userPincode);
-  store.write("user_role", userResponse.user?.roleId);
-  store.write("user_phone", userResponse.user?.userPhonenumber);
-
-  }
 
   Future<void> postSignUpForm(dynamic data) async {
 
