@@ -20,6 +20,7 @@ class HomeController extends GetxController {
 
 
   var store = GetStorage();
+ late  String token = store.read("user_token") ?? "";
   String currentItem = 'Category';
   List<String> selectItems = ["Category"];
 
@@ -38,8 +39,9 @@ class HomeController extends GetxController {
 
   List categoryId = [];
 
+
   Future<void> getUserData() async {
-    isLoggedIn.value = store.read("user_token") != '' || store.read("user_token") != null ? true : false;
+    isLoggedIn.value = token != "" ? true : false;
 
     if(isLoggedIn.value) {
       userDetails.firstName = store.read("user_name") ?? "";
@@ -54,6 +56,7 @@ class HomeController extends GetxController {
 
   String showName(UserDataModel user) {
     user.firstName == '' ? isLoggedIn.value = false : isLoggedIn.value = true;
+    update();
     return user.firstName;
   }
 
@@ -61,7 +64,7 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
 
-    isLoggedIn.value = store.read("user_token") != '' || store.read("user_token") != null ? true : false;
+    isLoggedIn.value = token != ""  ? true : false;
     getCategory();
     getUserData();
   }

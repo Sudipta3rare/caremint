@@ -176,10 +176,6 @@ class LoginSnackBar {
 
                                           UserResponse userResponse = UserResponse.fromJson(responseData);
                                           ctrl.storeUserDetails(userResponse);
-                                          print(userResponse.message);
-                                          print(userResponse.user?.userEmail);
-                                          print(userResponse.user?.displayName);
-                                          print(userResponse.token);
 
                                           Get.snackbar(
                                             'Message',

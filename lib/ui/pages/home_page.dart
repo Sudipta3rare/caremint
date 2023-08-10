@@ -182,8 +182,9 @@ class _HomePageState extends State<HomePage> {
                           },
                           onConfirm: () async {
                             // perform logout
-
-                            ApiRequest(url: Constant.baseUrl+"/api/user-logout", data: null).postToken(beforeSend: () => {},
+                              print(ctrl.store.read("user_token"));
+                            ApiRequest(url: Constant.baseUrl+"/api/user-logout", frmData: null).postToken(
+                                beforeSend: () => {},
                                 onSuccess: (response){
                               print(response.data);
                                   ctrl.userDetails = UserDataModel();
@@ -197,7 +198,9 @@ class _HomePageState extends State<HomePage> {
                                   Get.offAllNamed('/home');
                                 ctrl.update();
                                 },
-                                onError: (error) => {});
+                                onError: (error) => {
+                                  print("error")
+                                });
 
 
 

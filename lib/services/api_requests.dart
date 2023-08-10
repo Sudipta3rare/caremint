@@ -35,10 +35,11 @@ class ApiRequest {
   Dio _dioToken() {
     // Put your authorization token if required
     String token = store.read("user_token");
+    print(token);
     return Dio(
       BaseOptions(
         headers: {
-          'Authorization': 'Bearer $token}', //$adminToken',
+          'Authorization': 'Bearer $token', //$adminToken',
           "Accept": "application/json",
           "Content-Type": "application/json"
         },

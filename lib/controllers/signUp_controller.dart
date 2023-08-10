@@ -6,7 +6,6 @@ import 'package:caremint/models/user_model.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../constants/app_colors.dart';
 
 class SignUpController extends GetxController {
 
