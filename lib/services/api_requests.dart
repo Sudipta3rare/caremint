@@ -15,6 +15,7 @@ class ApiRequest {
     this.data,
     this.frmData,
     this.frmData1,
+
   });
 
   Dio _dio() {
@@ -38,8 +39,10 @@ class ApiRequest {
   }) async {
     await _dio().get(url, queryParameters: data).then((res) {
       onSuccess(res.data);
+      print(res.data);
     }).catchError((error) {
       onError(error);
+      print(error);
     });
   }
 
@@ -48,9 +51,13 @@ class ApiRequest {
     required Function(dynamic frmData) onSuccess,
     required Function(dynamic error) onError,
   }) async {
+    print("post");
+    print(frmData);
+    print(url);
     _dio().post(url, data: frmData).then((res) {
       onSuccess(res);
     }).catchError((error) {
+      print(error);
       onError(error);
     });
   }
@@ -60,10 +67,18 @@ class ApiRequest {
     required Function(dynamic frmData1) onSuccess,
     required Function(dynamic error) onError,
   }) async {
+    print(frmData1);
+    print("here");
+    print(url);
     _dio().request(url, data: frmData1).then((res) {
+      print("response");
+      print(res);
       onSuccess(res);
+
     }).catchError((error) {
       onError(error);
+      print("error");
+      print(error);
     });
   }
 }

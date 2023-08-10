@@ -1,4 +1,10 @@
+import 'dart:convert';
+import 'dart:ui';
+
+import 'package:caremint/data/api_signup_provider.dart';
 import 'package:get/get.dart';
+
+import '../constants/app_colors.dart';
 
 class SignUpController extends GetxController {
 
@@ -12,5 +18,48 @@ class SignUpController extends GetxController {
   List<String> listOfPackage = ['Silver','Gold','Platinum','Titanium'];
 
 
+
+  Future<void> submitForm(String email,String phone, String address, String pincode, String name, String password) async {
+
+    Map<String, String> dataMap = {};
+
+    dataMap = {
+      "user_firstname": name,
+      "user_email": email,
+      "user_pass": password,
+      "user_pincode": pincode,
+      "user_address" : address,
+      "user_phonenumber" : phone
+    };
+
+
+    await postSignUpForm(json.encode(
+      dataMap,
+    ));
+
+  }
+
+  Future<void> postSignUpForm(dynamic data) async {
+
+    isLoading.value = true;
+    await SignUpProvider().postSignUpRes(
+      data: data,
+      onSuccess: (val) {
+
+        isLoading.value = false;
+
+        // onRefresh();
+        update();
+      },
+      onError: (error) {
+        print("postSingup");
+        print(error);
+        isLoading.value = false;
+        Get.back();
+        // onRefresh();
+        update();
+      },
+    );
+  }
 
 }

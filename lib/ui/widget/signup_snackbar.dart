@@ -1,9 +1,7 @@
 import 'package:caremint/ui/widget/login_snackbar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
+
 import 'package:flutter/material.dart';
-import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_colors.dart';
@@ -14,6 +12,7 @@ import '../components/custom_button.dart';
 class SignUpSnackBar {
   String email = '',
       pass = '',
+      address = '',
       confirmPassword = '',
       phone = '',
       firstName = "",
@@ -23,6 +22,7 @@ class SignUpSnackBar {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
   final TextEditingController pinCodeController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
 
@@ -34,6 +34,7 @@ class SignUpSnackBar {
     pinCodeController.clear();
     passwordController.clear();
     confirmPasswordController.clear();
+    addressController.clear();
   }
 
   final ctrl = Get.put(SignUpController());
@@ -131,6 +132,18 @@ class SignUpSnackBar {
                         return;
                       }
 
+                      if (addressController.text.isEmpty) {
+                        Get.snackbar(
+                          'Info',
+                          'Please enter a valid address.',
+                          snackPosition: SnackPosition.BOTTOM,
+                          colorText: Color(0xffffffff),
+                          backgroundColor: AppStyle().gradientColor2,
+                          duration: Duration(seconds: 2),
+                        );
+                        return;
+                      }
+
                       if (pinCodeController.text.isEmpty && pinCodeController.text.length!=6) {
                         Get.snackbar(
                           'Info',
@@ -178,31 +191,17 @@ class SignUpSnackBar {
                         );
                         return;
                       }
+                      ctrl.submitForm(
+                        firstnameController.text,
+                        phoneController.text,
+                        addressController.text,
+                        pinCodeController.text,
+                        emailController.text,
+                        passwordController.text,
+                      );
 
                       try {
-                        await Firebase.initializeApp();
-                        // Ensure Firebase is initialized
-                        UserCredential userCredential = await FirebaseAuth
-                            .instance
-                            .createUserWithEmailAndPassword(
-                          email: email,
-                          password: pass,
-                        );
-
-                        clearTextField();
-
-                        final userDocRef = FirebaseFirestore.instance
-                            .collection('users')
-                            .doc(userCredential.user!.uid);
-
-                        await userDocRef.set({
-                          'email': email,
-                          'phone': phone,
-                          'firstname':firstName,
-                          'pincode' : pinCode,
-                          'cart': []
-                        });
-
+                        ctrl.submitForm(email, phone, address, pinCode , firstName, pass );
                         Get.snackbar(
                           'Message',
                           'Registration Successful,Please Log in to Access Your Profile',
@@ -211,19 +210,17 @@ class SignUpSnackBar {
                           backgroundColor: AppStyle().gradientColor2,
                           duration: Duration(seconds: 2),
                         );
-                        return;
-                        //Get.offAndToNamed("home");
-                      } on FirebaseAuthException catch (e) {
+
+                        clearTextField();
+                        // return;
+                        Get.offAndToNamed("home");
+                      }  catch (e) {
                         Get.snackbar("Error In Sign Up", "$e",
                             snackPosition: SnackPosition.BOTTOM,
                             colorText: Color(0xffffffff),
                             backgroundColor: AppStyle().gradientColor2,
                             duration: Duration(seconds: 2));
-                        if (e.code == 'weak-password') {
-                          print('The password provided is too weak.');
-                        } else if (e.code == 'email-already-in-use') {
-                          print('The account already exists for that email.');
-                        }
+
                       }
                     },
                     child: CustomButton().customButton200(context, 'Sign Up'),),
@@ -522,6 +519,29 @@ class SignUpSnackBar {
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
                     labelText: "Phone",
+                    labelStyle: GoogleFonts.poppins(
+                        color: Colors.blue[900],
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400),
+                    border: OutlineInputBorder(
+                      gapPadding: 2,
+                      borderSide: BorderSide(width: 5),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              Container(
+                width: 300,
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  controller: addressController,
+                  onChanged: (value) {
+                    address = value;
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                    labelText: "Address",
                     labelStyle: GoogleFonts.poppins(
                         color: Colors.blue[900],
                         fontSize: 11,
