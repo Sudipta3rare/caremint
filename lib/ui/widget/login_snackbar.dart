@@ -1,10 +1,10 @@
 import 'package:caremint/constants/app_string.dart';
+import 'package:caremint/constants/constants.dart';
 import 'package:caremint/controllers/controllers.dart';
 import 'package:caremint/controllers/home_controller.dart';
+import 'package:caremint/services/api_requests.dart';
 import 'package:caremint/ui/components/loading_overlay_components.dart';
 import 'package:caremint/ui/widget/signup_snackbar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,7 +16,7 @@ class LoginSnackBar {
   String email = '';
   String pass = '';
 
-  Future loginSnackBar(context) {
+  Future loginSnackBar(context) async  {
     /*//Check user Login Successful
     if (FirebaseAuth.instance.currentUser != null) {
       print("User Loginnnnnnnnn");
@@ -122,105 +122,137 @@ class LoginSnackBar {
                   ),
                   GetBuilder<SignUpController>(builder: (ctrl) {
                     return GetBuilder<HomeController>(
-                      builder: (hmCtrl) {
-                        return LoadingOverlay(
-                          isLoading: hmCtrl.isLoading.value,
-                          child: GestureDetector(
-                            onTap: () async {
-                              hmCtrl.isLoading.value = true;
-                              hmCtrl.update();
-                              if (!RegExp(
-                                      r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
-                                  .hasMatch(email)) {
-                                hmCtrl.isLoading.value = false;
+                        builder: (hmCtrl) {
+                          return LoadingOverlay(
+                            isLoading: hmCtrl.isLoading.value,
+                            child: GestureDetector(
+                              onTap: () async {
+                                hmCtrl.isLoading.value = true;
                                 hmCtrl.update();
-
-                                Get.snackbar(
-                                  'Info',
-                                  'Please enter a valid email.',
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  colorText: Color(0xffffffff),
-                                  backgroundColor: AppStyle().gradientColor2,
-                                  duration: Duration(seconds: 2),
-                                );
-                              } else if (pass.isEmpty) {
-                                hmCtrl.isLoading.value = false;
-                                hmCtrl.update();
-
-                                Get.snackbar(
-                                  'Info',
-                                  'Password field cannot be empty.',
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  colorText: Color(0xffffffff),
-                                  backgroundColor: AppStyle().gradientColor2,
-                                  duration: Duration(seconds: 2),
-                                );
-                              } else {
-                                try {
-
-                                  await Firebase.initializeApp();
-                                  UserCredential userCredential = await FirebaseAuth
-                                      .instance
-                                      .signInWithEmailAndPassword(
-                                    email: email,
-                                    password: pass,
-                                  );
-
-
+                                if (!RegExp(
+                                    r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$')
+                                    .hasMatch(email)) {
+                                  hmCtrl.isLoading.value = false;
+                                  hmCtrl.update();
 
                                   Get.snackbar(
-                                    'Message',
-                                    'Login Successful',
+                                    'Info',
+                                    'Please enter a valid email.',
                                     snackPosition: SnackPosition.BOTTOM,
                                     colorText: Color(0xffffffff),
                                     backgroundColor: AppStyle().gradientColor2,
                                     duration: Duration(seconds: 2),
                                   );
-
-                                  hmCtrl.getUserData();
+                                } else if (pass.isEmpty) {
                                   hmCtrl.isLoading.value = false;
-                                  ctrl.update();
-                                  // hmCtrl.update();
-                                } on FirebaseAuthException catch (e) {
-                                  if (e.code == 'user-not-found') {
-                                    hmCtrl.isLoading.value = false;
-                                    hmCtrl.update();
+                                  hmCtrl.update();
 
+                                  Get.snackbar(
+                                    'Info',
+                                    'Password field cannot be empty.',
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    colorText: Color(0xffffffff),
+                                    backgroundColor: AppStyle().gradientColor2,
+                                    duration: Duration(seconds: 2),
+                                  );
+                                } else {
+                                  try {
+                                    final apiRequest = ApiRequest(url: Constant.baseUrl + "/api/user-login", frmData: {
+                                      'email': email,
+                                      'password': pass,
+                                    });
+
+                                    await apiRequest.post(
+                                      beforeSend: () {
+                                        // Perform actions before making the request if needed
+                                      },
+                                      onSuccess: (response) {
+                                        print(response.data);
+                                        if (response.statusCode == 200) {
+                                          print("Success");
+
+                                          Get.snackbar(
+                                            'Message',
+                                            'Login Successful',
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            colorText: Color(0xffffffff),
+                                            backgroundColor: AppStyle().gradientColor2,
+                                            duration: Duration(seconds: 2),
+                                          );
+
+                                          hmCtrl.isLoading.value = false;
+                                          ctrl.update();
+                                          hmCtrl.update();
+                                          Get.offAllNamed('/home');
+                                        } else if (response.statusCode == 401) {
+                                          print("Unauthorized"); // Handle unauthorized login
+                                          Get.snackbar(
+                                            'Message',
+                                            'Login Unsuccessful: Unauthorized',
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            colorText: Color(0xffffffff),
+                                            backgroundColor: AppStyle().gradientColor2,
+                                            duration: Duration(seconds: 2),
+                                          );
+
+                                          hmCtrl.isLoading.value = false; // Stop the circular progress indicator
+                                          ctrl.update();
+                                          hmCtrl.update();
+                                        } else {
+                                          print("Failed");
+                                          Get.snackbar(
+                                            'Message',
+                                            'Login Unsuccessful',
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            colorText: Color(0xffffffff),
+                                            backgroundColor: AppStyle().gradientColor2,
+                                            duration: Duration(seconds: 2),
+                                          );
+
+                                          hmCtrl.isLoading.value = false;
+                                          ctrl.update();
+                                          hmCtrl.update();
+                                        }
+                                      },
+                                      onError: (error) {
+                                        print("Exception: $error");
+                                        Get.snackbar(
+                                          'Message',
+                                          'Login Unsuccessful',
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          colorText: Color(0xffffffff),
+                                          backgroundColor: AppStyle().gradientColor2,
+                                          duration: Duration(seconds: 2),
+                                        );
+
+                                        hmCtrl.isLoading.value = false; // Stop the circular progress indicator on exception
+                                        ctrl.update();
+                                        hmCtrl.update();
+                                      },
+                                    );
+                                  } catch (e) {
+                                    print("Exception: $e");
                                     Get.snackbar(
-                                      'Info',
-                                      'No user found for that email.',
+                                      'Message',
+                                      'Login Unsuccessful',
                                       snackPosition: SnackPosition.BOTTOM,
                                       colorText: Color(0xffffffff),
                                       backgroundColor: AppStyle().gradientColor2,
                                       duration: Duration(seconds: 2),
                                     );
-                                  } else if (e.code == 'wrong-password') {
-                                    hmCtrl.isLoading.value = false;
+                                    hmCtrl.isLoading.value = false; // Stop the circular progress indicator on exception
+                                    ctrl.update();
                                     hmCtrl.update();
-
-                                    Get.snackbar(
-                                      'Info',
-                                      'Wrong password provided for that user.',
-                                      snackPosition: SnackPosition.BOTTOM,
-                                      colorText: Color(0xffffffff),
-                                      backgroundColor: AppStyle().gradientColor2,
-                                      duration: Duration(seconds: 2),
-                                    );
                                   }
                                 }
-                              }
-
-
-                              hmCtrl.update();
-                              Get.offAllNamed('/home');
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CustomButton().customButton200(context, "Login"),
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CustomButton().customButton200(context, "Login"),
+                              ),
                             ),
-                          ),
-                        );
-                      }
+                          );
+                        }
                     );
                   }),
                   SizedBox(
