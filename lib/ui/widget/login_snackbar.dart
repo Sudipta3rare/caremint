@@ -176,7 +176,9 @@ class LoginSnackBar {
 
                                           UserResponse userResponse = UserResponse.fromJson(responseData);
 
-
+                                              if(userResponse.token != "" || userResponse.token != null) {
+                                                hmCtrl.isLoggedIn.value = true;
+                                              }
                                           Get.snackbar(
                                             'Message',
                                             'Login Successful',

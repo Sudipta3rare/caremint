@@ -21,7 +21,7 @@ class HomeController extends GetxController {
 
 
   var store = GetStorage();
- late  String token = store.read("user_token") ?? "";
+ late  String token ;
   String currentItem = 'Category';
   List<String> selectItems = ["Category"];
 
@@ -42,17 +42,16 @@ class HomeController extends GetxController {
 
 
   Future<void> getUserData() async {
-   isLoggedIn.value = token != "" ? true : false;
 
+    token =  store.read("user_token") ?? "";
+    isLoggedIn.value = token != "" ? true : false;
+    print(token);
     if(isLoggedIn.value) {
       userDetails.firstName = store.read("user_name") ?? "";
-     userDetails.email = store.read("user_email");
-    userDetails.pincode=  store.read("user_pincode");
-     userDetails.roleId = store.read("user_role");
-     userDetails.phone = store.read("user_phone");
-     print(userDetails.firstName);
-
-
+     userDetails.email = store.read("user_email") ?? "";
+    userDetails.pincode=  store.read("user_pincode") ?? "";
+     userDetails.roleId = store.read("user_role") ?? "";
+     userDetails.phone = store.read("user_phone") ?? "";
     }
     update();
   }
@@ -66,6 +65,8 @@ class HomeController extends GetxController {
     store.write("user_phone", userResponse.user?.userPhonenumber);
     print(store.read("user_token"));
     isLoggedIn.value = true;
+    await getUserData();
+    update();
   }
 
   String showName(UserDataModel user) {
@@ -78,7 +79,7 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
 
-    isLoggedIn.value = token != "" ? true : false;
+
     getCategory();
     await getUserData();
     // Call update here if necessary
