@@ -18,13 +18,14 @@ class HomeController extends GetxController {
   FirebaseController frCtrl = FirebaseController.to;
   FirebaseFirestore db = FirebaseFirestore.instance;
 
+
+  var store = GetStorage();
   String currentItem = 'Category';
   List<String> selectItems = ["Category"];
 
   RxBool isLoading = false.obs;
 
-  RxBool isLoggedIn =
-      false.obs;
+  RxBool isLoggedIn = false.obs;
 
   UserDataModel userDetails = UserDataModel();
 
@@ -38,14 +39,15 @@ class HomeController extends GetxController {
   List categoryId = [];
 
   Future<void> getUserData() async {
-    isLoggedIn.value = await FirebaseAuth.instance.currentUser != '' || FirebaseAuth.instance.currentUser != null ? true : false;
+    isLoggedIn.value = store.read("user_token") != '' || store.read("user_token") != null ? true : false;
 
     if(isLoggedIn.value) {
-      var snapshot = await db
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser?.uid)
-          .get();
-      userDetails = UserDataModel.fromSnapshot(snapshot);
+      userDetails.firstName = store.read("user_name") ?? "";
+     userDetails.email = store.read("user_email");
+    userDetails.pincode=  store.read("user_pincode");
+     userDetails.roleId = store.read("user_role");
+     userDetails.phone = store.read("user_phone");
+     print(userDetails.firstName);
     }
     update();
   }
@@ -58,7 +60,8 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    isLoggedIn = await FirebaseAuth.instance.currentUser != '' || FirebaseAuth.instance.currentUser != null ? true.obs : false.obs;
+
+    isLoggedIn.value = store.read("user_token") != '' || store.read("user_token") != null ? true : false;
     getCategory();
     getUserData();
   }
@@ -72,7 +75,8 @@ class HomeController extends GetxController {
 
   void getCategory() async {
     isLoading.value = true;
-    CategoryProvider().getCategory(onSuccess: (categoryItems){
+    CategoryProvider().getCategory
+      (onSuccess: (categoryItems){
       if(categoryItems.body != ''){
         categoryList.clear();
 

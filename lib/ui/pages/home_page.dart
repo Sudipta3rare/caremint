@@ -1,11 +1,13 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:caremint/constants/app_colors.dart';
+import 'package:caremint/constants/constants.dart';
 import 'package:caremint/controllers/categories_controller/exterior_service_controller.dart';
 import 'package:caremint/controllers/home_controller.dart';
 import 'package:caremint/controllers/my_orders_controller/my_order_controller.dart';
 
 import 'package:caremint/franchise/views/tabview.dart';
+import 'package:caremint/services/api_requests.dart';
 import 'package:caremint/ui/components/custom_button.dart';
 import 'package:caremint/ui/pages/blog_page.dart';
 import 'package:caremint/ui/pages/testimonial_page.dart';
@@ -179,10 +181,27 @@ class _HomePageState extends State<HomePage> {
                             Get.back();
                           },
                           onConfirm: () async {
-                            // perform login
-                            ctrl.userDetails = UserDataModel();
-                            ctrl.isLoggedIn.value =false;
-                            ctrl.update();
+                            // perform logout
+
+                            ApiRequest(url: Constant.baseUrl+"/api/user-logout", data: null).postToken(beforeSend: () => {},
+                                onSuccess: (response){
+                              print(response.data);
+                                  ctrl.userDetails = UserDataModel();
+                                  ctrl.store.write("user_token", "");
+                                  ctrl.store.write("user_name", "");
+                                  ctrl.store.write("user_email","");
+                                  ctrl.store.write("user_pincode", "");
+                                  ctrl.store.write("user_role", "");
+                                  ctrl.store.write("user_phone", "");
+                                  ctrl.isLoggedIn.value =false;
+                                  Get.offAllNamed('/home');
+                                ctrl.update();
+                                },
+                                onError: (error) => {});
+
+
+
+
 
                             // await auth.signOut().then((value) => Get.offAllNamed('/home'));
 

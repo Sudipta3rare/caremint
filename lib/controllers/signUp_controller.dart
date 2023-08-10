@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:caremint/data/api_signup_provider.dart';
+import 'package:caremint/models/user_model.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../constants/app_colors.dart';
 
@@ -17,6 +19,7 @@ class SignUpController extends GetxController {
   List<String> listOfCategory = ['Ceramic Coating', 'Deep Cleaning', 'Exterior + Interior Service', 'Exterior Service', 'Interior Service','Monthly Subscription'];
   List<String> listOfPackage = ['Silver','Gold','Platinum','Titanium'];
 
+  var store= GetStorage();
 
 
   Future<void> submitForm(String email,String phone, String address, String pincode, String name, String password) async {
@@ -36,6 +39,17 @@ class SignUpController extends GetxController {
     await postSignUpForm(json.encode(
       dataMap,
     ));
+
+  }
+
+
+  Future<void> storeUserDetails(UserResponse userResponse) async {
+  store.write("user_token", userResponse.token);
+  store.write("user_name", userResponse.user?.userFirstname);
+  store.write("user_email", userResponse.user?.userEmail);
+  store.write("user_pincode", userResponse.user?.userPincode);
+  store.write("user_role", userResponse.user?.roleId);
+  store.write("user_phone", userResponse.user?.userPhonenumber);
 
   }
 

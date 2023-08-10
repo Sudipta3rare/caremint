@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:caremint/constants/app_string.dart';
 import 'package:caremint/constants/constants.dart';
 import 'package:caremint/controllers/controllers.dart';
@@ -177,7 +175,7 @@ class LoginSnackBar {
                                           Map<String, dynamic> responseData = response.data;
 
                                           UserResponse userResponse = UserResponse.fromJson(responseData);
-
+                                          ctrl.storeUserDetails(userResponse);
                                           print(userResponse.message);
                                           print(userResponse.user?.userEmail);
                                           print(userResponse.user?.displayName);
