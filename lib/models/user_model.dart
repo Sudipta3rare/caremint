@@ -1,8 +1,4 @@
-// To parse this JSON data, do
-//
-//     final userResponse = userResponseFromJson(jsonString);
-
-
+import 'dart:convert';
 
 class UserResponse {
   String? message;
@@ -33,9 +29,9 @@ class User {
   String? userLogin;
   String? userPass;
   String? userEmail;
-  String? userUrl;
+  dynamic userUrl;
   DateTime? userRegistered;
-  String? userActivationKey;
+  dynamic userActivationKey;
   String? userStatus;
   String? displayName;
   String? roleId;
@@ -43,7 +39,7 @@ class User {
   String? userPhonenumber;
   String? userPincode;
   String? userAddress;
-  String? userIsloggedin;
+  dynamic userIsloggedin;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -107,3 +103,8 @@ class User {
     "updated_at": updatedAt?.toString(),
   };
 }
+
+
+UserResponse userResponseFromJson(String str) => UserResponse.fromJson(json.decode(str));
+
+String userResponseToJson(UserResponse data) => json.encode(data.toJson());

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:caremint/constants/app_string.dart';
 import 'package:caremint/constants/constants.dart';
 import 'package:caremint/controllers/controllers.dart';
@@ -9,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../constants/app_colors.dart';
+import '../../models/user_model.dart';
 import '../components/custom_button.dart';
 import 'forget_password_snackbar.dart';
 
@@ -170,6 +173,15 @@ class LoginSnackBar {
                                         print(response.data);
                                         if (response.statusCode == 200) {
                                           print("Success");
+
+                                          Map<String, dynamic> responseData = response.data;
+
+                                          UserResponse userResponse = UserResponse.fromJson(responseData);
+
+                                          print(userResponse.message);
+                                          print(userResponse.user?.userEmail);
+                                          print(userResponse.user?.displayName);
+                                          print(userResponse.token);
 
                                           Get.snackbar(
                                             'Message',
