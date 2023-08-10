@@ -41,7 +41,7 @@ class HomeController extends GetxController {
 
 
   Future<void> getUserData() async {
-    isLoggedIn.value = token != "" ? true : false;
+   isLoggedIn.value = token != "" ? true : false;
 
     if(isLoggedIn.value) {
       userDetails.firstName = store.read("user_name") ?? "";
@@ -56,7 +56,7 @@ class HomeController extends GetxController {
 
   String showName(UserDataModel user) {
     user.firstName == '' ? isLoggedIn.value = false : isLoggedIn.value = true;
-    update();
+    //update();
     return user.firstName;
   }
 
@@ -64,9 +64,10 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
 
-    isLoggedIn.value = token != ""  ? true : false;
+    isLoggedIn.value = token != "" ? true : false;
     getCategory();
-    getUserData();
+    await getUserData();
+    // Call update here if necessary
   }
 
   @override
