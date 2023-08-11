@@ -17,6 +17,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   final SplashScreenViewModel welcomeController = SplashScreenViewModel.to;
   // final AuthController authCtrl = AuthController.to;
 
+
   @override
   void initState() {
     super.initState();
@@ -37,7 +38,13 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       //       : welcomeController.gotoIntro();
       // }
       if(status == AnimationStatus.completed){
-        Get.offAndToNamed('/home');
+        if(welcomeController.checkProvider()){
+          Get.offAndToNamed('/tabview');
+        }
+        else{
+          Get.offAndToNamed('/home');
+        }
+
       }
     });
   }

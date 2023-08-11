@@ -13,7 +13,6 @@ import 'package:caremint/ui/pages/blog_page.dart';
 import 'package:caremint/ui/pages/testimonial_page.dart';
 import 'package:caremint/ui/widget/login_snackbar.dart';
 import 'package:caremint/ui/widget/signup_snackbar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

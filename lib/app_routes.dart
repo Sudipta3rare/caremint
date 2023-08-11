@@ -1,3 +1,4 @@
+import 'package:caremint/franchise/views/tabview.dart';
 import 'package:caremint/ui/pages/cart_page.dart';
 import 'package:caremint/ui/pages/categories/exterior_services.dart';
 import 'package:caremint/ui/pages/home_page.dart';
@@ -18,5 +19,6 @@ class AppRoutes {
     // GetPage(name: '/orders', page: () =>  const ListOrders(), transition: Transition.fade),
     GetPage(name: '/order', page: () =>   MyOrdersPage(), transition: Transition.fade),
     GetPage(name: '/cart', page: () =>   CartPage(), transition: Transition.fade),
+    GetPage(name: '/tabview', page: () =>   TabView(), transition: Transition.fade),
   ];
 }

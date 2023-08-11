@@ -135,7 +135,6 @@ class LoginSnackBar {
                                     .hasMatch(email)) {
                                   hmCtrl.isLoading.value = false;
                                   hmCtrl.update();
-
                                   Get.snackbar(
                                     'Info',
                                     'Please enter a valid email.',
@@ -192,7 +191,12 @@ class LoginSnackBar {
                                           hmCtrl.isLoading.value = false;
                                           ctrl.update();
                                           hmCtrl.update();
-                                          Get.offAllNamed('/home');
+                                          if(ctrl.store.read(("user_role")) == "2"){
+                                            Get.offAllNamed('/home');
+                                          }
+                                          else{
+                                            Get.offAllNamed("/tabview");
+                                          }
 
 
 

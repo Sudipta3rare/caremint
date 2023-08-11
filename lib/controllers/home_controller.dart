@@ -1,7 +1,7 @@
 import 'package:caremint/controllers/firebase_controller.dart';
 import 'package:caremint/data/api_category_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +28,7 @@ class HomeController extends GetxController {
   RxBool isLoading = false.obs;
 
   RxBool isLoggedIn = false.obs;
-
+  RxBool isProvider = false.obs;
   UserDataModel userDetails = UserDataModel();
 
   TextEditingController city = TextEditingController();
@@ -49,14 +49,13 @@ class HomeController extends GetxController {
     if(isLoggedIn.value) {
       userDetails.firstName = store.read("user_name") ?? "";
      userDetails.email = store.read("user_email") ?? "";
-    userDetails.pincode=  store.read("user_pincode") ?? "";
+     userDetails.pincode=  store.read("user_pincode") ?? "";
      userDetails.roleId = store.read("user_role") ?? "";
      userDetails.phone = store.read("user_phone") ?? "";
     }
     update();
   }
   Future<void> storeUserDetails(UserResponse userResponse) async {
-    print("here");
     store.write("user_token", userResponse.token);
     store.write("user_name", userResponse.user?.userFirstname);
     store.write("user_email", userResponse.user?.userEmail);

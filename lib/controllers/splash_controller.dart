@@ -1,5 +1,6 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class SplashScreenViewModel extends GetxController
      {
@@ -9,12 +10,24 @@ class SplashScreenViewModel extends GetxController
 
   @override
   void onInit() {
-
     super.onInit();
   }
 
+  var store = GetStorage();
+
   late AnimationController controller;
   late Animation<double> animation;
+
+  bool checkProvider () {
+    String  isProvider = (store.read("user_role")) ?? "2";
+    print(isProvider);
+    if( (isProvider) == "3"){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
 
   // animationInitilization() {

@@ -7,6 +7,7 @@ import 'package:caremint/controllers/single_service_controller.dart';
 import 'package:caremint/franchise/controllers/customerInfo_controller.dart';
 import 'package:caremint/franchise/controllers/listing_services_controller.dart';
 import 'package:caremint/franchise/controllers/order_controller.dart';
+import 'package:caremint/franchise/controllers/tabview_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,6 +45,7 @@ _initController(){
   Get.put(SplashScreenViewModel());
   Get.put(FirebaseController());
   Get.put(HomeController());
+  Get.put(TabviewController());
   Get.put(SignUpController());
   Get.put(ExteriorServiceController());
   Get.put(SingleServiceController());
