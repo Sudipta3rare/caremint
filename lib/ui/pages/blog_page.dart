@@ -28,7 +28,7 @@ class BlogPage extends StatelessWidget {
         init: BlogController(), // Instantiate the BlogController
         builder: (blogController) {
           return Obx(
-            () => ListView.builder(
+                () => ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: blogController.blogs.length,
               itemBuilder: (context, index) {
@@ -184,14 +184,45 @@ class ReadingListCard extends StatelessWidget {
               children: [
                 SizedBox(height: 16.0),
                 Container(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  color: AppStyle.backgroundColor,
-                  child: ExpandableNotifier(
-                    child: Column(
-                      children: [
-                        Expandable(
-                          collapsed: ExpandableButton(
-                            child: Column(
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    color: AppStyle.backgroundColor,
+                    child: ExpandableNotifier(
+                      child: Column(
+                        children: [
+                          Expandable(
+                            collapsed: ExpandableButton(
+                              child: Column(
+                                children: [
+                                  CachedNetworkImage(
+                                    imageUrl: blog.image1,
+                                    placeholder: (context, url) => CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) => Icon(Icons.error),
+                                    //width: 170,
+                                    //height: 190,
+                                  ),
+                                  SizedBox(height: 16.0),
+                                  Text(
+                                    blog.read,
+                                    maxLines: 5,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.justify,
+                                    style: GoogleFonts.poppins(
+                                      color: AppStyle.blue900,
+                                      textStyle: TextStyle(
+                                        // Additional text style properties can be added here
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 16.0),
+                                  Icon(
+                                    Icons.expand_more,
+                                    color: AppStyle().gradientColor2,
+                                    size: 24.0,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            expanded: Column(
                               children: [
                                 CachedNetworkImage(
                                   imageUrl: blog.image1,
@@ -203,8 +234,6 @@ class ReadingListCard extends StatelessWidget {
                                 SizedBox(height: 16.0),
                                 Text(
                                   blog.read,
-                                  maxLines: 5,
-                                  overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.justify,
                                   style: GoogleFonts.poppins(
                                     color: AppStyle.blue900,
@@ -213,42 +242,13 @@ class ReadingListCard extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 16.0),
-                                Icon(
-                                  Icons.expand_more,
-                                  color: AppStyle().gradientColor2,
-                                  size: 24.0,
-                                ),
+                                // Add any additional widgets you want to display in the expanded state
                               ],
                             ),
                           ),
-                          expanded: Column(
-                            children: [
-                              CachedNetworkImage(
-                                imageUrl: blog.image1,
-                                placeholder: (context, url) => CircularProgressIndicator(),
-                                errorWidget: (context, url, error) => Icon(Icons.error),
-                                //width: 170,
-                                //height: 190,
-                              ),
-                              SizedBox(height: 16.0),
-                              Text(
-                                blog.read,
-                                textAlign: TextAlign.justify,
-                                style: GoogleFonts.poppins(
-                                  color: AppStyle.blue900,
-                                  textStyle: TextStyle(
-                                    // Additional text style properties can be added here
-                                  ),
-                                ),
-                              ),
-                              // Add any additional widgets you want to display in the expanded state
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
+                        ],
+                      ),
+                    )
                 ),
 
                 SizedBox(height: 16.0),

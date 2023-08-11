@@ -1,7 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import '../models/blog_model.dart';
-
 
 class BlogController extends GetxController {
   RxList<Blog> blogs = <Blog>[].obs;
@@ -14,17 +13,26 @@ class BlogController extends GetxController {
 
   void fetchBlogs() async {
     try {
-      QuerySnapshot snapshot =
-          await FirebaseFirestore.instance.collection('Blog').get();
+      // Replace with the actual API endpoint
+      String apiUrl = 'https://caremint.3raredynamics.com/public/api/blogs';
+
+      // Create a Dio instance
+      Dio dio = Dio();
+
+      // Make the API request
+      final response = await dio.get(apiUrl);
+
+      // Parse the response data into a list of Blog objects
+      List<dynamic> body = response.data['body'];
       blogs.clear();
-      snapshot.docs.forEach((doc1) {
-        String image = doc1['image'];
-        String image1 = doc1['image1'];
-        String title = doc1['title'];
-        String author = doc1['auth'];
-        String date = doc1['date'];
-        String read = doc1['read'];
-        String readTitle = doc1['readTitle'];
+      body.forEach((blogData) {
+        String image = blogData['img'];
+        String image1 = blogData['img']; // Replace with the appropriate field from the API response
+        String title = blogData['title'].toString(); // Use a unique identifier as the title
+        String author = blogData['author'];
+        String date = blogData['blog_date'];
+        String read = blogData['des']; // Replace with the appropriate field from the API response
+        String readTitle = ''; // Replace with the appropriate field from the API response
 
         blogs.add(Blog(
           image: image,
@@ -33,7 +41,7 @@ class BlogController extends GetxController {
           author: author,
           date: date,
           read: read,
-          readTitle: readTitle
+          readTitle: readTitle,
         ));
       });
     } catch (e) {
@@ -42,7 +50,3 @@ class BlogController extends GetxController {
     }
   }
 }
-
-
-
-

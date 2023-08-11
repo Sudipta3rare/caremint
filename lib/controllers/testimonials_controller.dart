@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../ui/pages/testimonial_page.dart';
 
@@ -17,18 +16,22 @@ class TestimonialsController extends GetxController {
 
   void fetchTestimonials() async {
     try {
-      // Fetch data from Firestore collection
-      QuerySnapshot snapshot =
-      await FirebaseFirestore.instance.collection('Testimonials').get();
+      // Replace with the actual API endpoint
+      String apiUrl = 'https://caremint.3raredynamics.com/public/api/testimonials';
 
-      // Clear existing testimonials
+      // Create a Dio instance
+      Dio dio = Dio();
+
+      // Make the API request
+      final response = await dio.get(apiUrl);
+
+      // Parse the response data into a list of testimonial cards
+      List<dynamic> body = response.data['body'];
       testimonials.clear();
-
-      // Iterate through the documents and create testimonial cards
-      snapshot.docs.forEach((doc) {
-        String description = doc['description'];
-        String name = doc['name'];
-        String image = doc['image'];
+      body.forEach((testimonialData) {
+        String description = testimonialData['des'];
+        String name = testimonialData['name'];
+        String image = testimonialData['img'];
 
         testimonials.add(testimonialCard(description, name, image));
       });
@@ -38,4 +41,3 @@ class TestimonialsController extends GetxController {
     }
   }
 }
-
