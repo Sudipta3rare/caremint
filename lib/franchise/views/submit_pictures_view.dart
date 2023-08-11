@@ -38,8 +38,8 @@ class SubmitPictures extends StatelessWidget {
       floatingActionButton: ElevatedButton(onPressed: (){
         if(ctrl.imagePathList.isEmpty || ctrl.des.text == ""){
           Get.snackbar(
-            'No image selected',
-            'Please select a valid image.',
+            'Error!',
+            'Please enter a valid image and message.',
             snackPosition: SnackPosition.BOTTOM,
             colorText: Color(0xffffffff),
             backgroundColor: AppStyle().gradientColor2,
