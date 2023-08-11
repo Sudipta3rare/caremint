@@ -6,8 +6,8 @@ import 'package:intl/intl.dart';
 
 import '../../constants/app_colors.dart';
 import '../controllers/customerInfo_controller.dart';
-class CompletedOrderPage extends StatelessWidget {
-  const CompletedOrderPage({super.key});
+class CanceledOrderPage extends StatelessWidget {
+  const CanceledOrderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +71,9 @@ class CompletedOrderPage extends StatelessWidget {
                     //   ],
                     // ),
                     Expanded(
-                      child: ordCtrl.completedOrderList.isEmpty ? emptyOrders() : ListView.builder(
+                      child: ordCtrl.canceledOrderList.isEmpty ? emptyOrders() : ListView.builder(
                         padding: EdgeInsets.symmetric(vertical: 10),
-                        itemCount: ordCtrl.completedOrderList.length,
+                        itemCount: ordCtrl.canceledOrderList.length,
                         itemBuilder: (context, index)
                         =>listLayout(context, ordCtrl, index),
                       ),
@@ -94,7 +94,7 @@ class CompletedOrderPage extends StatelessWidget {
       shape: RoundedRectangleBorder(
         side: BorderSide(
           width: 2,
-          color: Colors.green,
+          color:Colors.red,
         ),
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -111,9 +111,9 @@ class CompletedOrderPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  listComponetCol(ordCtrl.completedOrderList[index].name!,ordCtrl.completedOrderList[index].mobileNumber!,"Customer Name", "Phone Number",context),
-                  listComponetCol(ordCtrl.completedOrderList[index].orderPrice!,ordCtrl.completedOrderList[index].address!,"Order Value ", "Address",context),
-                  listComponetCol(ordCtrl.completedOrderList[index].description!,DateFormat("yMMMMd").format(ordCtrl.completedOrderList[index].deliveryDate!),"Order Date", "Delivery Date",context),
+                  listComponetCol(ordCtrl.canceledOrderList[index].name!,ordCtrl.canceledOrderList[index].mobileNumber!,"Customer Name", "Phone Number",context),
+                  listComponetCol(ordCtrl.canceledOrderList[index].orderPrice!,ordCtrl.canceledOrderList[index].address!,"Order Value ", "Address",context),
+                  listComponetCol(ordCtrl.canceledOrderList[index].description!,DateFormat("yMMMMd").format(ordCtrl.canceledOrderList[index].deliveryDate!),"Order Date", "Delivery Date",context),
                 ],
               ),
             ),

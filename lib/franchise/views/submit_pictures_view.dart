@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:io';
 
+import '../models/ongoingOrderModel.dart';
+
 class SubmitPictures extends StatelessWidget {
-   SubmitPictures({super.key});
+   SubmitPictures({super.key, required this.order });
 
   SubmitPictureController ctrl = Get.put(SubmitPictureController());
-
+  OngoingOrders order ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +36,7 @@ class SubmitPictures extends StatelessWidget {
       body: _showBody(context),
 
       floatingActionButton: ElevatedButton(onPressed: (){
-        if(ctrl.imagePathList.isEmpty){
+        if(ctrl.imagePathList.isEmpty || ctrl.des.text == ""){
           Get.snackbar(
             'No image selected',
             'Please select a valid image.',
@@ -46,6 +48,8 @@ class SubmitPictures extends StatelessWidget {
         }
         else{
           //Submit order code here
+          ctrl.postSubmitPicture(order);
+
         }
 
       } , child: Padding(
@@ -59,19 +63,39 @@ class SubmitPictures extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: GetBuilder<SubmitPictureController>(
         builder: (ctrl) {
-          return ctrl.imagePathList.isNotEmpty ? GridView.builder(
-            padding: EdgeInsets.all(20),
-              itemCount: ctrl.imagePathList.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 4.0,
-              mainAxisSpacing: 4.0
+          return Column(
+
+            children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                style: GoogleFonts.poppins(),
+                controller: ctrl.des,
+                decoration: InputDecoration(
+                  hintText: 'Write a message',
+                  filled: true,
+                ),
+              keyboardType: TextInputType.multiline,
+              minLines: 1,//Normal textInputField will be displayed
+              maxLines: 10,// when user presses enter it will adapt to it
           ),
-              itemBuilder: (context, index){
-              print(ctrl.imagePathList[index].path);
-            return Image.file(File(ctrl.imagePathList[index].path));
-              })
-          : Center(child: Text("No image selected! \n To complete the order please submit picture.", textAlign: TextAlign.center,));
+            ),
+              Expanded(
+              child: ctrl.imagePathList.isNotEmpty ? GridView.builder(
+                padding: EdgeInsets.all(20),
+                  itemCount: ctrl.imagePathList.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 4.0,
+                  mainAxisSpacing: 4.0
+              ),
+                  itemBuilder: (context, index){
+                  print(ctrl.imagePathList[index].path);
+                return Image.file(File(ctrl.imagePathList[index].path));
+                  })
+              : Center(child: Text("No image selected! \n To complete the order please submit picture.", textAlign: TextAlign.center,)),
+            ),],
+          );
         }
       ),
     );

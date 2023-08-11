@@ -55,12 +55,13 @@ class ApiRequest {
     required Function(dynamic data) onSuccess,
     required Function(dynamic error) onError,
   }) async {
+
     await _dio().get(url, queryParameters: data).then((res) {
       onSuccess(res.data);
-      print(res.data);
+
     }).catchError((error) {
       onError(error);
-      print(error);
+
     });
   }
 
@@ -69,13 +70,11 @@ class ApiRequest {
     required Function(dynamic frmData) onSuccess,
     required Function(dynamic error) onError,
   }) async {
-    print("post");
-    print(frmData);
-    print(url);
+
     _dio().post(url, data: frmData).then((res) {
       onSuccess(res);
     }).catchError((error) {
-      print(error);
+
       onError(error);
     });
   }
@@ -87,10 +86,10 @@ class ApiRequest {
   }) async {
     await _dioToken().get(url, queryParameters: data).then((res) {
       onSuccess(res.data);
-      print(res.data);
+
     }).catchError((error) {
       onError(error);
-      print(error);
+
     });
   }
 
@@ -99,13 +98,9 @@ class ApiRequest {
     required Function(dynamic frmData) onSuccess,
     required Function(dynamic error) onError,
   }) async {
-    print("post");
-    print(frmData);
-    print(url);
     _dioToken().post(url, data: frmData).then((res) {
       onSuccess(res);
     }).catchError((error) {
-      print(error);
       onError(error);
     });
   }

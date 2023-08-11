@@ -1,5 +1,6 @@
 import 'package:caremint/controllers/home_controller.dart';
 import 'package:caremint/franchise/controllers/tabview_controller.dart';
+import 'package:caremint/franchise/views/canceled_orders.dart';
 import 'package:caremint/franchise/views/completed_orders_page.dart';
 import 'package:caremint/ui/components/loading_overlay_components.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import '../../constants/app_colors.dart';
 import '../../constants/constants.dart';
 import '../../models/userDataModel.dart';
 import '../../services/api_requests.dart';
+import '../controllers/customerInfo_controller.dart';
 import 'ongoing_orders.dart';
 import 'listing_services.dart';
 import 'orders.dart';
@@ -21,7 +23,7 @@ class TabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(length: 3, child:
+    return DefaultTabController(length: 4, child:
     GetBuilder<TabviewController>(
       builder: (ctrl) {
         return Scaffold(
@@ -122,7 +124,7 @@ class TabView extends StatelessWidget {
                 color: Colors.white,
                 fontSize: 10,
               ),
-              // isScrollable: true,
+              isScrollable: true,
               indicator: UnderlineTabIndicator(
 
                   borderSide: BorderSide(width: 1.0,
@@ -134,25 +136,31 @@ class TabView extends StatelessWidget {
                 Tab(text: "Orders"),
                 Tab(text: "Ongoind Orders",),
                 Tab(text: "Completed Orders"),
+                Tab(text: "Canceled Orders",),
                 // Tab(text: "Listing Service",)
 
               ],
             ),
           ),
-          body: LoadingOverlay(
-            isLoading: ctrl.isLoading.value,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: const TabBarView(
-                children: [
-                  Orders(),
-                  CustomerInfo(),
-                  CompletedOrderPage(),
-                  // ListingServices(),
+          body: GetBuilder<CustomerInfoController>(
+            builder: (customCtrl) {
+              return LoadingOverlay(
+                isLoading: customCtrl.isLoading.value,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: const TabBarView(
+                    children: [
+                      Orders(),
+                      CustomerInfo(),
+                      CompletedOrderPage(),
+                      CanceledOrderPage(),
+                      // ListingServices(),
 
-                ],
-              ),
-            ),
+                    ],
+                  ),
+                ),
+              );
+            }
           ),
         );
       }

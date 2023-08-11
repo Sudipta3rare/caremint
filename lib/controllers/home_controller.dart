@@ -64,6 +64,8 @@ class HomeController extends GetxController {
     store.write("user_phone", userResponse.user?.userPhonenumber);
     print(store.read("user_token"));
     isLoggedIn.value = true;
+    print(store.read("user_token"));
+    print(store.read("user_role"));
     await getUserData();
     update();
   }

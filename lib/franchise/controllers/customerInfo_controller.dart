@@ -15,25 +15,52 @@ class CustomerInfoController extends GetxController{
   List<OngoingOrders> ongoingOrderList = [];
   List<OngoingOrders> completedOrderList = [];
   List<OngoingOrders> newOrderList = [];
+  List<OngoingOrders> canceledOrderList = [];
   RxBool isLoading = false.obs;
 
 
  Future<void> onRefresh()async{
   isLoading.value= true;
-  await  getOngoingOrder();
+  print("refresing");
+  await getOngoingOrder();
   await getCompletedOrder();
   await getNewOrder();
+  await getCanceledOrder();
   isLoading.value = false;
   update();
  }
    Future<void> getOngoingOrder() async {
+     ongoingOrderList.clear();
+
+     update();
      isLoading.value = true;
     ApiRequest(url: Constant.baseUrl+'/api/get-pending-orders', data: null).getToken(
         beforeSend: (){}, onSuccess: (onSuccess) {
 
           var ongoingOrderResponse = OngoingOrderResponse.fromJson(onSuccess as Map<String, dynamic>);
-          ongoingOrderList.clear();
           ongoingOrderList.addAll(ongoingOrderResponse.body as Iterable<OngoingOrders>);
+          isLoading.value = false;
+          update();
+
+    }, onError: (onError){
+          isLoading.value = false;
+          print(onError);
+          update();
+    });
+     isLoading.value = false;
+    update();
+   }
+   Future<void> getCanceledOrder() async {
+     canceledOrderList.clear();
+
+     update();
+     isLoading.value = true;
+    ApiRequest(url: Constant.baseUrl+'/api/get-cancelled-orders', data: null).getToken(
+        beforeSend: (){}, onSuccess: (onSuccess) {
+
+          var canceledOrder = OngoingOrderResponse.fromJson(onSuccess as Map<String, dynamic>);
+
+          canceledOrderList.addAll(canceledOrder.body as Iterable<OngoingOrders>);
 
           isLoading.value = false;
           update();
@@ -48,12 +75,15 @@ class CustomerInfoController extends GetxController{
    }
 
    Future<void> getCompletedOrder() async {
+     completedOrderList.clear();
+
+     update();
      isLoading.value = true;
     ApiRequest(url: Constant.baseUrl+'/api/get-completed-orders', data: null).getToken(
         beforeSend: (){}, onSuccess: (onSuccess) {
 
           var completedOrderListResponse = OngoingOrderResponse.fromJson(onSuccess as Map<String, dynamic>);
-          completedOrderList.clear();
+
           completedOrderList.addAll(completedOrderListResponse.body as Iterable<OngoingOrders>);
 
           isLoading.value = false;
@@ -64,16 +94,18 @@ class CustomerInfoController extends GetxController{
           update();
     });
      isLoading.value = false;
-    update();
+     update();
    }
 
    Future<void> getNewOrder() async {
+     newOrderList.clear();
+     update();
      isLoading.value = true;
     ApiRequest(url: Constant.baseUrl+'/api/get-new-orders', data: null).getToken(
         beforeSend: (){}, onSuccess: (onSuccess) {
 
           var newOrderListResponse = OngoingOrderResponse.fromJson(onSuccess as Map<String, dynamic>);
-          newOrderList.clear();
+
           newOrderList.addAll(newOrderListResponse.body as Iterable<OngoingOrders>);
 
           isLoading.value = false;
@@ -90,14 +122,16 @@ class CustomerInfoController extends GetxController{
 
    Future<void> postAcceptOrder(OngoingOrders order) async{
      isLoading.value = true;
-   ApiRequest(url: '${Constant.baseUrl}api/order-accept/', frmData: {order.id}).postToken(beforeSend:
+     print('${Constant.baseUrl}/api/order-accept/${order.id}');
+   ApiRequest(url: '${Constant.baseUrl}/api/order-accept/${order.id}', data: null).getToken(beforeSend:
    (){},
        onSuccess: (onSuccess) async {
 
       await onRefresh().whenComplete(() => isLoading.value=false);
       update();
        },
-       onError: (onError){
+       onError: (onError) async {
+         await onRefresh().whenComplete(() => isLoading.value=false);
      print(onError);
      Get.snackbar(
        'Error',
@@ -117,7 +151,9 @@ class CustomerInfoController extends GetxController{
 
    Future<void> postCancelOrder(OngoingOrders order) async{
      isLoading.value = true;
-   ApiRequest(url: Constant.baseUrl+'api/cancel-order/', frmData: {order.id}).postToken(beforeSend:
+     print(Constant.baseUrl+'/api/cancel-order/${order.id}');
+     print(order.id);
+   ApiRequest(url: Constant.baseUrl+'/api/cancel-order/${order.id}', data: null).getToken(beforeSend:
    (){},
        onSuccess: (onSuccess) async {
       await onRefresh().whenComplete(() => isLoading.value=false);

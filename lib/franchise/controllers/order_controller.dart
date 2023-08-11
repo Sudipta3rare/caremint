@@ -5,7 +5,7 @@ import '../models/order_model.dart';
 class OrderController extends GetxController{
   static OrderController to = Get.find();
 
-  Future<void> getOrders() async{
+  Future<void> postOrder() async{
 
   }
 

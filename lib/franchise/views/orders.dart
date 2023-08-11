@@ -1,6 +1,5 @@
 import 'package:caremint/constants/app_colors.dart';
 import 'package:caremint/franchise/controllers/customerInfo_controller.dart';
-import 'package:caremint/franchise/controllers/order_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -72,7 +71,7 @@ class Orders extends StatelessWidget {
                     child: Text("Orders in pending status : Please Accept or Cancel ", style:  GoogleFonts.poppins(),),
                   ),
                   Expanded(
-                    child: ListView.builder(
+                    child: ordCtrl.newOrderList.isEmpty ? emptyOrders() :  ListView.builder(
                       padding: EdgeInsets.symmetric(vertical: 10),
                         itemCount: ordCtrl.newOrderList.length,
                         itemBuilder: (context, index)
@@ -180,6 +179,13 @@ class Orders extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+  Widget emptyOrders(){
+    return Center(
+      child: Text("No Ongoing Orders",
+        style: AppStyle().subHeadBlueTextStyle,
+        textAlign: TextAlign.center,),
     );
   }
 }

@@ -8,14 +8,13 @@ class SignUpProvider{
     required Function(dynamic error) onError,
     required dynamic data,
   }) async {
-      print(data);
-      print("post Signup Res");
+
     ApiRequest(url: '${Constant.baseUrl}/api/user-signup', frmData: data).post(
       beforeSend: () => {if (beforeSend != null) beforeSend()},
       onSuccess: (data) {
-        print("here");
+
         onSuccess(data);
-       print(data);
+
       },
       onError: (error) => {
 

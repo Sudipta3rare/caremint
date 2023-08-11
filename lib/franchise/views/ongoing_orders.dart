@@ -124,7 +124,7 @@ class CustomerInfo extends StatelessWidget {
               ),
               ElevatedButton(onPressed: (){
                 Get.to(
-                  SubmitPictures()
+                  SubmitPictures(order: ordCtrl.ongoingOrderList[index],)
                 );
               }, child: Text("Order Completed",
               style:  GoogleFonts.poppins(),))

@@ -34,10 +34,12 @@ class SplashScreenViewModel extends GetxController
     Future<void> goToProvider() async {
       CustomerInfoController cCtrl = CustomerInfoController.to;
       // ListingServicesController sCtrl = ListingServicesController.to;
-      await cCtrl.getOngoingOrder();
-     await cCtrl.getCompletedOrder();
-     await cCtrl.getNewOrder();
+       await cCtrl.getOngoingOrder();
+       await cCtrl.getCompletedOrder();
+       await cCtrl.getNewOrder();
+       await cCtrl.getCanceledOrder();
       // sCtrl.getListedCategory();
+      update();
       Get.offAllNamed('/tabview');
     }
 
