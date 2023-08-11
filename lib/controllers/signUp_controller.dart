@@ -72,14 +72,15 @@ class SignUpController extends GetxController {
   Future<void> goToProvider() async {
     CustomerInfoController cCtrl = CustomerInfoController.to;
     // ListingServicesController sCtrl = ListingServicesController.to;
-    await cCtrl.onRefresh().whenComplete(() => (){
-      update();
-      Get.offAllNamed('/tabview');
-    });
+    cCtrl.isLoading.value= true;
+     await cCtrl.getOngoingOrder();
+     await cCtrl.getCanceledOrder();
+    await cCtrl.getCompletedOrder();
+    await cCtrl.getNewOrder();
+    cCtrl.isLoading.value = false;
     // sCtrl.getListedCategory();
-
-
-
+    update();
+    Get.offAllNamed('/tabview');
   }
 
 }
