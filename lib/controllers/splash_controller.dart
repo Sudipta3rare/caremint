@@ -1,3 +1,5 @@
+import 'package:caremint/franchise/controllers/customerInfo_controller.dart';
+import 'package:caremint/franchise/controllers/listing_services_controller.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -29,6 +31,15 @@ class SplashScreenViewModel extends GetxController
     }
   }
 
+    Future<void> goToProvider() async {
+      CustomerInfoController cCtrl = CustomerInfoController.to;
+      // ListingServicesController sCtrl = ListingServicesController.to;
+      await cCtrl.getOngoingOrder();
+     await cCtrl.getCompletedOrder();
+     await cCtrl.getNewOrder();
+      // sCtrl.getListedCategory();
+      Get.offAllNamed('/tabview');
+    }
 
   // animationInitilization() {
   //   animationController =

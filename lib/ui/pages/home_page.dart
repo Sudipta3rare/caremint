@@ -180,26 +180,36 @@ class _HomePageState extends State<HomePage> {
                             Get.back();
                           },
                           onConfirm: () async {
+                            ctrl.userDetails = UserDataModel();
+                            ctrl.store.write("user_token", "");
+                            ctrl.store.write("user_name", "");
+                            ctrl.store.write("user_email","");
+                            ctrl.store.write("user_pincode", "");
+                            ctrl.store.write("user_role", "");
+                            ctrl.store.write("user_phone", "");
+                            ctrl.isLoggedIn.value =false;
+                            Get.offAllNamed('/home');
+                            ctrl.update();
                             // perform logout
-                              print(ctrl.store.read("user_token"));
-                            ApiRequest(url: Constant.baseUrl+"/api/user-logout", frmData: null).postToken(
-                                beforeSend: () => {},
-                                onSuccess: (response){
-                              print(response.data);
-                                  ctrl.userDetails = UserDataModel();
-                                  ctrl.store.write("user_token", "");
-                                  ctrl.store.write("user_name", "");
-                                  ctrl.store.write("user_email","");
-                                  ctrl.store.write("user_pincode", "");
-                                  ctrl.store.write("user_role", "");
-                                  ctrl.store.write("user_phone", "");
-                                  ctrl.isLoggedIn.value =false;
-                                  Get.offAllNamed('/home');
-                                ctrl.update();
-                                },
-                                onError: (error) => {
-                                  print("error")
-                                });
+                            //   print(ctrl.store.read("user_token"));
+                            // ApiRequest(url: Constant.baseUrl+"/api/user-logout", frmData: null).postToken(
+                            //     beforeSend: () => {},
+                            //     onSuccess: (response){
+                            //   print(response.data);
+                            //       ctrl.userDetails = UserDataModel();
+                            //       ctrl.store.write("user_token", "");
+                            //       ctrl.store.write("user_name", "");
+                            //       ctrl.store.write("user_email","");
+                            //       ctrl.store.write("user_pincode", "");
+                            //       ctrl.store.write("user_role", "");
+                            //       ctrl.store.write("user_phone", "");
+                            //       ctrl.isLoggedIn.value =false;
+                            //       Get.offAllNamed('/home');
+                            //     ctrl.update();
+                            //     },
+                            //     onError: (error) => {
+                            //       print("error")
+                            //     });
 
 
 

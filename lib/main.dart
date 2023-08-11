@@ -51,12 +51,12 @@ _initController(){
   Get.put(SingleServiceController());
   Get.put<ServiceOrderController>(ServiceOrderController());
   Get.lazyPut(() => OrderController(),fenix: true);
-  Get.put<ListingServicesController>(ListingServicesController());
+  // Get.put<ListingServicesController>(ListingServicesController());
   Get.put<CustomerInfoController>(CustomerInfoController());
   Get.put<MyOrderController>(MyOrderController());
+  Get.put<CartController>(CartController());
+}
 
-
-  Get.put<CartController>(CartController());}
 class MainApp extends StatefulWidget {
   const MainApp({Key? key}) : super(key: key);
 

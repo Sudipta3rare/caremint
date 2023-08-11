@@ -37,8 +37,10 @@ class ApiRequest {
     String token = store.read("user_token");
     print(token);
     return Dio(
+
       BaseOptions(
         headers: {
+
           'Authorization': 'Bearer $token', //$adminToken',
           "Accept": "application/json",
           "Content-Type": "application/json"

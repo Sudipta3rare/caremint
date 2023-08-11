@@ -21,7 +21,7 @@ class TabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(length: 4, child:
+    return DefaultTabController(length: 3, child:
     GetBuilder<TabviewController>(
       builder: (ctrl) {
         return Scaffold(
@@ -51,36 +51,48 @@ class TabView extends StatelessWidget {
                       },
                       onConfirm: () async {
                         ctrl.isLoading.value = true;
+                        hmCtrl.userDetails = UserDataModel();
+                        ctrl.store.write("user_token", "");
+                        ctrl.store.write("user_name", "");
+                        ctrl.store.write("user_email","");
+                        ctrl.store.write("user_pincode", "");
+                        ctrl.store.write("user_role", "");
+                        ctrl.store.write("user_phone", "");
+                        hmCtrl.isLoggedIn.value =false;
+                        ctrl.isLoading.value = false;
+                        Get.offAllNamed('/home');
+                        ctrl.update();
+                        hmCtrl.update();
                         // perform logout
                         print(ctrl.store.read("user_token"));
-                        ApiRequest(url: Constant.baseUrl+"/api/user-logout", frmData: null).postToken(
-                            beforeSend: () => {},
-                            onSuccess: (response){
-                              print(response.data);
-                              hmCtrl.userDetails = UserDataModel();
-                              ctrl.store.write("user_token", "");
-                              ctrl.store.write("user_name", "");
-                              ctrl.store.write("user_email","");
-                              ctrl.store.write("user_pincode", "");
-                              ctrl.store.write("user_role", "");
-                              ctrl.store.write("user_phone", "");
-                              hmCtrl.isLoggedIn.value =false;
-                              ctrl.isLoading.value = false;
-                              Get.offAllNamed('/home');
-                              ctrl.update();
-                              hmCtrl.update();
-                            },
-                            onError: (error) => (){
-                             ctrl.isLoading.value = false;
-                             Get.snackbar(
-                               'Oops',
-                               'Logout Failed: Try Again',
-                               snackPosition: SnackPosition.BOTTOM,
-                               colorText: Color(0xffffffff),
-                               backgroundColor: AppStyle().gradientColor2,
-                               duration: Duration(seconds: 2),
-                             );
-                            });
+                        // ApiRequest(url: Constant.baseUrl+"/api/user-logout", frmData: null).postToken(
+                        //     beforeSend: () => {},
+                        //     onSuccess: (response){
+                        //       print(response.data);
+                        //       hmCtrl.userDetails = UserDataModel();
+                        //       ctrl.store.write("user_token", "");
+                        //       ctrl.store.write("user_name", "");
+                        //       ctrl.store.write("user_email","");
+                        //       ctrl.store.write("user_pincode", "");
+                        //       ctrl.store.write("user_role", "");
+                        //       ctrl.store.write("user_phone", "");
+                        //       hmCtrl.isLoggedIn.value =false;
+                        //       ctrl.isLoading.value = false;
+                        //       Get.offAllNamed('/home');
+                        //       ctrl.update();
+                        //       hmCtrl.update();
+                        //     },
+                        //     onError: (error) => (){
+                        //      ctrl.isLoading.value = false;
+                        //      Get.snackbar(
+                        //        'Oops',
+                        //        'Logout Failed: Try Again',
+                        //        snackPosition: SnackPosition.BOTTOM,
+                        //        colorText: Color(0xffffffff),
+                        //        backgroundColor: AppStyle().gradientColor2,
+                        //        duration: Duration(seconds: 2),
+                        //      );
+                        //     });
 
 
 
@@ -110,7 +122,7 @@ class TabView extends StatelessWidget {
                 color: Colors.white,
                 fontSize: 10,
               ),
-              isScrollable: true,
+              // isScrollable: true,
               indicator: UnderlineTabIndicator(
 
                   borderSide: BorderSide(width: 1.0,
@@ -121,8 +133,9 @@ class TabView extends StatelessWidget {
               tabs: [
                 Tab(text: "Orders"),
                 Tab(text: "Ongoind Orders",),
-                Tab(text: "Listing Service",),
-                Tab(text: "Completed Orders")
+                Tab(text: "Completed Orders"),
+                // Tab(text: "Listing Service",)
+
               ],
             ),
           ),
@@ -134,8 +147,9 @@ class TabView extends StatelessWidget {
                 children: [
                   Orders(),
                   CustomerInfo(),
-                  ListingServices(),
                   CompletedOrderPage(),
+                  // ListingServices(),
+
                 ],
               ),
             ),

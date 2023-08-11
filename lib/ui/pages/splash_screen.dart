@@ -39,7 +39,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       // }
       if(status == AnimationStatus.completed){
         if(welcomeController.checkProvider()){
-          Get.offAndToNamed('/tabview');
+          welcomeController.goToProvider();
         }
         else{
           Get.offAndToNamed('/home');

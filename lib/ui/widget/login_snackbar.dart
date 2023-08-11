@@ -195,7 +195,7 @@ class LoginSnackBar {
                                             Get.offAllNamed('/home');
                                           }
                                           else{
-                                            Get.offAllNamed("/tabview");
+                                            ctrl.goToProvider();
                                           }
 
 

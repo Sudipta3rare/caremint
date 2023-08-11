@@ -6,6 +6,9 @@ import 'package:caremint/models/user_model.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../franchise/controllers/customerInfo_controller.dart';
+import '../franchise/controllers/listing_services_controller.dart';
+
 
 class SignUpController extends GetxController {
 
@@ -64,6 +67,16 @@ class SignUpController extends GetxController {
         update();
       },
     );
+  }
+
+  Future<void> goToProvider() async {
+    CustomerInfoController cCtrl = CustomerInfoController.to;
+    // ListingServicesController sCtrl = ListingServicesController.to;
+     await cCtrl.getOngoingOrder();
+    await cCtrl.getCompletedOrder();
+    await cCtrl.getNewOrder();
+    // sCtrl.getListedCategory();
+    Get.offAllNamed('/tabview');
   }
 
 }
