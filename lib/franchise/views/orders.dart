@@ -1,5 +1,6 @@
 import 'package:caremint/constants/app_colors.dart';
 import 'package:caremint/franchise/controllers/customerInfo_controller.dart';
+import 'package:caremint/ui/components/loading_overlay_components.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,71 +16,74 @@ class Orders extends StatelessWidget {
           builder: (ordCtrl) {
             return RefreshIndicator(
               onRefresh:  ()=> ordCtrl.onRefresh(),
-              child: Column(
-                children: [
-                  // Row(
-                  //   children: [
-                  //
-                  //     Expanded(
-                  //       child: Padding(
-                  //         padding: const EdgeInsets.all(8.0),
-                  //         child: TextFormField(
-                  //
-                  //           // enabled: true,
-                  //           decoration: InputDecoration(
-                  //             contentPadding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
-                  //             hintText: "Search Order",
-                  //             hintStyle:GoogleFonts.poppins(
-                  //                 color: Colors.blue[900],
-                  //                 fontWeight: FontWeight.w500) ,
-                  //
-                  //             icon: Icon(Icons.search),
-                  //             iconColor: AppStyle.buttonColor,
-                  //             border: const UnderlineInputBorder(
-                  //
-                  //             ),
-                  //             // labelText: '$title',
-                  //
-                  //           ),
-                  //           controller: null,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Container(
-                  //       margin: EdgeInsets.all(10),
-                  //       decoration: BoxDecoration(
-                  //         color: Colors.white,
-                  //         borderRadius: BorderRadius.all(
-                  //           Radius.circular(12.0),
-                  //         ),
-                  //       ),
-                  //
-                  //       height: 40,
-                  //       width: 100,
-                  //       child: Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //         children: [
-                  //           Text("Sort", style: AppStyle().paraTextStyle,),
-                  //           Icon(Icons.sort, color: AppStyle.buttonColor,)
-                  //         ],
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text("Orders in pending status : Please Accept or Cancel ", style:  GoogleFonts.poppins(),),
-                  ),
-                  Expanded(
-                    child: ordCtrl.newOrderList.isEmpty ? emptyOrders() :  ListView.builder(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                        itemCount: ordCtrl.newOrderList.length,
-                        itemBuilder: (context, index)
-                        =>listLayout(context, ordCtrl, index),
-                   ),
-                  ),
-                ],
+              child: LoadingOverlay(
+                isLoading: ordCtrl.isLoading.value,
+                child: Column(
+                  children: [
+                    // Row(
+                    //   children: [
+                    //
+                    //     Expanded(
+                    //       child: Padding(
+                    //         padding: const EdgeInsets.all(8.0),
+                    //         child: TextFormField(
+                    //
+                    //           // enabled: true,
+                    //           decoration: InputDecoration(
+                    //             contentPadding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
+                    //             hintText: "Search Order",
+                    //             hintStyle:GoogleFonts.poppins(
+                    //                 color: Colors.blue[900],
+                    //                 fontWeight: FontWeight.w500) ,
+                    //
+                    //             icon: Icon(Icons.search),
+                    //             iconColor: AppStyle.buttonColor,
+                    //             border: const UnderlineInputBorder(
+                    //
+                    //             ),
+                    //             // labelText: '$title',
+                    //
+                    //           ),
+                    //           controller: null,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     Container(
+                    //       margin: EdgeInsets.all(10),
+                    //       decoration: BoxDecoration(
+                    //         color: Colors.white,
+                    //         borderRadius: BorderRadius.all(
+                    //           Radius.circular(12.0),
+                    //         ),
+                    //       ),
+                    //
+                    //       height: 40,
+                    //       width: 100,
+                    //       child: Row(
+                    //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //         children: [
+                    //           Text("Sort", style: AppStyle().paraTextStyle,),
+                    //           Icon(Icons.sort, color: AppStyle.buttonColor,)
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Orders in pending status : Please Accept or Cancel ", style:  GoogleFonts.poppins(),),
+                    ),
+                    Expanded(
+                      child: ordCtrl.newOrderList.isEmpty ? emptyOrders() :  ListView.builder(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                          itemCount: ordCtrl.newOrderList.length,
+                          itemBuilder: (context, index)
+                          =>listLayout(context, ordCtrl, index),
+                     ),
+                    ),
+                  ],
 
+                ),
               ),
             );
           }
@@ -122,12 +126,47 @@ class Orders extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                 TextButton(onPressed: (){
-                    ordCtrl.postCancelOrder(ordCtrl.newOrderList[index]);
-                    ordCtrl.update();
+
+                  
+                  Get.defaultDialog(
+                    // titlePadding: EdgeInsets.all(30),
+                    // contentPadding: EdgeInsets.all(8),
+                    title: 'Cancel order request!',
+                    titleStyle: TextStyle(
+                      color: AppStyle().gradientColor2, // Replace with your desired color
+                    ),
+                    middleTextStyle: AppStyle().subHeadBlueTextStyle,
+                    content: Text(
+                      'Do you want to cancel order?',
+                      style: AppStyle().paraTextStyle,
+                    ),
+                    textCancel: 'NO',
+                    textConfirm: 'YES',
+                    buttonColor: AppStyle().gradientColor3,
+                    cancelTextColor: AppStyle().gradientColor1,
+                    confirmTextColor: AppStyle().gradientColor1,
+                    onCancel: () {
+                      Get.back();
+                    },
+                    onConfirm: () async {
+
+
+                      ordCtrl.postCancelOrder(ordCtrl.newOrderList[index]);
+                      ordCtrl.update();
+
+                    },
+                  );
+
                 }, child: Text("Cancel Order")),
                 ElevatedButton(onPressed: (){
-                  ordCtrl.postAcceptOrder(ordCtrl.newOrderList[index]);
+
+
+
+                  ordCtrl.isLoading.value=true;
                   ordCtrl.update();
+                  ordCtrl.postAcceptOrder(ordCtrl.newOrderList[index]);
+
+                  // ordCtrl.update();
                 }, child: Text("Accept Order"))
               ],)
             ],

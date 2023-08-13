@@ -16,18 +16,18 @@ class CustomerInfoController extends GetxController{
   List<OngoingOrders> completedOrderList = [];
   List<OngoingOrders> newOrderList = [];
   List<OngoingOrders> canceledOrderList = [];
-  RxBool isLoading = false.obs;
+  RxBool isLoading = true.obs;
 
 
  Future<void> onRefresh()async{
-  isLoading.value= true;
+  // isLoading.value= true;
   print("refresing");
   await getOngoingOrder();
   await getCompletedOrder();
   await getNewOrder();
   await getCanceledOrder();
-  isLoading.value = false;
-  update();
+  // isLoading.value = false;
+  // update();
  }
    Future<void> getOngoingOrder() async {
      ongoingOrderList.clear();
@@ -39,13 +39,14 @@ class CustomerInfoController extends GetxController{
 
           var ongoingOrderResponse = OngoingOrderResponse.fromJson(onSuccess as Map<String, dynamic>);
           ongoingOrderList.addAll(ongoingOrderResponse.body as Iterable<OngoingOrders>);
-          isLoading.value = false;
+          // isLoading.value = false;
           update();
 
     }, onError: (onError){
-          isLoading.value = false;
+          // isLoading.value = false;
+          print("getPending order");
           print(onError);
-          update();
+          // update();
     });
      isLoading.value = false;
     update();
@@ -62,13 +63,14 @@ class CustomerInfoController extends GetxController{
 
           canceledOrderList.addAll(canceledOrder.body as Iterable<OngoingOrders>);
 
-          isLoading.value = false;
+          // isLoading.value = false;
           update();
 
     }, onError: (onError){
-          isLoading.value = false;
+          // isLoading.value = false;
+          print("get canceled order");
           print(onError);
-          update();
+          // update();
     });
      isLoading.value = false;
     update();
@@ -86,12 +88,13 @@ class CustomerInfoController extends GetxController{
 
           completedOrderList.addAll(completedOrderListResponse.body as Iterable<OngoingOrders>);
 
-          isLoading.value = false;
+          // isLoading.value = false;
           update();
     }, onError: (onError){
-          isLoading.value = false;
+          // isLoading.value = false;
+          print("completed order");
           print(onError);
-          update();
+          // update();
     });
      isLoading.value = false;
      update();
@@ -101,19 +104,20 @@ class CustomerInfoController extends GetxController{
      newOrderList.clear();
      update();
      isLoading.value = true;
+     update();
     ApiRequest(url: Constant.baseUrl+'/api/get-new-orders', data: null).getToken(
         beforeSend: (){}, onSuccess: (onSuccess) {
 
           var newOrderListResponse = OngoingOrderResponse.fromJson(onSuccess as Map<String, dynamic>);
 
           newOrderList.addAll(newOrderListResponse.body as Iterable<OngoingOrders>);
+update();
 
-          isLoading.value = false;
-          update();
     }, onError: (onError){
-          isLoading.value = false;
+          // isLoading.value = false;
+          print("get new order");
           print(onError);
-          update();
+          // update();
     });
      isLoading.value = false;
     update();
@@ -122,8 +126,10 @@ class CustomerInfoController extends GetxController{
 
    Future<void> postAcceptOrder(OngoingOrders order) async{
      isLoading.value = true;
+     update();
+     print(isLoading.value);
      print('${Constant.baseUrl}/api/order-accept/${order.id}');
-   ApiRequest(url: '${Constant.baseUrl}/api/order-accept/${order.id}', data: null).getToken(beforeSend:
+   ApiRequest(url: '${Constant.baseUrl}/api/order-accept/${order.id}', data: null).getToken( beforeSend:
    (){},
        onSuccess: (onSuccess) async {
 
@@ -132,6 +138,7 @@ class CustomerInfoController extends GetxController{
        },
        onError: (onError) async {
          await onRefresh().whenComplete(() => isLoading.value=false);
+         print("order accept");
      print(onError);
      Get.snackbar(
        'Error',
@@ -141,10 +148,11 @@ class CustomerInfoController extends GetxController{
        backgroundColor: AppStyle().gradientColor2,
        duration: Duration(seconds: 2),
      );
-     isLoading.value= false;
-     update();
+     // isLoading.value= false;
+     // update();
        });
-     isLoading.value= false;
+
+     print(isLoading.value);
      update();
    }
 
@@ -157,9 +165,10 @@ class CustomerInfoController extends GetxController{
    (){},
        onSuccess: (onSuccess) async {
       await onRefresh().whenComplete(() => isLoading.value=false);
-      update();
+      // update();
        },
        onError: (onError){
+
      print(onError);
      Get.snackbar(
        'Error',
@@ -169,10 +178,11 @@ class CustomerInfoController extends GetxController{
        backgroundColor: AppStyle().gradientColor2,
        duration: Duration(seconds: 2),
      );
-     isLoading.value= false;
-     update();
+     // isLoading.value= false;
+     // update();
        });
      isLoading.value= false;
+
      update();
    }
 }
