@@ -3,7 +3,6 @@ import 'package:caremint/controllers/categories_controller/exterior_service_cont
 import 'package:caremint/controllers/controllers.dart';
 import 'package:caremint/ui/components/appBar.dart';
 import 'package:caremint/ui/components/loading_overlay_components.dart';
-import 'package:caremint/ui/pages/single_service_detail/service_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:get/get.dart';
@@ -90,7 +89,7 @@ class ExteriorServices extends StatelessWidget {
   }
 
   //List View Building
-  Widget listBuilding(BuildContext context, ctrl, itemList) {
+  Widget listBuilding(BuildContext context, ctrl, List<Provider> itemList) {
     return ListView.builder(
       itemCount: itemList.length,
       itemBuilder: (BuildContext context,int index){
@@ -103,7 +102,7 @@ class ExteriorServices extends StatelessWidget {
 
 
 // List view single widget
-  Widget listTile(Providers item, ) {
+  Widget listTile(Provider item ) {
     return Container(
 
       padding: EdgeInsets.all(10),
@@ -139,7 +138,7 @@ class ExteriorServices extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     backgroundColor: AppStyle.blue900.withOpacity(0.3),
-                    backgroundImage: CachedNetworkImageProvider(item.image,),
+                    backgroundImage: CachedNetworkImageProvider(item.userUrl,),
                     radius: 50,
                   ),
                   const SizedBox(
@@ -150,16 +149,16 @@ class ExteriorServices extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        item.name,
+                        item.displayName!,
                         // item.name,
                         style: AppStyle().subHeadBlueTextStyle,
                       ),
                       Text(
-                        item.service[0].sCategory,
+                        item.userPhonenumber!,
                         style: AppStyle().paraTextStyle,
                       ),
                       Text(
-                        item.city,
+                        item.userAddress!,
                         style: AppStyle().paraTextStyle,
                       ),
                     ],
@@ -199,7 +198,7 @@ class ExteriorServices extends StatelessWidget {
 
 
   //Grid view item widget
-  Widget getGridItem(Providers item) {
+  Widget getGridItem(Provider item) {
     return GetBuilder<SingleServiceController>(
       builder: (ctrl) {
         return GestureDetector(
@@ -241,18 +240,18 @@ class ExteriorServices extends StatelessWidget {
                         child: ClipRRect(
 
                             borderRadius: BorderRadius.circular(20),
-                            child: CachedNetworkImage(imageUrl: item.image,fit: BoxFit.cover,
+                            child: CachedNetworkImage(imageUrl: item.userUrl,fit: BoxFit.cover,
                               placeholder: (context, url) => CircularProgressIndicator(),
                             )
                         ),
                       ),
                     )),
                 Text(
-                  item.name,
+                  item.displayName!,
                   style:AppStyle().paraTextStyle,
                 ),
                 Text(
-                  item.city,
+                  item.userPhonenumber!,
                   style:AppStyle().paraTextStyle,
                 ),
                 const SizedBox(

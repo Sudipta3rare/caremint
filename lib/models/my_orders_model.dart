@@ -1,108 +1,105 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// To parse this JSON data, do
+//
+//     final myOrdersResponse = myOrdersResponseFromJson(jsonString);
 
-class MyOrderModel {
-  final String ordId;
-  final String userId;
-final  String address ;
-  final String city;
-  final String date;
-  final String description;
-  final String payment;
-  final String price;
-  final String providerId;
-  final String sCategory;
-  final String sName;
-  final String state;
-  final String status;
-  final String time;
 
-  MyOrderModel({
-    this.userId= '',
-    this.ordId = '',
-    this.address='',
-    this.city='',
-    this.date='',
-    this.description='',
-    this.payment='',
-    this.price='',
-    this.providerId='',
-    this.sCategory='',
-    this.sName='',
-    this.state='',
-    this.status ='',
-    this.time ='',});
+class MyOrdersResponse {
+  List<MyOrders>? body;
 
-  toJson(){
-    return {
-      "userId" : userId,
-      "id" : ordId,
-      "city": city,
-      "address": address,
-      "date": date,
-      "description":description,
-      "payment": payment,
-      "price":price,
-      "provider_id": providerId,
-      "s_category": sCategory,
-      "s_name":sName,
-      "state": state,
-      "status": status,
-      "time": time,
-    };
-  }
+  MyOrdersResponse({
+    this.body,
+  });
 
-  // factory MyOrderModel.fromSnapshot(
-  //     DocumentSnapshot<Map<String, dynamic>> document){
-  //   final data = document.data()!;
-  //   return MyOrderModel(
-  //
-  //     ordId: document.id,
-  //     name: data["name"],
-  //     phone: data["phone"],
-  //     city: data["city"],
-  //     image: data['image'],
-  //
-  //     service : List<Service>.from(data["service"].map((x) => Service.fromJson(x))),
-  //     state: data["state"],
-  //   );
+  factory MyOrdersResponse.fromJson(Map<String, dynamic> json) => MyOrdersResponse(
+    body: json["body"] == null ? [] : List<MyOrders>.from(json["body"]!.map((x) => MyOrders.fromJson(x))),
+  );
 
-  factory MyOrderModel.fromSnapshot(
-      DocumentSnapshot<Map<String, dynamic>> document){
-    // print(document.id);
-    final data = document.data()!;
-
-    return MyOrderModel(
-      ordId: document.id ?? '',
-   userId: data["userId"] ?? '',
-   address: data["address"] ?? '',
-   city: data["city"] ?? '',
-   date: data["date"] ?? '',
-   description: data["description"] ?? '',
-   payment: data["payment"] ?? '',
-   providerId: data["providerId"] ?? '',
-   price: data["price"]?? '',
-   sCategory: data["sCategory"] ?? '',
-   sName: data["sName"] ?? '',
-   state: data["state"] ?? '' ,
-   status: data["status"] == "1" ? "Completed" : "Ongoing" ,
-   time: data["time"],
-    );
-  }
-    Map<String, dynamic> toFirestore(Map<String,dynamic> data,  String userId){
-    return {
-      "userId" : userId ?? '',
-      "address": data["address"],
-      "city": data["city"],
-      "date": data["date"],
-      "description": data["description"],
-      "payment": data["payment"],
-      "providerId": data["provider_id"],
-      "price": data["price"].toString(),
-      "sCategory": data["category"] ?? '',
-      "sName": data["s_name"],
-      "state": data["state"]  ,
-      "status":"0",
-      "time": data["time"],
-    };
+  Map<String, dynamic> toJson() => {
+    "body": body == null ? [] : List<dynamic>.from(body!.map((x) => x.toJson())),
+  };
 }
+
+class MyOrders {
+  int? id;
+  String? serviceId;
+  String? providerId;
+  String? userId;
+  String? name;
+  String? mobileNumber;
+  String? pincodeId;
+  String? address;
+  DateTime? orderDate;
+  String? orderTime;
+  String? orderPrice;
+  DateTime? deliveryDate;
+  String? orderStatus;
+  String? image;
+  String? description;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+
+  MyOrders({
+    this.id,
+    this.serviceId,
+    this.providerId,
+    this.userId,
+    this.name = "",
+    this.mobileNumber = "",
+    this.pincodeId,
+    this.address = "",
+    this.orderDate,
+    this.orderTime,
+    this.orderPrice,
+    this.deliveryDate,
+    this.orderStatus = "",
+    this.image = "",
+    this.description = "",
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  factory MyOrders.fromJson(Map<String, dynamic> json) => MyOrders(
+    id: json["id"],
+    serviceId: json["service_id"],
+    providerId: json["provider_id"],
+    userId: json["user_id"],
+    name:json["name"],
+    mobileNumber: json["mobile_number"],
+    pincodeId: json["pincode_id"],
+    address: json["address"],
+    orderDate: json["order_date"] == null ? null : DateTime.parse(json["order_date"]),
+    orderTime: json["order_time"] ,
+    orderPrice: json["order_price"],
+    deliveryDate: json["delivery_date"] == null ? null : DateTime.parse(json["delivery_date"]),
+    orderStatus: json["order_status"],
+    image: json["image"],
+    description: json["description"],
+    createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
+    updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "service_id": serviceId,
+    "provider_id": providerId,
+    "user_id": userId,
+    "name": name,
+    "mobile_number": mobileNumber,
+    "pincode_id": pincodeId,
+    "address": address,
+    "order_date": orderDate?.toString(),
+    "order_time": orderTime?.toString(),
+    "order_price": orderPrice,
+    "delivery_date": deliveryDate?.toString(),
+    "order_status": orderStatus ?? "",
+    "image": image,
+    "description": description ?? "",
+    "created_at": createdAt?.toString(),
+    "updated_at": updatedAt?.toString(),
+  };
 }
+
+
+
+
+

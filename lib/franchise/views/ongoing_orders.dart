@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../constants/app_colors.dart';
+
+
 class CustomerInfo extends StatelessWidget {
   const CustomerInfo({Key? key}) : super(key: key);
 

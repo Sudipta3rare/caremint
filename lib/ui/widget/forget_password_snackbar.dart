@@ -1,6 +1,5 @@
 import 'package:caremint/ui/widget/login_snackbar.dart';
 import 'package:caremint/ui/widget/signup_snackbar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +11,7 @@ class ForgetPasswordSnackbar {
   Future forgetPasswordSnackbar(context){
 
     final TextEditingController emailController = TextEditingController();
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+    // final FirebaseAuth _auth = FirebaseAuth.instance;
 
     void sendPasswordResetEmail(BuildContext context) async {
       String email = emailController.text.trim();
@@ -38,27 +37,27 @@ class ForgetPasswordSnackbar {
         duration: Duration(seconds: 2),
       );
 
-      try {
-        await _auth.sendPasswordResetEmail(email: email);
-        Get.snackbar(
-          'Info',
-          'Instruction to reset your password sent',
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: Color(0xffffffff),
-          backgroundColor: AppStyle().gradientColor2,
-          duration: Duration(seconds: 2),
-        );
-
-      } catch (e) {
-        Get.snackbar(
-          'Info',
-          'Failed to sent reset email!',
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: Color(0xffffffff),
-          backgroundColor: AppStyle().gradientColor2,
-          duration: Duration(seconds: 2),
-        );
-      }
+      // try {
+      //   await _auth.sendPasswordResetEmail(email: email);
+      //   Get.snackbar(
+      //     'Info',
+      //     'Instruction to reset your password sent',
+      //     snackPosition: SnackPosition.BOTTOM,
+      //     colorText: Color(0xffffffff),
+      //     backgroundColor: AppStyle().gradientColor2,
+      //     duration: Duration(seconds: 2),
+      //   );
+      //
+      // } catch (e) {
+      //   Get.snackbar(
+      //     'Info',
+      //     'Failed to sent reset email!',
+      //     snackPosition: SnackPosition.BOTTOM,
+      //     colorText: Color(0xffffffff),
+      //     backgroundColor: AppStyle().gradientColor2,
+      //     duration: Duration(seconds: 2),
+      //   );
+      // }
     }
 
     return Get.dialog(

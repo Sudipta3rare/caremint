@@ -1,6 +1,5 @@
 import 'package:caremint/controllers/firebase_controller.dart';
 import 'package:caremint/data/api_category_provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,8 +15,7 @@ import '../models/user_model.dart';
 class HomeController extends GetxController {
   static HomeController to = Get.find();
 
-  FirebaseController frCtrl = FirebaseController.to;
-  FirebaseFirestore db = FirebaseFirestore.instance;
+
 
 
   var store = GetStorage();
@@ -89,7 +87,7 @@ class HomeController extends GetxController {
   @override
   void onClose() {
     userDetails = UserDataModel();
-    categoryId = [];
+
     categoryList=[];
   }
 
@@ -99,32 +97,22 @@ class HomeController extends GetxController {
       (onSuccess: (categoryItems){
       if(categoryItems.body != ''){
         categoryList.clear();
-
         categoryList.addAll(categoryItems.body as Iterable<Category>);
+        for (var items in categoryList)
+        {
+          categoryId.add(items.id);
+          selectItems.add(items.categoryName.toString());
+        }
         print(categoryList[0].categoryName);
       }
     },
         onError: (error){
           categoryList.clear();
-          isLoading.value = false;
-          update();
+
         });
-
-
-    final query = await db.collection('Category').get();
-
-
-    for (int i = 0; i < query.docs.length; i++) {
-
-      categoryId.add(query.docs[i].id);
-
-    }
-
-    // print(category);
     isLoading.value = false;
+    update();
   }
 
-  void gotoService(index) {
-    Get.toNamed('/service');
-  }
+
 }

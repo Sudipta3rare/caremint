@@ -1,11 +1,7 @@
 import 'package:caremint/app_routes.dart';
-import 'package:caremint/controllers/cart_controller.dart';
-import 'package:caremint/controllers/categories_controller/exterior_service_controller.dart';
 import 'package:caremint/controllers/controllers.dart';
 import 'package:caremint/controllers/my_orders_controller/my_order_controller.dart';
-import 'package:caremint/controllers/single_service_controller.dart';
 import 'package:caremint/franchise/controllers/customerInfo_controller.dart';
-import 'package:caremint/franchise/controllers/listing_services_controller.dart';
 import 'package:caremint/franchise/controllers/order_controller.dart';
 import 'package:caremint/franchise/controllers/tabview_controller.dart';
 
@@ -14,12 +10,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sizer/sizer.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'controllers/firebase_controller.dart';
 
 import 'controllers/home_controller.dart';
-import 'controllers/service_order_controller.dart';
 
 
 Future<void> main() async {
@@ -27,23 +19,23 @@ Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
   GetStorage.init();
-  await Firebase.initializeApp(
-    // options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // await Firebase.initializeApp(
+  //   // options: DefaultFirebaseOptions.currentPlatform,
+  // );
   _initController();
 
-  _initFirebase();
+  // _initFirebase();
   runApp(const MainApp());
 }
-_initFirebase() async {
-  await Firebase.initializeApp(
-    // options: DefaultFirebaseOptions.currentPlatform,
-  );
-}
+// _initFirebase() async {
+//   await Firebase.initializeApp(
+//     // options: DefaultFirebaseOptions.currentPlatform,
+//   );
+// }
 _initController(){
 
   Get.put(SplashScreenViewModel());
-  Get.put(FirebaseController());
+  // Get.put(FirebaseController());
   Get.put(HomeController());
   Get.put(TabviewController());
   Get.put(SignUpController());
@@ -54,7 +46,7 @@ _initController(){
   // Get.put<ListingServicesController>(ListingServicesController());
   Get.put<CustomerInfoController>(CustomerInfoController());
   Get.put<MyOrderController>(MyOrderController());
-  Get.put<CartController>(CartController());
+  // Get.put<CartController>(CartController());
 }
 
 class MainApp extends StatefulWidget {

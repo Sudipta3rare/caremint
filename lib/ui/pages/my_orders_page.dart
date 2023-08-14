@@ -4,7 +4,7 @@ import 'package:caremint/ui/components/appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:intl/intl.dart';
 
 class MyOrdersPage extends StatelessWidget {
   const MyOrdersPage({super.key});
@@ -21,7 +21,7 @@ class MyOrdersPage extends StatelessWidget {
   Widget _showBody(context){
     return GetBuilder<MyOrderController>(
       builder: (ctrl) {
-        return ctrl.myOrderList.isNotEmpty ?ListView.builder(
+        return ctrl.myOrderList.isNotEmpty ? ListView.builder(
           padding: EdgeInsets.symmetric(vertical: 10),
           itemCount: ctrl.myOrderList.length,
           itemBuilder: (context, index)
@@ -53,9 +53,9 @@ class MyOrdersPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  listComponetCol(ordCtrl.myOrderList[index].sName,ordCtrl.myOrderList[index].sCategory,"Service Name", "Service Category",context),
-                  listComponetCol(ordCtrl.myOrderList[index].providerId,ordCtrl.myOrderList[index].price.toString(),"Provider Name", "Order Value",context),
-                  listComponetCol(ordCtrl.myOrderList[index].date,ordCtrl.myOrderList[index].status == "1" ? "Completed" : "Ongoing","Order Date", "Order Status",context),
+                  listComponetCol(ordCtrl.myOrderList[index].name!,ordCtrl.myOrderList[index].description.toString(),"Service Name", "Description",context),
+                  listComponetCol(DateFormat("yMMMMd").format(ordCtrl.myOrderList[index].deliveryDate!) ,ordCtrl.myOrderList[index].orderPrice.toString(),"Delivery Date", "Order Value",context),
+                  listComponetCol(DateFormat("yMMMMd").format(ordCtrl.myOrderList[index].orderDate!),ordCtrl.myOrderList[index].orderStatus.toString() == "null" ? "pending" :  ordCtrl.myOrderList[index].orderStatus.toString(),"Order Date", "Order Status",context),
 
                 ],
               ),
@@ -87,25 +87,26 @@ class MyOrdersPage extends StatelessWidget {
             //     ],),
             // )
 
-          Row(
-            children: [
-              TextButton(onPressed:() {}, child: Text("Cancel Order", style: GoogleFonts.poppins(
-                color: Colors.red,
-              ),)
-              ),
-              Spacer(),
-              ElevatedButton(onPressed:() {}, child: Text("Contact Provider", style: GoogleFonts.poppins(
-
-              ),)
-              ),
-            ],
-          )
+          // Row(
+          //   children: [
+          //     TextButton(onPressed:() {}, child: Text("Cancel Order", style: GoogleFonts.poppins(
+          //       color: Colors.red,
+          //     ),)
+          //     ),
+          //     Spacer(),
+          //     ElevatedButton(onPressed:() {}, child: Text("Contact Provider", style: GoogleFonts.poppins(
+          //
+          //     ),)
+          //     ),
+          //   ],
+          // )
           ],
         ),
       ),
     );
   }
   Widget listComponetCol(String name1, String name2,String title1,String title2, context){
+
     return Container(
       width: MediaQuery.of(context).size.width /2.8,
       padding: const EdgeInsets.all(8.0),

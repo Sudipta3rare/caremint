@@ -98,9 +98,12 @@ class ApiRequest {
     required Function(dynamic frmData) onSuccess,
     required Function(dynamic error) onError,
   }) async {
+    print(url);
+    print(frmData);
     _dioToken().post(url, data: frmData).then((res) {
       onSuccess(res);
     }).catchError((error) {
+
       onError(error);
     });
   }

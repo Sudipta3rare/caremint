@@ -18,7 +18,7 @@ class AppRoutes {
     // GetPage(name: '/dashboard', page: () => const DashboardPage()),
     // GetPage(name: '/orders', page: () =>  const ListOrders(), transition: Transition.fade),
     GetPage(name: '/order', page: () =>   MyOrdersPage(), transition: Transition.fade),
-    GetPage(name: '/cart', page: () =>   CartPage(), transition: Transition.fade),
+    // GetPage(name: '/cart', page: () =>   CartPage(), transition: Transition.fade),
     GetPage(name: '/tabview', page: () =>   TabView(), transition: Transition.fade),
   ];
 }

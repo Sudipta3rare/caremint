@@ -1,7 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:caremint/constants/constants.dart';
+import 'package:caremint/services/api_requests.dart';
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/app_colors.dart';
 import '../../models/service_person.dart';
 
 enum ViewType { grid, list }
@@ -23,8 +26,7 @@ class ExteriorServiceController extends GetxController{
 
   ViewType viewType = ViewType.grid;
 
-   late List itemList;
-  FirebaseFirestore db = FirebaseFirestore.instance;
+   late List<Provider> itemList;
 
   String categoryId = '';
   String catName = '';
@@ -35,61 +37,75 @@ class ExteriorServiceController extends GetxController{
   late String city,pincode;
 
 
-  void getProviders () async {
+  Future<void> getProviders () async {
     isLoading.value = true;
 
-   final querySnapshot=  await db.collection('Category').doc(categoryId).collection("providers").where("pincode", arrayContains: pincode).get();
-    for (int i = 0; i < querySnapshot.docs.length; i++) {
-      var a = querySnapshot.docs[i];
-      print(a.id);
-    }
-      itemList = querySnapshot.docs.map((doc) => Providers.fromSnapshot(doc)).toList();
+
+    ApiRequest(url: Constant.baseUrl+"/api/get-providers/${categoryId}/${pincode}", data: null).getToken(beforeSend: (){},
+        onSuccess: (onSuccess){
+        var providerResponse = ProviderResponse.fromJson(onSuccess);
+      itemList.addAll(providerResponse.body as Iterable<Provider>);
+      print(itemList[0].displayName);
+      update();
+        },
+        onError: (onError){
+          Get.snackbar(
+            'Error',
+            'Unable to fetch provider. Please try again!',
+            snackPosition: SnackPosition.BOTTOM,
+            colorText: Color(0xffffffff),
+            backgroundColor: AppStyle().gradientColor2,
+            duration: Duration(seconds: 2),
+          );
+        });
+
+
     isLoading.value = false;
     update();
   }
 
+  //
+  // void getProvidersWithLocation () async {
+  //   isLoading.value = true;
+  //  final querySnapshot=  await db.collection('Category').doc(categoryId).collection("providers").
+  //           where('city', isEqualTo: city).where("pincode", arrayContains: pincode).get();
+  //
+  //
+  //   for (int i = 0; i < querySnapshot.docs.length; i++) {
+  //     var a = querySnapshot.docs[i];
+  //     print(a.id);
+  //   }
+  //     // itemList = querySnapshot.docs.map((doc) => Providers.fromSnapshot(doc)).toList();
+  //
+  //   // print(itemList[0].service[0].price);
+  //   // itemList.add(userLink);
+  //   // print(itemList);
+  //   // print(itemList.length);
+  //   isLoading.value = false;
+  //   update();
+  // }
+  //
+  // Future<void> gotoServiceWithLocation() async {
+  //   // categoryId = catId;
+  //   // catName = catN;
+  //   // city =capitalizeAllWord(cty).trim();
+  //   // pincode = st.trim();
+  //   // // state =capitalizeAllWord(st);
+  //   // // print(catId);
+  //   // itemList = [];
+  //  await getProviders();
+  //   Get.toNamed('/service');
+  // }
 
-  void getProvidersWithLocation () async {
-    isLoading.value = true;
-   final querySnapshot=  await db.collection('Category').doc(categoryId).collection("providers").
-            where('city', isEqualTo: city).where("pincode", arrayContains: pincode).get();
-
-
-    for (int i = 0; i < querySnapshot.docs.length; i++) {
-      var a = querySnapshot.docs[i];
-      print(a.id);
-    }
-      itemList = querySnapshot.docs.map((doc) => Providers.fromSnapshot(doc)).toList();
-
-    // print(itemList[0].service[0].price);
-    // itemList.add(userLink);
-    // print(itemList);
-    // print(itemList.length);
-    isLoading.value = false;
-    update();
-  }
-
-  void gotoServiceWithLocation(){
-    // categoryId = catId;
-    // catName = catN;
-    // city =capitalizeAllWord(cty).trim();
-    // pincode = st.trim();
-    // // state =capitalizeAllWord(st);
-    // // print(catId);
-    // itemList = [];
-    getProvidersWithLocation();
-    Get.toNamed('/service');
-  }
-
-  void gotoService(String catId, String catN, pin){
+  Future<void> gotoService(String catId, String catN, pin) async {
     categoryId = catId;
     catName = catN;
    pincode = pin.trim();
    // print(pincode);
     // print(catId);
     itemList = [];
-    getProviders();
-    Get.toNamed('/service');
+   await  getProviders().whenComplete(() =>   Get.toNamed('/service'));
+  
   }
 
   String capitalizeAllWord(String value) {

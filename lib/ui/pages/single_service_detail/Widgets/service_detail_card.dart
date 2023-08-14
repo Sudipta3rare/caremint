@@ -67,7 +67,7 @@ class ServiceDetailCard extends StatelessWidget {
                   top: -20,
                   right: 0,
                   child: Hero(
-                    tag: "${serviceDetial.sName}",
+                    tag: "${serviceDetial.name}",
 
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 16),
@@ -77,7 +77,7 @@ class ServiceDetailCard extends StatelessWidget {
                       child: CachedNetworkImage(
                         placeholder: (context, url) => CircularProgressIndicator(),
 
-                        imageUrl: serviceDetial.sImage,
+                        imageUrl: serviceDetial.img.toString(),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -98,15 +98,16 @@ class ServiceDetailCard extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 16),
                                 child: Text(
-                                  serviceDetial.sName,
+                                  serviceDetial.name.toString(),
                                   style: AppStyle().paraTextStyle,
                                 ),
                               ), Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 16),
                                 child: Text(
-                                  serviceDetial.sCategory,
-                                  style: AppStyle().paraTextStyle,
+                                  // serviceDetial.sCategory,
+                                  serviceDetial.description ?? ""
+                                  , style: AppStyle().paraTextStyle,
                                 ),
                               ),
                               // it use the available space

@@ -182,7 +182,7 @@ update();
      // update();
        });
      isLoading.value= false;
-
+    Get.back();
      update();
    }
 }

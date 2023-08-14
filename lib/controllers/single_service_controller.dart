@@ -1,30 +1,74 @@
+import 'dart:ui';
+
+import 'package:caremint/constants/constants.dart';
+import 'package:caremint/models/service_detial.dart';
 import 'package:caremint/models/service_person.dart';
+import 'package:caremint/services/api_requests.dart';
 import 'package:caremint/ui/pages/single_service_detail/service_detail_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+
+import '../constants/app_colors.dart';
 class SingleServiceController extends GetxController{
-static SingleServiceController to =Get.find();
-  RxInt selectedIndex = 0.obs;
+static SingleServiceController to = Get.find();
+RxBool isLoading = true.obs;
+  // RxInt selectedIndex = 0.obs;
+  String providerName = '';
+  String providerAddress = "";
+  String providerId = "";
+  // var  serviceResponse;
+  List<Service>  serviceList= [];
+  List<Service> searchList=[];
+Future<void> getProviderService(String id)async{
+  isLoading.value = true;
+  // update();
+
+ await ApiRequest(url: Constant.baseUrl+'/api/get-provider-service/${id}', data: null).getToken(beforeSend: (){},
+      onSuccess: (onSuccess){
+
+  var   serviceResponse = ServicesResponse.fromJson(onSuccess);
+      serviceList.clear();
+      serviceList.addAll(serviceResponse.body?.services as Iterable<Service>);
+
+      searchList = serviceList;
+      update();
+      },
+      onError: (onError){
+        Get.snackbar(
+          'Error',
+          'Unable to fetch services. Please try again!',
+          snackPosition: SnackPosition.BOTTOM,
+          colorText: Color(0xffffffff),
+          backgroundColor: AppStyle().gradientColor2,
+          duration: Duration(seconds: 2),
+        );
+      });
+  isLoading.value = false;
+  update();
 
 
-  FirebaseFirestore db = FirebaseFirestore.instance;
+
+}
 
 
 
-List<Service> searchList=[];
 
-  List<Providers> itemList=[];
-  List<Service> serviceDetialsList=[];
 
-  late Providers personDetails;
 
-  void gotoServieDetail(Providers personDetail){
-    serviceDetialsList = [];
-    personDetails = personDetail;
-    serviceDetialsList = personDetail.service;
-    searchList = serviceDetialsList;
+//
+//   List<Provider> itemList=[];
+//   List<Service> serviceDetialsList=[];
+//
+//   late Providers personDetails;
 
-    Get.to(SingleServiceDetail());
+  Future<void> gotoServieDetail(Provider personDetail) async {
+    providerName = personDetail.displayName.toString();
+    providerAddress = personDetail.userAddress.toString();
+    providerId = personDetail.userId.toString();
+    print(providerId)
+;   getProviderService(personDetail.userId!);
+   Get.to(SingleServiceDetail());
+
+   
   }
 
 

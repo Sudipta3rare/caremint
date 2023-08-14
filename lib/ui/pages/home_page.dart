@@ -130,6 +130,7 @@ class _HomePageState extends State<HomePage> {
                         child: ListTile(
                           title: const Text('My Orders'),
                           onTap: () {
+                            // ordCtrl.isLoading.value = true;
 
                             // ordCtrl.getUserOrders();
                             // Update the state of the app.
@@ -259,8 +260,9 @@ class _HomePageState extends State<HomePage> {
                                 delegate: SliverChildBuilderDelegate(
                                   childCount: ctrl.categoryList.length,
                                       (context, index) => homeCard(context,
-                                      ctrl.categoryList[index].categoryName.toString()
-                                        , ctrl.categoryId[index], ctrl.categoryList[index].img.toString(), ),
+                                        ctrl.categoryList[index].categoryName.toString(),
+                                        ctrl.categoryList[index].id.toString(),
+                                        ctrl.categoryList[index].img.toString(), ),
                                 )),
 
                           SliverList(
@@ -369,6 +371,7 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {
                   if(ctrl.isLoggedIn.value){
                     // print(ctrl.userDetails.pincode);
+                    print(ctrl.store.read("user_token"));
                     exCtrl.gotoService(catName, itemName, ctrl.userDetails.pincode );
                   }
                   else{
@@ -396,14 +399,14 @@ class _HomePageState extends State<HomePage> {
                             maxRadius: 55,
                             minRadius: 40,
                             child:CachedNetworkImage(
-                              placeholder: (context, url) => CircularProgressIndicator(),
+                              placeholder: (context, url) => const CircularProgressIndicator(),
 
                               imageUrl: catImg,
                             fit: BoxFit.cover,
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Text(
@@ -466,7 +469,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: DropdownButtonFormField(
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.category_outlined,
@@ -498,7 +501,8 @@ class _HomePageState extends State<HomePage> {
             GetBuilder<ExteriorServiceController>(builder: (exCtrl) {
               return GestureDetector(
                   onTap: () {
-                   if(ctrl.pincode.text.isEmpty || ctrl.city.text.isEmpty || ctrl.currentItem=='Category'){
+                    if(ctrl.isLoggedIn.value){
+                     if(ctrl.pincode.text.isEmpty || ctrl.city.text.isEmpty || ctrl.currentItem=='Category'){
                         Get.snackbar("Error", "Please enter proper value in all fields",
                           snackPosition: SnackPosition.BOTTOM,
                           colorText: Color(0xffffffff),
@@ -507,7 +511,12 @@ class _HomePageState extends State<HomePage> {
                         ctrl.update();
                    }
                     else {
-                      exCtrl.gotoServiceWithLocation();
+
+                      exCtrl.gotoService(ctrl.selectItems.indexOf(ctrl.currentItem).toString(), ctrl.city.text,ctrl.pincode.text);
+                    }
+                  }
+                    else{
+                      LoginSnackBar().loginSnackBar(context);
                     }
                   },
                   child: CustomButton()

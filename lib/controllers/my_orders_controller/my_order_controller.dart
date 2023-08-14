@@ -1,6 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'dart:ui';
+
+import 'package:caremint/constants/constants.dart';
+import 'package:caremint/services/api_requests.dart';
+
 import 'package:get/get.dart';
 
 import '../../constants/app_colors.dart';
@@ -14,55 +16,49 @@ class MyOrderController extends GetxController{
   //   getUserOrders();
   // }
 
-  FirebaseFirestore db = FirebaseFirestore.instance;
-  List<MyOrderModel> myOrderList = [];
+  List<MyOrders> myOrderList = [];
       List<Map<String, dynamic>> cartList = [];
       Map<String, dynamic> cartItem = {};
 
-  RxBool isLoading = false.obs;
+  RxBool isLoading = true.obs;
+
 
   Future<void> getUserOrders() async {
-    isLoading.value = true;
-    final  userId = await FirebaseAuth.instance.currentUser!.uid.toString();
-    // print(userId);
-    final querySnapshot=  await db.collection('users').doc(userId).collection("orders").get();
-    // for (int i = 0; i < querySnapshot.docs.length; i++) {
-    //   var a = querySnapshot.docs[i];
-    //   print(a.id);
-    // }
+  isLoading.value = true;
+  update();
 
-    myOrderList = querySnapshot.docs.map((doc) => MyOrderModel.fromSnapshot(doc)).toList();
-    // print(myOrderList.length);
 
-    // print(myOrderList[0].sName);
+  ApiRequest(url: Constant.baseUrl+"/api/get-user-orders", data: null).getToken(beforeSend: (){},
+      onSuccess: (onSuccess){
+    var myOrderResponse = MyOrdersResponse.fromJson(onSuccess);
+    myOrderList.clear();
+    myOrderList.addAll(myOrderResponse.body!);
+    update();
+      },
+      onError: (onError){
+    print(onError);
+        Get.snackbar(
+          'Error',
+          'Unable to fetch orders. Please try again!',
+          snackPosition: SnackPosition.BOTTOM,
+          colorText: Color(0xffffffff),
+          backgroundColor: AppStyle().gradientColor2,
+          duration: Duration(seconds: 2),
+        );
+      });
+
     isLoading.value = false;
     update();
   }
 
   Future<void> postUserOrder() async {
 
-    final  userId = await FirebaseAuth.instance.currentUser!.uid.toString();
-
-    for(var element in cartList){
-
-      Map<String,dynamic> x = MyOrderModel().toFirestore(element, userId);
-
-      db.collection('users').doc(userId).collection("orders").add(
-
-            x
-
-      ).then((value) => Get.snackbar("Order Placed", "Your Order is placed successfully",
-        snackPosition: SnackPosition.BOTTOM,
-        colorText: Colors.white,
-        backgroundColor: AppStyle().gradientColor2,
-        duration: Duration(seconds: 2)),);
-    }
     cartList=[];
     cartItem = {};
 
   }
 
-   void gotoMyOrders(){
+   Future<void> gotoMyOrders() async {
     getUserOrders();
     Get.toNamed("/order");
    }

@@ -1,7 +1,9 @@
 
 
 import 'package:caremint/controllers/cart_controller.dart';
+import 'package:caremint/controllers/my_orders_controller/my_order_controller.dart';
 import 'package:caremint/controllers/service_order_controller.dart';
+import 'package:caremint/models/service_detial.dart';
 import 'package:caremint/models/service_person.dart';
 import 'package:caremint/ui/components/custom_button.dart';
 import 'package:caremint/ui/widget/login_snackbar.dart';
@@ -13,10 +15,11 @@ import 'package:intl/intl.dart';
 import '../../../../constants/app_colors.dart';
 
 class SingleOrderPage{
-  SingleOrderPage(this.index, this.product, this.serviceProviderId);
+  SingleOrderPage(this.index, this.product, this.providerId);
   late int index;
   late Service product;
-  late String serviceProviderId;
+  late String providerId;
+
 
   bool isDateSelected = false;
 
@@ -158,33 +161,34 @@ class SingleOrderPage{
                                 firstDate: DateTime.now(),
                                 lastDate: DateTime(2024),
                                 onDateChanged: (DateTime value)
-                                { isDateSelected = true;
+                                {
+                                  isDateSelected = true;
                                   ctrl.selectedDate.value = value;
                                   ctrl.update();  },
                               ),
-                              Visibility(
-                              visible: isDateSelected,
-                                child: DropdownMenu<String>(
-                                onSelected: (value){
-                                  ctrl.timingSelected= value!;
-                                  ctrl.update();
-                                },
-                                // height: 60,
-                                width: MediaQuery.of(context).size.width*0.7,
-                                label: Text("Select Service Timing",style: GoogleFonts.poppins(
-                                  fontSize: 12,
-                                  color: Colors.blue[900],
-                                ),),
-                                dropdownMenuEntries: ctrl.timings
-                                    .map<DropdownMenuEntry<String>>((String value) {
-                                  ctrl.update();
-                                  return DropdownMenuEntry<String>(
-                                    value: value,
-                                    label: (value),
-                                  );
-                                }
-                                ).toList(),
-                              ),),
+                              // Visibility(
+                              // visible: isDateSelected,
+                              //   child: DropdownMenu<String>(
+                              //   onSelected: (value){
+                              //     ctrl.timingSelected= value!;
+                              //     ctrl.update();
+                              //   },
+                              //   // height: 60,
+                              //   width: MediaQuery.of(context).size.width*0.7,
+                              //   label: Text("Select Service Timing",style: GoogleFonts.poppins(
+                              //     fontSize: 12,
+                              //     color: Colors.blue[900],
+                              //   ),),
+                              //   dropdownMenuEntries: ctrl.timings
+                              //       .map<DropdownMenuEntry<String>>((String value) {
+                              //     ctrl.update();
+                              //     return DropdownMenuEntry<String>(
+                              //       value: value,
+                              //       label: (value),
+                              //     );
+                              //   }
+                              //   ).toList(),
+                              // ),),
 
                               Text("Customer Details", style: AppStyle().subHeadBlueTextStyle,),
                               formFeild("Name", ctrl.name),
@@ -193,33 +197,72 @@ class SingleOrderPage{
                               // formFeild("Pin Code",ctrl.pincode),
                               formFeild("City",ctrl.city),
                               formFeild("Sate",ctrl.state),
+                              formFeild("Pincode", ctrl.pincode),
                               formFeild("Describe Your Task",ctrl.des),
-                              GetBuilder<CartController>(
+                              GetBuilder<MyOrderController>(
                                 builder: (Crctrl) {
                                   return GestureDetector(
                                       onTap: () async {
 
 
-                                       if(!await Crctrl.isLoggedIn()){
-                                         LoginSnackBar()
-                                  .loginSnackBar(context) ;
-                                       }
-                                       else {
+
 
                                       if (ctrl.formKey.currentState!.validate()) {
 
                                         print("all key validated");
-                                          if(DateFormat.yMEd().format(ctrl.selectedDate.value).toString() != '' && ctrl.timingSelected.isNotEmpty){
-                                            ctrl.onCheckout(product.sName, product.sCategory, product.price, serviceProviderId,);
-                                            Crctrl.getCartItems();
+                                          if(DateFormat.yMd().format(ctrl.selectedDate.value).toString() != '') {
+                                            Get.defaultDialog(
+                                              title: 'Confirm Order',
+                                              titleStyle: TextStyle(
+                                                color: AppStyle()
+                                                    .gradientColor2, // Replace with your desired color
+                                              ),
+                                              middleTextStyle: AppStyle()
+                                                  .subHeadBlueTextStyle,
+                                              content: Text(
+                                                'Confirm order with COD',
+                                                style: AppStyle().paraTextStyle,
+                                              ),
+                                              textCancel: 'Cancel',
+                                              textConfirm: 'Place Order',
+                                              buttonColor: AppStyle()
+                                                  .gradientColor3,
+                                              cancelTextColor: AppStyle()
+                                                  .gradientColor1,
+                                              confirmTextColor: AppStyle()
+                                                  .gradientColor1,
+                                              onCancel: () {
+                                                Get.back();
+                                              },
+                                              onConfirm: () async {
+                                                ctrl.onCheckout(
+                                                  product.name.toString(),
+                                                  product.id.toString(),
+                                                  product.price!, providerId,);
+
+
+
+                                                // await auth.signOut().then((value) => Get.offAllNamed('/home'));
+
+
+                                              },);
                                           }
-                                          else
-                                            Get.snackbar("Date Time Not Selected", "Please Select Date Time for service",
-                                                snackPosition: SnackPosition.BOTTOM,
-                                                colorText: Color(0xffffffff),
-                                        backgroundColor: AppStyle().gradientColor2,
-                                        duration: Duration(seconds: 2),);
-                                           } else
+
+                                            // Crctrl.getCartItems();
+
+
+                                          else {
+                                            Get.snackbar(
+                                              "Date Time Not Selected",
+                                              "Please Select Date Time for service",
+                                              snackPosition: SnackPosition
+                                                  .BOTTOM,
+                                              colorText: Color(0xffffffff),
+                                              backgroundColor: AppStyle()
+                                                  .gradientColor2,
+                                              duration: Duration(seconds: 2),);
+                                          }
+                                      } else
                                         Get.snackbar("Submition form empty", "Please fill all fields of the form",
                                           snackPosition: SnackPosition.BOTTOM,
                                           colorText: Color(0xffffffff),
@@ -227,9 +270,6 @@ class SingleOrderPage{
                                           duration: Duration(seconds: 2),);
 
 
-
-
-                            }
                           },
                                       child: CustomButton().customButton200(context, "Checkout"));
                                 }
