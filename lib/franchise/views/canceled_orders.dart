@@ -111,9 +111,9 @@ class CanceledOrderPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  listComponetCol(ordCtrl.canceledOrderList[index].name!,ordCtrl.canceledOrderList[index].mobileNumber!,"Customer Name", "Phone Number",context),
-                  listComponetCol(ordCtrl.canceledOrderList[index].orderPrice!,ordCtrl.canceledOrderList[index].address!,"Order Value ", "Address",context),
-                  listComponetCol(ordCtrl.canceledOrderList[index].description!,DateFormat("yMMMMd").format(ordCtrl.canceledOrderList[index].deliveryDate!),"Order Date", "Delivery Date",context),
+                  listComponetCol(ordCtrl.canceledOrderList[index].name.toString(),ordCtrl.canceledOrderList[index].mobileNumber.toString(),"Customer Name", "Phone Number",context),
+                  listComponetCol(ordCtrl.canceledOrderList[index].orderPrice.toString(),ordCtrl.canceledOrderList[index].address.toString(),"Order Value ", "Address",context),
+                  listComponetCol(ordCtrl.canceledOrderList[index].description.toString(),DateFormat("yMMMMd").format(ordCtrl.canceledOrderList[index].deliveryDate!),"Order Date", "Delivery Date",context),
                 ],
               ),
             ),

@@ -118,9 +118,9 @@ class CustomerInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    listComponetCol(ordCtrl.ongoingOrderList[index].name!,ordCtrl.ongoingOrderList[index].mobileNumber!,"Customer Name", "Phone Number",context),
-                    listComponetCol(ordCtrl.ongoingOrderList[index].orderPrice!,ordCtrl.ongoingOrderList[index].address!,"Order Value ", "Address",context),
-                    listComponetCol(ordCtrl.ongoingOrderList[index].description!,DateFormat("yMMMMd").format(ordCtrl.ongoingOrderList[index].deliveryDate!),"Order Date", "Delivery Date",context),
+                    listComponetCol(ordCtrl.ongoingOrderList[index].name.toString(),ordCtrl.ongoingOrderList[index].mobileNumber.toString(),"Customer Name", "Phone Number",context),
+                    listComponetCol(ordCtrl.ongoingOrderList[index].orderPrice.toString(),ordCtrl.ongoingOrderList[index].address.toString(),"Order Value ", "Address",context),
+                    listComponetCol(ordCtrl.ongoingOrderList[index].description.toString(),DateFormat("yMMMMd").format(ordCtrl.ongoingOrderList[index].deliveryDate!),"Order Date", "Delivery Date",context),
                   ],
                 ),
               ),

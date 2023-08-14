@@ -111,9 +111,9 @@ class CompletedOrderPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  listComponetCol(ordCtrl.completedOrderList[index].name!,ordCtrl.completedOrderList[index].mobileNumber!,"Customer Name", "Phone Number",context),
-                  listComponetCol(ordCtrl.completedOrderList[index].orderPrice!,ordCtrl.completedOrderList[index].address!,"Order Value ", "Address",context),
-                  listComponetCol(ordCtrl.completedOrderList[index].description!,DateFormat("yMMMMd").format(ordCtrl.completedOrderList[index].deliveryDate!),"Order Date", "Delivery Date",context),
+                  listComponetCol(ordCtrl.completedOrderList[index].name.toString(),ordCtrl.completedOrderList[index].mobileNumber.toString(),"Customer Name", "Phone Number",context),
+                  listComponetCol(ordCtrl.completedOrderList[index].orderPrice.toString(),ordCtrl.completedOrderList[index].address.toString(),"Order Value ", "Address",context),
+                  listComponetCol(ordCtrl.completedOrderList[index].description.toString(),DateFormat("yMMMMd").format(ordCtrl.completedOrderList[index].deliveryDate!),"Order Date", "Delivery Date",context),
                 ],
               ),
             ),
