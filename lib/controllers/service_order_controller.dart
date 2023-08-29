@@ -1,7 +1,7 @@
 
 import 'package:caremint/constants/constants.dart';
 import 'package:caremint/services/api_requests.dart';
-import 'package:caremint/ui/pages/my_orders_page.dart';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -46,18 +46,19 @@ class ServiceOrderController extends GetxController{
 print( DateFormat("yMd").format(selectedDate.value));
 ApiRequest(url: '${Constant.baseUrl}/api/add-cart/${serviceId}', frmData:
 {
+  "order_price": double.parse(price),
   "provider_id" : providerId,
   "payment_mode" :"COD",
   "delivery_date" : DateFormat("yMd").format(selectedDate.value),
   "name" : name.text,
   "mobile_number" : phone.text,
-  "address" : "${address.text}",
+  "address" : "${address.text}, ${city.text}, ${state.text}",
   "description" : des.text,
   "pincode" : pincode.text,
 })
     .postToken(beforeSend: (){},
     onSuccess: (onSuccess){
-  print(onSuccess);
+
 
   Get.back();
   Get.snackbar(

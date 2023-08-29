@@ -21,6 +21,7 @@ class MyOrdersPage extends StatelessWidget {
   Widget _showBody(context){
     return GetBuilder<MyOrderController>(
       builder: (ctrl) {
+        print(ctrl.myOrderList.length);
         return ctrl.myOrderList.isNotEmpty ? ListView.builder(
           padding: EdgeInsets.symmetric(vertical: 10),
           itemCount: ctrl.myOrderList.length,
@@ -33,6 +34,7 @@ class MyOrdersPage extends StatelessWidget {
   }
 
   Widget listLayout(BuildContext context,MyOrderController ordCtrl,int index){
+    print(index);
     return Card(
         margin: EdgeInsets.all(10),
       shape: RoundedRectangleBorder(
@@ -53,9 +55,9 @@ class MyOrdersPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  listComponetCol(ordCtrl.myOrderList[index].name!,ordCtrl.myOrderList[index].description.toString(),"Service Name", "Description",context),
-                  listComponetCol(DateFormat("yMMMMd").format(ordCtrl.myOrderList[index].deliveryDate!) ,ordCtrl.myOrderList[index].orderPrice.toString(),"Delivery Date", "Order Value",context),
-                  listComponetCol(DateFormat("yMMMMd").format(ordCtrl.myOrderList[index].orderDate!),ordCtrl.myOrderList[index].orderStatus.toString() == "null" ? "pending" :  ordCtrl.myOrderList[index].orderStatus.toString(),"Order Date", "Order Status",context),
+                  listComponetCol(ordCtrl.myOrderList[index].name.toString(),ordCtrl.myOrderList[index].description.toString(),"Service Name", "Description",context),
+                  listComponetCol(DateFormat("yMMMMd").format(ordCtrl.myOrderList[index].deliveryDate ?? DateTime.now()).toString() ,ordCtrl.myOrderList[index].orderPrice.toString(),"Delivery Date", "Order Value",context),
+                  listComponetCol(DateFormat("yMMMMd").format(ordCtrl.myOrderList[index].orderDate!).toString(),ordCtrl.myOrderList[index].orderStatus.toString() == "null" ? "pending" :  ordCtrl.myOrderList[index].orderStatus.toString(),"Order Date", "Order Status",context),
 
                 ],
               ),
@@ -106,6 +108,7 @@ class MyOrdersPage extends StatelessWidget {
     );
   }
   Widget listComponetCol(String name1, String name2,String title1,String title2, context){
+
 
     return Container(
       width: MediaQuery.of(context).size.width /2.8,
