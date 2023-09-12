@@ -5,6 +5,7 @@ import 'package:caremint/data/api_signup_provider.dart';
 import 'package:caremint/models/user_model.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 
 import '../franchise/controllers/customerInfo_controller.dart';
 import '../franchise/controllers/listing_services_controller.dart';
@@ -25,7 +26,7 @@ class SignUpController extends GetxController {
 
 
   Future<void> submitForm(String email,String phone, String address, String pincode, String name, String password, String dob) async {
-
+    // print( DateFormat("yMd").format(selectedDate.value))
     Map<String, String> dataMap = {};
 
     dataMap = {
@@ -35,7 +36,7 @@ class SignUpController extends GetxController {
       "user_pincode": pincode,
       "user_address" : address,
       "user_phonenumber" : phone,
-      // "user-dob" : dob,
+      "dob" : dob,
     };
 
 

@@ -20,7 +20,6 @@ class SingleOrderPage{
   late Service product;
   late String providerId;
 
-
   bool isDateSelected = false;
 
   String? numberValidator(String? value) {
@@ -246,7 +245,7 @@ class SingleOrderPage{
                                                 ctrl.onCheckout(
                                                   product.name.toString(),
                                                   product.id.toString(),
-                                                  product.price!, providerId,);
+                                                  product.price!, providerId,ctrl.timingSelected);
 
 
 

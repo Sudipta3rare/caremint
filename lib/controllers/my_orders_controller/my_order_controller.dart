@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:caremint/constants/constants.dart';
 import 'package:caremint/services/api_requests.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:get/get.dart';
 
@@ -16,11 +17,19 @@ class MyOrderController extends GetxController{
   //   getUserOrders();
   // }
 
+  double rating = 0.0;
+  TextEditingController review = TextEditingController();
+
+
+
+
   List<MyOrders> myOrderList = [];
       List<Map<String, dynamic>> cartList = [];
       Map<String, dynamic> cartItem = {};
 
   RxBool isLoading = true.obs;
+
+
 
 
   Future<void> getUserOrders() async {
@@ -55,6 +64,46 @@ class MyOrderController extends GetxController{
 
     cartList=[];
     cartItem = {};
+
+  }
+
+  Future<void> postReview(int index) async {
+    isLoading.value = true;
+    update();
+    ApiRequest(url: '${Constant.baseUrl}/api/review', frmData: {
+      'rating' : rating,
+      'review' : review.text,
+      'order_id': myOrderList[index].id,
+
+
+    }).postToken(beforeSend: (){}, onSuccess: (data){
+      print(data);
+      rating = 0.0;
+      review.clear();
+
+      Get.snackbar(
+        'Success',
+        'Review placed successfully',
+        snackPosition: SnackPosition.BOTTOM,
+        colorText: Color(0xffffffff),
+        backgroundColor: AppStyle().gradientColor2,
+        duration: Duration(seconds: 2),
+      );
+      update();
+
+    }, onError: (onError){
+      Get.snackbar(
+        'Error',
+        'Unable to review order. Please try again!',
+        snackPosition: SnackPosition.BOTTOM,
+        colorText: Color(0xffffffff),
+        backgroundColor: AppStyle().gradientColor2,
+        duration: Duration(seconds: 2),
+      );
+    });
+    isLoading.value = false;
+    update();
+    Get.offAllNamed('/home');
 
   }
 

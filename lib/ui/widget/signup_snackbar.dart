@@ -4,6 +4,7 @@ import 'package:caremint/ui/widget/login_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_string.dart';
 import '../../controllers/signUp_controller.dart';
@@ -182,6 +183,17 @@ class SignUpSnackBar {
                         );
                         return;
                       }
+                      if (dobController.text.isEmpty) {
+                        Get.snackbar(
+                          'Info',
+                          'Please enter Date of Birth.',
+                          snackPosition: SnackPosition.BOTTOM,
+                          colorText: Color(0xffffffff),
+                          backgroundColor: AppStyle().gradientColor2,
+                          duration: Duration(seconds: 2),
+                        );
+                        return;
+                      }
 
                       if (pass != confirmPassword) {
                         Get.snackbar(
@@ -194,15 +206,15 @@ class SignUpSnackBar {
                         );
                         return;
                       }
-                      ctrl.submitForm(
-                        firstnameController.text,
-                        phoneController.text,
-                        addressController.text,
-                        pinCodeController.text,
-                        emailController.text,
-                        passwordController.text,
-                        dobController.text,
-                      );
+                      // ctrl.submitForm(
+                      //   firstnameController.text,
+                      //   phoneController.text,
+                      //   addressController.text,
+                      //   pinCodeController.text,
+                      //   emailController.text,
+                      //   passwordController.text,
+                      //   dobController.text,
+                      // );
 
                       try {
                         ctrl.submitForm(email, phone, address, pinCode , firstName, pass , dob);
@@ -516,10 +528,33 @@ class SignUpSnackBar {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                     controller: dobController,
-                    onChanged: (value) {
-                      dob = value;
-                    },
+                    // onChanged: (value) {
+                    //   dob = value;
+                    // },
+                    readOnly: true,
+
+                    onTap: ()async{
+                      DateTime? pickedDate = await showDatePicker(
+                          context: context, initialDate: DateTime.now(),
+                          firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
+                          lastDate: DateTime(2101)
+                      );
+
+                if(pickedDate != null ) {
+                    dob = DateFormat('yMd').format(pickedDate);
+                    dobController.text = dob;
+               //formatted date output using intl package =>  2021-03-16
+      //you can implement different kind of Date Format here according to your requirement
+    }
+                ctrl.update();
+    },
+
+style: GoogleFonts.poppins(
+  fontSize: 14,
+),
                     decoration: InputDecoration(
+
+                      // icon: Icon(Icons.calendar_today, color: AppStyle.buttonColor,),
                       contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
                       labelText: "Date of Birth",
                       labelStyle: GoogleFonts.poppins(

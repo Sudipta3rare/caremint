@@ -1,8 +1,10 @@
 import 'package:caremint/constants/app_colors.dart';
 import 'package:caremint/controllers/my_orders_controller/my_order_controller.dart';
 import 'package:caremint/ui/components/appBar.dart';
+import 'package:caremint/ui/components/loading_overlay_components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -23,11 +25,14 @@ class MyOrdersPage extends StatelessWidget {
     return GetBuilder<MyOrderController>(
       builder: (ctrl) {
         // print(ctrl.myOrderList.length);
-        return ctrl.myOrderList.isNotEmpty ? ListView.builder(
-          padding: EdgeInsets.symmetric(vertical: 10),
-          itemCount: ctrl.myOrderList.length,
-          itemBuilder: (context, index)
-          =>listLayout(context, ctrl, index),
+        return ctrl.myOrderList.isNotEmpty ? LoadingOverlay(
+          isLoading: ctrl.isLoading.value,
+          child: ListView.builder(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            itemCount: ctrl.myOrderList.length,
+            itemBuilder: (context, index)
+            =>listLayout(context, ctrl, index),
+          ),
         ) :
         emptyOrders();
       }
@@ -63,6 +68,7 @@ class MyOrdersPage extends StatelessWidget {
                 ],
               ),
             ),
+            ordCtrl.myOrderList[index].review == "" ?
             ordCtrl.myOrderList[index].orderStatus.toString() =='completed' ?
             Center(
               child: ElevatedButton.icon(
@@ -98,12 +104,13 @@ class MyOrdersPage extends StatelessWidget {
                             ),
                             onRatingUpdate: (rating) {
                               // print(rating);
+                              ordCtrl.rating = rating;
                             },
                           ),
                           SizedBox(height: 20.0),
 
                           TextField(
-
+                            controller: ordCtrl.review,
                             maxLines: null,
                             maxLength: 500,
                             style: AppStyle().paraTextStyle,
@@ -114,7 +121,9 @@ class MyOrdersPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 20.0),
-                          ElevatedButton(onPressed: (){}, child: Text("Submit"),
+                          ElevatedButton(onPressed: (){
+                            ordCtrl.postReview(index);
+                          }, child: Text("Submit"),
                           style: AppStyle.primaryButtonStyle,),
                           Row(
                             children: [
@@ -123,7 +132,8 @@ class MyOrdersPage extends StatelessWidget {
                                 icon: Icon(Icons.cancel, color:  AppStyle.buttonColor,),
 
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  Get.back();
+
                                 },
                               ),
                             ],
@@ -144,7 +154,7 @@ class MyOrdersPage extends StatelessWidget {
 
                 :
                 Text("")
-
+                : SizedBox(height: 0,)
           // Row(
           //   children: [
           //     TextButton(onPressed:() {}, child: Text("Cancel Order", style: GoogleFonts.poppins(

@@ -1,5 +1,6 @@
 
 import 'package:caremint/constants/constants.dart';
+import 'package:caremint/models/timeslots_model.dart';
 import 'package:caremint/services/api_requests.dart';
 
 
@@ -18,16 +19,40 @@ class ServiceOrderController extends GetxController{
   TextEditingController itemNo= TextEditingController();
   // Rx<int> items = 1.obs;
   Rx<DateTime> selectedDate = DateTime.now().obs;
+  List<Body> timeslot = <Body>[];
 
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    getTimeslots();
+  }
+
+  Future<void> getTimeslots() async{
+    ApiRequest(url: '${Constant.baseUrl}/api/timeslots', data: null).get(beforeSend: (){}, onSuccess: (data) async {
+     timeslot =  await Timeslots.fromJson(data as Map<String, dynamic>).body;
+      for (var item in timeslot){
+        timings.add(item.slots);
+      }
+    },
+        onError: (onError){
+      Get.snackbar(
+        "Error",
+        "Order failed. Please try again!",
+        snackPosition: SnackPosition
+            .BOTTOM,
+        colorText: Color(0xffffffff),
+        backgroundColor: AppStyle()
+            .gradientColor2,
+        duration: Duration(seconds: 2),);
+
+    });
+  }
 
 
 
 
 String timingSelected ="";
-  List<String> timings = ["6:00 - 7:00 AM", "7:00 - 8:00 AM","8:00  - 9:00 AM","9:00 - 10:00 AM", "10:00 - 11:00 AM",
-                          "11:00 - 12:00 PM", "12:00 - 1:00 PM","1:00 - 2:00 PM",
-                          "2:00 - 3:00 PM", "3:00 - 4:00 PM", "4:00 - 5:00 PM",
-                          "5:00 - 6:00 PM", "6:00 - 7:00 PM", "7:00 - 8:00 PM"];
+  List<String> timings = [];
 
 
 
@@ -44,10 +69,10 @@ String timingSelected ="";
 
 
   
-  Future<void> onCheckout(String sName, String serviceId , String price, String providerId) async {
+  Future<void> onCheckout(String sName, String serviceId , String price, String providerId, String timeslotId) async {
 
 
-print( DateFormat("yMd").format(selectedDate.value));
+print( timings.indexOf(timeslotId)+1);
 ApiRequest(url: '${Constant.baseUrl}/api/add-cart/${serviceId}', frmData:
 {
   "order_price": double.parse(price),
@@ -59,9 +84,10 @@ ApiRequest(url: '${Constant.baseUrl}/api/add-cart/${serviceId}', frmData:
   "address" : "${address.text}, ${city.text}, ${state.text}",
   "description" : des.text,
   "pincode" : pincode.text,
-  // "vName" : vName.text,
-  // "vModel" : vModel.text,
-  // "vNumber" : vNumber.text,
+  "vehicle_brand" : vName.text,
+  "vehicle_model" : vModel.text,
+  "vehicle_no" : vNumber.text,
+  "timeslot_id" : (timings.indexOf(timeslotId)+1),
 })
     .postToken(beforeSend: (){},
     onSuccess: (onSuccess){

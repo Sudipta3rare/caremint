@@ -30,8 +30,6 @@ class ServiceDetailCard extends StatelessWidget {
         height: 160,
         child: InkWell(
           onTap: () {
-
-
             // Get.to(ServiceOrderPage());
            SingleOrderPage(itemIndex, serviceDetial, serviceProviderId).orderSnackBar(context);
           },

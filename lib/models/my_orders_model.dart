@@ -37,6 +37,13 @@ class MyOrders {
   String? description;
   DateTime? createdAt;
   DateTime? updatedAt;
+  String? review;
+  String? rating;
+  String? vehicleBrand;
+  String? vehicleModel;
+  String? vehicleNo;
+  String? timeslotId;
+
 
   MyOrders({
     this.id,
@@ -54,6 +61,12 @@ class MyOrders {
     this.orderStatus = "",
     this.image = "",
     this.description = "",
+    this.review,
+     this.rating,
+     this.vehicleBrand,
+     this.vehicleModel,
+     this.vehicleNo,
+     this.timeslotId,
     this.createdAt,
     this.updatedAt,
   });
@@ -74,6 +87,12 @@ class MyOrders {
     orderStatus: json["order_status"],
     image: json["image"],
     description: json["description"],
+    review: json["review"]  ?? "",
+    rating: json["rating"] ?? "",
+    vehicleBrand: json["vehicle_brand"]  ?? "",
+    vehicleModel: json["vehicle_model"]  ?? "",
+    vehicleNo: json["vehicle_no"]  ?? "",
+    timeslotId: json["timeslot_id"] ?? "",
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
   );
@@ -94,6 +113,12 @@ class MyOrders {
     "order_status": orderStatus ?? "",
     "image": image,
     "description": description ?? "",
+    "review": review  ?? "",
+    "rating": rating  ?? "",
+    "vehicle_brand": vehicleBrand  ?? "",
+    "vehicle_model": vehicleModel  ?? "",
+    "vehicle_no": vehicleNo  ?? "",
+    "timeslot_id": timeslotId  ?? "",
     "created_at": createdAt?.toString(),
     "updated_at": updatedAt?.toString(),
   };
