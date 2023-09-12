@@ -166,29 +166,34 @@ class SingleOrderPage{
                                   ctrl.selectedDate.value = value;
                                   ctrl.update();  },
                               ),
-                              // Visibility(
-                              // visible: isDateSelected,
-                              //   child: DropdownMenu<String>(
-                              //   onSelected: (value){
-                              //     ctrl.timingSelected= value!;
-                              //     ctrl.update();
-                              //   },
-                              //   // height: 60,
-                              //   width: MediaQuery.of(context).size.width*0.7,
-                              //   label: Text("Select Service Timing",style: GoogleFonts.poppins(
-                              //     fontSize: 12,
-                              //     color: Colors.blue[900],
-                              //   ),),
-                              //   dropdownMenuEntries: ctrl.timings
-                              //       .map<DropdownMenuEntry<String>>((String value) {
-                              //     ctrl.update();
-                              //     return DropdownMenuEntry<String>(
-                              //       value: value,
-                              //       label: (value),
-                              //     );
-                              //   }
-                              //   ).toList(),
-                              // ),),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Visibility(
+                                visible: isDateSelected,
+                                  child: DropdownMenu<String>(
+                                  onSelected: (value){
+                                    ctrl.timingSelected= value!;
+                                    ctrl.update();
+                                  },
+                                  // height: 60,
+
+                                  width: MediaQuery.of(context).size.width*0.7,
+                                    menuHeight: MediaQuery.of(context).size.height*0.7,
+                                  label: Text("Select Service Timing",style: GoogleFonts.poppins(
+                                    fontSize: 12,
+                                    color: Colors.blue[900],
+                                  ),),
+                                  dropdownMenuEntries: ctrl.timings
+                                      .map<DropdownMenuEntry<String>>((String value) {
+                                    ctrl.update();
+                                    return DropdownMenuEntry<String>(
+                                      value: value,
+                                      label: (value),
+                                    );
+                                  }
+                                  ).toList(),
+                                ),),
+                              ),
 
                               Text("Customer Details", style: AppStyle().subHeadBlueTextStyle,),
                               formFeild("Name", ctrl.name),
@@ -198,6 +203,9 @@ class SingleOrderPage{
                               formFeild("City",ctrl.city),
                               formFeild("Sate",ctrl.state),
                               formFeild("Pincode", ctrl.pincode),
+                              formFeild("Vehicle Company Name",ctrl.vName),
+                              formFeild("Vehicle Model",ctrl.vModel),
+                              formFeild("Vehicle Number",ctrl.vNumber),
                               formFeild("Describe Your Task",ctrl.des),
                               GetBuilder<MyOrderController>(
                                 builder: (Crctrl) {

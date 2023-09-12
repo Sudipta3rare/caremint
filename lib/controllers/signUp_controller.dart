@@ -24,7 +24,7 @@ class SignUpController extends GetxController {
   var store= GetStorage();
 
 
-  Future<void> submitForm(String email,String phone, String address, String pincode, String name, String password) async {
+  Future<void> submitForm(String email,String phone, String address, String pincode, String name, String password, String dob) async {
 
     Map<String, String> dataMap = {};
 
@@ -34,7 +34,8 @@ class SignUpController extends GetxController {
       "user_pass": password,
       "user_pincode": pincode,
       "user_address" : address,
-      "user_phonenumber" : phone
+      "user_phonenumber" : phone,
+      // "user-dob" : dob,
     };
 
 
@@ -59,7 +60,7 @@ class SignUpController extends GetxController {
         update();
       },
       onError: (error) {
-        print("postSingup");
+        // print("post Singup");
         print(error);
         isLoading.value = false;
         Get.back();

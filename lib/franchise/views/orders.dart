@@ -222,7 +222,7 @@ class Orders extends StatelessWidget {
   }
   Widget emptyOrders(){
     return Center(
-      child: Text("No Ongoing Orders",
+      child: Text("No New Orders",
         style: AppStyle().subHeadBlueTextStyle,
         textAlign: TextAlign.center,),
     );

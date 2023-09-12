@@ -4,11 +4,10 @@ import 'package:caremint/constants/constants.dart';
 import 'package:caremint/franchise/controllers/customerInfo_controller.dart';
 import 'package:caremint/franchise/models/helper_submitImage/submit_Image_helper.dart';
 import 'package:caremint/franchise/models/ongoingOrderModel.dart';
-import 'package:caremint/services/api_requests.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:dio/dio.dart';
+
 import '../../constants/app_colors.dart';
 
 class SubmitPictureController extends GetxController{
@@ -27,6 +26,7 @@ class SubmitPictureController extends GetxController{
     );
   update();
   }
+
   Future<void> pickCameraImage () async {
    XFile? image = await picker.pickImage(source: ImageSource.camera);
     imagePathList.add(image!);
@@ -34,7 +34,6 @@ class SubmitPictureController extends GetxController{
   }
   Future<void> postSubmitPicture(OngoingOrders order) async {
     isLoading.value = true;
-    print(imagePathList[0].path);
 
     SubmitImageProvider().postOrderStatus(
         onSuccess: (onSuccess){

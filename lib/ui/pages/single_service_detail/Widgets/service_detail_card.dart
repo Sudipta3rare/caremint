@@ -2,13 +2,9 @@ import 'dart:core';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:caremint/constants/app_colors.dart';
-import 'package:caremint/models/service_person.dart';
 import 'package:caremint/ui/pages/single_service_detail/Widgets/service_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:get/get.dart';
-import '../../../../controllers/cart_controller.dart';
-import '../../../../controllers/service_order_controller.dart';
 import '../../../../models/service_detial.dart';
 
 class ServiceDetailCard extends StatelessWidget {

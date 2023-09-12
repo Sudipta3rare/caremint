@@ -1,15 +1,11 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:caremint/constants/app_colors.dart';
-import 'package:caremint/constants/constants.dart';
 import 'package:caremint/controllers/categories_controller/exterior_service_controller.dart';
 import 'package:caremint/controllers/home_controller.dart';
 import 'package:caremint/controllers/my_orders_controller/my_order_controller.dart';
 
-import 'package:caremint/franchise/views/tabview.dart';
-import 'package:caremint/services/api_requests.dart';
 import 'package:caremint/ui/components/custom_button.dart';
-import 'package:caremint/ui/pages/blog_page.dart';
 import 'package:caremint/ui/pages/testimonial_page.dart';
 import 'package:caremint/ui/widget/login_snackbar.dart';
 import 'package:caremint/ui/widget/signup_snackbar.dart';
@@ -141,14 +137,18 @@ class _HomePageState extends State<HomePage> {
                       );
                     }
                   ),
-                  ListTile(
-                    title: const Text('Blogs'),
-                    onTap: () {
-                      // Update the state of the app.
-                      // ...
-                      Get.to(BlogPage());
-                    },
-                  ),
+
+                  // Note: For blogs Tile
+
+                  // ListTile(
+                  //   title: const Text('Blogs'),
+                  //   onTap: () {
+                  //     // Update the state of the app.
+                  //     // ...
+                  //     Get.to(BlogPage());
+                  //   },
+                  // ),
+
                   ListTile(
                     title: const Text('Testimonials'),
                     onTap: () {
@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                             ctrl.store.write("user_pincode", "");
                             ctrl.store.write("user_role", "");
                             ctrl.store.write("user_phone", "");
-                            ctrl.isLoggedIn.value =false;
+                            ctrl.isLoggedIn.value = false;
                             Get.offAllNamed('/home');
                             ctrl.update();
                             // perform logout
@@ -561,7 +561,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "CareMint Protects from",
+                "CAREMINT Protects from",
                 style: GoogleFonts.poppins(
                   fontSize: 16,
                   color: Colors.white,

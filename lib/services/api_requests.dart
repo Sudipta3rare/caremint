@@ -48,6 +48,21 @@ class ApiRequest {
         baseUrl: Constant.baseUrl,
       ),
     );
+  } Dio _dioTokenFile() {
+    // Put your authorization token if required
+    String token = store.read("user_token");
+    print(token);
+    return Dio(
+
+      BaseOptions(
+        headers: {
+          'Authorization': 'Bearer $token', //$adminToken',
+          "Accept": "application/json",
+          "Content-Type": "multipart/form-data"
+        },
+        baseUrl: Constant.baseUrl,
+      ),
+    );
   }
 
   Future<void> get({
@@ -101,6 +116,27 @@ class ApiRequest {
     print(url);
     print(frmData);
     _dioToken().post(url, data: frmData).then((res) {
+      onSuccess(res);
+    }).catchError((error) {
+
+      onError(error);
+    });
+  } Future<void> postTokenFile({
+    required Function() beforeSend,
+    required Function(dynamic frmData) onSuccess,
+    required Function(dynamic error) onError,
+  }) async {
+    String token = store.read("user_token");
+
+    print(url);
+    print(frmData);
+   final response =  await Dio().post(url, data: frmData,options: Options(
+     headers: {
+       'Authorization': 'Bearer $token', //$adminToken',
+       "Accept": "application/json",
+       "Content-Type": "multipart/form-data"
+     }
+   ) ).then((res) {
       onSuccess(res);
     }).catchError((error) {
 

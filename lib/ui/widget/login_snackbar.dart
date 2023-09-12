@@ -5,6 +5,7 @@ import 'package:caremint/controllers/home_controller.dart';
 import 'package:caremint/services/api_requests.dart';
 import 'package:caremint/ui/components/loading_overlay_components.dart';
 import 'package:caremint/ui/widget/signup_snackbar.dart';
+import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,6 +58,30 @@ class LoginSnackBar {
                         letterSpacing: 1),
                   ),
                   SizedBox(height: 20),
+                  GetBuilder<SignUpController>(
+                      builder: (ctrl) {
+                        return Obx(
+                              () => FlutterToggleTab(
+                            width: MediaQuery.of(context).size.width / 8,
+                            selectedIndex: ctrl.tabTextIndexSelected.value,
+                            selectedBackgroundColors: [
+                              AppStyle().gradientColor1,
+                              AppStyle().gradientColor2
+                            ],
+                            selectedTextStyle: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            unSelectedTextStyle:
+                            GoogleFonts.poppins(color: Colors.blue[900]),
+                            labels: ctrl.toggleButtonString,
+                            selectedLabelIndex: (index) => ctrl.toggle(index),
+                            isScroll: false,
+                          ),
+                        );
+                      }
+                  ),
+                  SizedBox(height: 20),
                   Container(
                     width: 300,
                     padding: const EdgeInsets.all(8.0),
@@ -90,6 +115,7 @@ class LoginSnackBar {
                     ),
                   ),
                   SizedBox(height: 5),
+
                   Container(
                     width: 300,
                     padding: const EdgeInsets.all(8.0),

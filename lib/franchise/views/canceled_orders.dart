@@ -169,7 +169,7 @@ class CanceledOrderPage extends StatelessWidget {
   }
   Widget emptyOrders(){
     return Center(
-      child: Text("No Completed Orders",
+      child: Text("No Canceled Orders",
         style: AppStyle().subHeadBlueTextStyle,
         textAlign: TextAlign.center,),
     );

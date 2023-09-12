@@ -16,7 +16,8 @@ class SignUpSnackBar {
       confirmPassword = '',
       phone = '',
       firstName = "",
-      pinCode = " ";
+      pinCode = " ",
+      dob = '' ;
 
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -25,6 +26,7 @@ class SignUpSnackBar {
   final TextEditingController addressController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController dobController = TextEditingController();
 
   void clearTextField() {
     // Clear the text fields
@@ -35,6 +37,7 @@ class SignUpSnackBar {
     passwordController.clear();
     confirmPasswordController.clear();
     addressController.clear();
+    dobController.clear();
   }
 
   final ctrl = Get.put(SignUpController());
@@ -198,10 +201,11 @@ class SignUpSnackBar {
                         pinCodeController.text,
                         emailController.text,
                         passwordController.text,
+                        dobController.text,
                       );
 
                       try {
-                        ctrl.submitForm(email, phone, address, pinCode , firstName, pass );
+                        ctrl.submitForm(email, phone, address, pinCode , firstName, pass , dob);
                         Get.snackbar(
                           'Message',
                           'Registration Successful,Please Log in to Access Your Profile',
@@ -507,7 +511,28 @@ class SignUpSnackBar {
                     )),
               ),
               SizedBox(height: 5),
-
+              Container(
+                width: 300,
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                    controller: dobController,
+                    onChanged: (value) {
+                      dob = value;
+                    },
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                      labelText: "Date of Birth",
+                      labelStyle: GoogleFonts.poppins(
+                          color: Colors.blue[900],
+                          fontSize: 11,
+                          fontWeight: FontWeight.w400),
+                      border: OutlineInputBorder(
+                        gapPadding: 2,
+                        borderSide: BorderSide(width: 5),
+                      ),
+                    )),
+              ),
+              SizedBox(height: 5),
               Container(
                 width: 300,
                 padding: const EdgeInsets.all(8.0),
