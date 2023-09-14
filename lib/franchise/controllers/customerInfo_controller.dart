@@ -31,7 +31,6 @@ class CustomerInfoController extends GetxController{
  }
    Future<void> getOngoingOrder() async {
      ongoingOrderList.clear();
-
      update();
      isLoading.value = true;
     ApiRequest(url: Constant.baseUrl+'/api/get-pending-orders', data: null).getToken(
@@ -53,20 +52,15 @@ class CustomerInfoController extends GetxController{
    }
    Future<void> getCanceledOrder() async {
      canceledOrderList.clear();
-
      update();
      isLoading.value = true;
-    ApiRequest(url: Constant.baseUrl+'/api/get-cancelled-orders', data: null).getToken(
+     ApiRequest(url: Constant.baseUrl+'/api/get-cancelled-orders', data: null).getToken(
         beforeSend: (){}, onSuccess: (onSuccess) {
-
           var canceledOrder = OngoingOrderResponse.fromJson(onSuccess as Map<String, dynamic>);
-
           canceledOrderList.addAll(canceledOrder.body as Iterable<OngoingOrders>);
-
           // isLoading.value = false;
           update();
-
-    }, onError: (onError){
+        }, onError: (onError){
           // isLoading.value = false;
           print("get canceled order");
           print(onError);
@@ -75,19 +69,14 @@ class CustomerInfoController extends GetxController{
      isLoading.value = false;
     update();
    }
-
    Future<void> getCompletedOrder() async {
      completedOrderList.clear();
-
      update();
      isLoading.value = true;
     ApiRequest(url: Constant.baseUrl+'/api/get-completed-orders', data: null).getToken(
         beforeSend: (){}, onSuccess: (onSuccess) {
-
           var completedOrderListResponse = OngoingOrderResponse.fromJson(onSuccess as Map<String, dynamic>);
-
           completedOrderList.addAll(completedOrderListResponse.body as Iterable<OngoingOrders>);
-
           // isLoading.value = false;
           update();
     }, onError: (onError){
@@ -99,7 +88,6 @@ class CustomerInfoController extends GetxController{
      isLoading.value = false;
      update();
    }
-
    Future<void> getNewOrder() async {
      newOrderList.clear();
      update();
@@ -107,12 +95,9 @@ class CustomerInfoController extends GetxController{
      update();
     ApiRequest(url: Constant.baseUrl+'/api/get-new-orders', data: null).getToken(
         beforeSend: (){}, onSuccess: (onSuccess) {
-
           var newOrderListResponse = OngoingOrderResponse.fromJson(onSuccess as Map<String, dynamic>);
-
           newOrderList.addAll(newOrderListResponse.body as Iterable<OngoingOrders>);
 update();
-
     }, onError: (onError){
           // isLoading.value = false;
           print("get new order");
@@ -120,7 +105,7 @@ update();
           // update();
     });
      isLoading.value = false;
-    update();
+     update();
    }
 
 
@@ -129,17 +114,15 @@ update();
      update();
      print(isLoading.value);
      print('${Constant.baseUrl}/api/order-accept/${order.id}');
-   ApiRequest(url: '${Constant.baseUrl}/api/order-accept/${order.id}', data: null).getToken( beforeSend:
-   (){},
+     ApiRequest(url: '${Constant.baseUrl}/api/order-accept/${order.id}', data: null).getToken( beforeSend: (){},
        onSuccess: (onSuccess) async {
-
       await onRefresh().whenComplete(() => isLoading.value=false);
       update();
        },
        onError: (onError) async {
          await onRefresh().whenComplete(() => isLoading.value=false);
          print("order accept");
-     print(onError);
+         print(onError);
      Get.snackbar(
        'Error',
        'Unable to accept order. Please try again!',
@@ -151,7 +134,6 @@ update();
      // isLoading.value= false;
      // update();
        });
-
      print(isLoading.value);
      update();
    }

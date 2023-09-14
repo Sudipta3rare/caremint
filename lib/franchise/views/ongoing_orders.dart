@@ -105,7 +105,7 @@ class CustomerInfo extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: SizedBox(
-        height: 200,
+        height: 250,
 
         width: MediaQuery.of(context).size.width,
         child: Padding(
@@ -118,9 +118,12 @@ class CustomerInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    listComponetCol(ordCtrl.ongoingOrderList[index].name.toString(),ordCtrl.ongoingOrderList[index].mobileNumber.toString(),"Customer Name", "Phone Number",context),
-                    listComponetCol(ordCtrl.ongoingOrderList[index].orderPrice.toString(),ordCtrl.ongoingOrderList[index].address.toString(),"Order Value ", "Address",context),
-                    listComponetCol(ordCtrl.ongoingOrderList[index].description.toString(),DateFormat("yMMMMd").format(ordCtrl.ongoingOrderList[index].deliveryDate!),"Order Date", "Delivery Date",context),
+
+
+                    listComponetCol(ordCtrl.ongoingOrderList[index].name.toString(),ordCtrl.ongoingOrderList[index].description.toString(),"Service Name", "Description",context,ordCtrl.ongoingOrderList[index].vehicleBrand.toString(),"Vehicle Brand"),
+                    listComponetCol(DateFormat("yMMMMd").format(ordCtrl.ongoingOrderList[index].deliveryDate ?? DateTime.now()).toString() ,ordCtrl.ongoingOrderList[index].orderPrice.toString(),"Delivery Date", "Order Value",context,ordCtrl.ongoingOrderList[index].vehicleModel.toString(),"Vehicle Model"),
+                    listComponetCol(DateFormat("yMMMMd").format(ordCtrl.ongoingOrderList[index].orderDate!).toString(),ordCtrl.ongoingOrderList[index].orderStatus.toString() == "null" ? "pending" :  ordCtrl.ongoingOrderList[index].orderStatus.toString(),"Order Date", "Order Status",context,ordCtrl.ongoingOrderList[index].vehicleNo.toString(),"Vehicle Number"),
+
                   ],
                 ),
               ),
@@ -136,7 +139,7 @@ class CustomerInfo extends StatelessWidget {
       ),
     );
   }
-  Widget listComponetCol(String name1, String name2,String title1,String title2, context){
+  Widget listComponetCol(String name1, String name2,String title1,String title2, context, String name3, String title3){
     return Container(
       width: MediaQuery.of(context).size.width /2.8,
       padding: const EdgeInsets.all(8.0),
@@ -170,6 +173,22 @@ class CustomerInfo extends StatelessWidget {
             ),maxLines: 2,
                 overflow: TextOverflow.clip),
             Text(name2, style: GoogleFonts.poppins(
+              color: Colors.blue[900],
+              fontSize: 12,
+
+              fontWeight: FontWeight.w600,
+            ),maxLines: 2,
+                overflow: TextOverflow.clip),
+            SizedBox(
+              height: 16,
+            ),
+            Text(title3, style: GoogleFonts.poppins(
+              color: Colors.blue[900],
+              fontSize: 12,
+              // fontWeight: FontWeight.w400,
+            ),maxLines: 2,
+                overflow: TextOverflow.clip),
+            Text(name3, style: GoogleFonts.poppins(
               color: Colors.blue[900],
               fontSize: 12,
 

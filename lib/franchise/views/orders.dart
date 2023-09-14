@@ -116,9 +116,11 @@ class Orders extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    listComponetCol(ordCtrl.newOrderList[index].name.toString(),ordCtrl.newOrderList[index].mobileNumber.toString(),"Customer Name", "Phone Number",context),
-                    listComponetCol(ordCtrl.newOrderList[index].orderPrice.toString(),ordCtrl.newOrderList[index].address.toString(),"Order Value ", "Address",context),
-                    listComponetCol(ordCtrl.newOrderList[index].description.toString(),DateFormat("yMMMMd").format(ordCtrl.newOrderList[index].deliveryDate!),"Order Date", "Delivery Date",context),
+
+                    listComponetCol(ordCtrl.newOrderList[index].name.toString(),ordCtrl.newOrderList[index].description.toString(),"Service Name", "Description",context,ordCtrl.newOrderList[index].vehicleBrand.toString(),"Vehicle Brand"),
+                    listComponetCol(DateFormat("yMMMMd").format(ordCtrl.newOrderList[index].deliveryDate ?? DateTime.now()).toString() ,ordCtrl.newOrderList[index].orderPrice.toString(),"Delivery Date", "Order Value",context,ordCtrl.newOrderList[index].vehicleModel.toString(),"Vehicle Model"),
+                    listComponetCol(DateFormat("yMMMMd").format(ordCtrl.newOrderList[index].orderDate!).toString(),ordCtrl.newOrderList[index].orderStatus.toString() == "null" ? "pending" :  ordCtrl.newOrderList[index].orderStatus.toString(),"Order Date", "Order Status",context,ordCtrl.newOrderList[index].vehicleNo.toString(),"Vehicle Number"),
+
                   ],
                 ),
               ),
@@ -175,7 +177,7 @@ class Orders extends StatelessWidget {
       ),
     );
     }
-  Widget listComponetCol(String name1, String name2,String title1,String title2, context){
+  Widget listComponetCol(String name1, String name2,String title1,String title2, context, String name3, String title3){
     return Container(
       width: MediaQuery.of(context).size.width /2.8,
       padding: const EdgeInsets.all(8.0),
@@ -209,6 +211,22 @@ class Orders extends StatelessWidget {
             ),maxLines: 2,
                 overflow: TextOverflow.clip),
             Text(name2, style: GoogleFonts.poppins(
+              color: Colors.blue[900],
+              fontSize: 12,
+
+              fontWeight: FontWeight.w600,
+            ),maxLines: 2,
+                overflow: TextOverflow.clip),
+            SizedBox(
+              height: 16,
+            ),
+            Text(title3, style: GoogleFonts.poppins(
+              color: Colors.blue[900],
+              fontSize: 12,
+              // fontWeight: FontWeight.w400,
+            ),maxLines: 2,
+                overflow: TextOverflow.clip),
+            Text(name3, style: GoogleFonts.poppins(
               color: Colors.blue[900],
               fontSize: 12,
 

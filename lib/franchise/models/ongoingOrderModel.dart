@@ -37,6 +37,12 @@ class OngoingOrders {
   String? description;
   DateTime? createdAt;
   DateTime? updatedAt;
+  String? review;
+  String? rating;
+  String? vehicleBrand;
+  String? vehicleModel;
+  String? vehicleNo;
+  String? timeslotId;
 
   OngoingOrders({
     this.id,
@@ -56,6 +62,12 @@ class OngoingOrders {
     this.description,
     this.createdAt,
     this.updatedAt,
+    this.review,
+    this.rating,
+    this.vehicleBrand,
+    this.vehicleModel,
+    this.vehicleNo,
+    this.timeslotId,
   });
 
   factory OngoingOrders.fromJson(Map<String, dynamic> json) => OngoingOrders(
@@ -73,6 +85,12 @@ class OngoingOrders {
     deliveryDate: json["delivery_date"] == null ? null : DateTime.parse(json["delivery_date"]),
     orderStatus: json["order_status"],
     image: json["image"],
+    review: json["review"]  ?? "",
+    rating: json["rating"] ?? "",
+    vehicleBrand: json["vehicle_brand"]  ?? "",
+    vehicleModel: json["vehicle_model"]  ?? "",
+    vehicleNo: json["vehicle_no"]  ?? "",
+    timeslotId: json["timeslot_id"] ?? "",
     description: json["description"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
@@ -94,6 +112,12 @@ class OngoingOrders {
     "order_status": orderStatus,
     "image": image,
     "description": description,
+    "review": review  ?? "",
+    "rating": rating  ?? "",
+    "vehicle_brand": vehicleBrand  ?? "",
+    "vehicle_model": vehicleModel  ?? "",
+    "vehicle_no": vehicleNo  ?? "",
+    "timeslot_id": timeslotId  ?? "",
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
   };
