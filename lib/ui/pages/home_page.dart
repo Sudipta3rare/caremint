@@ -554,35 +554,42 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      child: Container(
-        padding: EdgeInsets.only(left: 20, top: 25, right: 30),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "CAREMINT Protects from",
-                style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Text(
-                "Rusting, Paint fading, Swirl marks, Water spots and also contribute to the society by saving water !",
-                style: GoogleFonts.dmSans(
-                  fontSize: 22,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                ),
-                overflow: TextOverflow.clip,
-              )
-            ],
+      child: Stack(
+        children: [
+          Positioned(
+            right: 0,top: 100,
+            child: Image.asset("assets/images/hometop.png", width: 200),
           ),
-        ),
-      ),
+          Container(
+            padding: EdgeInsets.only(left: 20, top: 25, right: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "CAREMINT",
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                  "Protects from Rusting, Paint fading, Swirl marks, Water spots and also contribute to the society by saving water !",
+                  style: GoogleFonts.dmSans(
+                    fontSize: 17,
+                    color: Colors.white,
+
+                  ),
+                  overflow: TextOverflow.clip,
+                )
+              ],
+            ),
+          ),
+        ],
+      )
     );
   }
 
