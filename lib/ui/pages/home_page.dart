@@ -557,8 +557,12 @@ class _HomePageState extends State<HomePage> {
       child: Stack(
         children: [
           Positioned(
-            right: 0,top: 100,
-            child: Image.asset("assets/images/hometop.png", width: 200),
+            right: 0,
+            top:  MediaQuery.of(context).size.height * 0.12,
+            child: SizedBox(
+              width: 200,
+              child: Image.asset("assets/images/hometop.png"),
+            ),
           ),
           Container(
             padding: EdgeInsets.only(left: 20, top: 25, right: 30),
@@ -576,6 +580,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: 10.0,
                 ),
+
                 Text(
                   "Protects from Rusting, Paint fading, Swirl marks, Water spots and also contribute to the society by saving water !",
                   style: GoogleFonts.dmSans(
@@ -590,6 +595,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       )
+
+
     );
   }
 
