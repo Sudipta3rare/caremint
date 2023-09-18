@@ -92,17 +92,16 @@ class Orders extends StatelessWidget {
     );
   }
 
-    Widget listLayout(context,CustomerInfoController ordCtrl, index){
+  Widget listLayout(context, CustomerInfoController ordCtrl, index) {
     return Card(
-
       shape: RoundedRectangleBorder(
         side: BorderSide(
-          color:Colors.blue[900]!,
+          color: Colors.blue[900]!,
         ),
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: SizedBox(
-        height: 200,
+        height: 250,
         width: MediaQuery.of(context).size.width,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -110,73 +109,91 @@ class Orders extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-
-                    listComponetCol(ordCtrl.newOrderList[index].name.toString(),ordCtrl.newOrderList[index].description.toString(),"Service Name", "Description",context,ordCtrl.newOrderList[index].vehicleBrand.toString(),"Vehicle Brand"),
-                    listComponetCol(DateFormat("yMMMMd").format(ordCtrl.newOrderList[index].deliveryDate ?? DateTime.now()).toString() ,ordCtrl.newOrderList[index].orderPrice.toString(),"Delivery Date", "Order Value",context,ordCtrl.newOrderList[index].vehicleModel.toString(),"Vehicle Model"),
-                    listComponetCol(DateFormat("yMMMMd").format(ordCtrl.newOrderList[index].orderDate!).toString(),ordCtrl.newOrderList[index].orderStatus.toString() == "null" ? "pending" :  ordCtrl.newOrderList[index].orderStatus.toString(),"Order Date", "Order Status",context,ordCtrl.newOrderList[index].vehicleNo.toString(),"Vehicle Number"),
-
-                  ],
+              Expanded( // Add an Expanded widget here
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      listComponetCol(
+                        ordCtrl.newOrderList[index].name.toString(),
+                        ordCtrl.newOrderList[index].description.toString(),
+                        "Service Name",
+                        "Description",
+                        context,
+                        ordCtrl.newOrderList[index].vehicleBrand.toString(),
+                        "Vehicle Brand",
+                      ),
+                      listComponetCol(
+                        DateFormat("yMMMMd").format(ordCtrl.newOrderList[index].deliveryDate ?? DateTime.now()).toString(),
+                        ordCtrl.newOrderList[index].orderPrice.toString(),
+                        "Delivery Date",
+                        "Order Value",
+                        context,
+                        ordCtrl.newOrderList[index].vehicleModel.toString(),
+                        "Vehicle Model",
+                      ),
+                      listComponetCol(
+                        DateFormat("yMMMMd").format(ordCtrl.newOrderList[index].orderDate!).toString(),
+                        ordCtrl.newOrderList[index].orderStatus.toString() == "null" ? "pending" : ordCtrl.newOrderList[index].orderStatus.toString(),
+                        "Order Date",
+                        "Order Status",
+                        context,
+                        ordCtrl.newOrderList[index].vehicleNo.toString(),
+                        "Vehicle Number",
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                TextButton(onPressed: (){
-
-                  
-                  Get.defaultDialog(
-                    // titlePadding: EdgeInsets.all(30),
-                    // contentPadding: EdgeInsets.all(8),
-                    title: 'Cancel order request!',
-                    titleStyle: TextStyle(
-                      color: AppStyle().gradientColor2, // Replace with your desired color
-                    ),
-                    middleTextStyle: AppStyle().subHeadBlueTextStyle,
-                    content: Text(
-                      'Do you want to cancel order?',
-                      style: AppStyle().paraTextStyle,
-                    ),
-                    textCancel: 'NO',
-                    textConfirm: 'YES',
-                    buttonColor: AppStyle().gradientColor3,
-                    cancelTextColor: AppStyle().gradientColor1,
-                    confirmTextColor: AppStyle().gradientColor1,
-                    onCancel: () {
-                      Get.back();
+                  TextButton(
+                    onPressed: () {
+                      Get.defaultDialog(
+                        title: 'Cancel order request!',
+                        titleStyle: TextStyle(
+                          color: AppStyle().gradientColor2, // Replace with your desired color
+                        ),
+                        middleTextStyle: AppStyle().subHeadBlueTextStyle,
+                        content: Text(
+                          'Do you want to cancel order?',
+                          style: AppStyle().paraTextStyle,
+                        ),
+                        textCancel: 'NO',
+                        textConfirm: 'YES',
+                        buttonColor: AppStyle().gradientColor3,
+                        cancelTextColor: AppStyle().gradientColor1,
+                        confirmTextColor: AppStyle().gradientColor1,
+                        onCancel: () {
+                          Get.back();
+                        },
+                        onConfirm: () async {
+                          ordCtrl.postCancelOrder(ordCtrl.newOrderList[index]);
+                          ordCtrl.update();
+                        },
+                      );
                     },
-                    onConfirm: () async {
-
-
-                      ordCtrl.postCancelOrder(ordCtrl.newOrderList[index]);
+                    child: Text("Cancel Order"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      ordCtrl.isLoading.value = true;
                       ordCtrl.update();
-
+                      ordCtrl.postAcceptOrder(ordCtrl.newOrderList[index]);
                     },
-                  );
-
-                }, child: Text("Cancel Order")),
-                ElevatedButton(onPressed: (){
-
-
-
-                  ordCtrl.isLoading.value=true;
-                  ordCtrl.update();
-                  ordCtrl.postAcceptOrder(ordCtrl.newOrderList[index]);
-
-                  // ordCtrl.update();
-                }, child: Text("Accept Order"))
-              ],)
+                    child: Text("Accept Order"),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
       ),
     );
-    }
+  }
   Widget listComponetCol(String name1, String name2,String title1,String title2, context, String name3, String title3){
     return Container(
       width: MediaQuery.of(context).size.width /2.8,
