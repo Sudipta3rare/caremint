@@ -13,7 +13,7 @@ import '../franchise/controllers/listing_services_controller.dart';
 
 class SignUpController extends GetxController {
 
-  List<String> toggleButtonString = ["Provider","Customer"];
+  List<String> toggleButtonString = ["Customer","Provider"];
   RxInt tabTextIndexSelected = 0.obs;
   RxBool isLoading = false.obs;
   toggle(int index) => tabTextIndexSelected.value = index;

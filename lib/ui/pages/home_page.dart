@@ -352,9 +352,12 @@ class _HomePageState extends State<HomePage> {
   }
 
 
-  Widget homeCard(BuildContext context, String itemName, String catName, String catImg,) {
+  Widget homeCard(BuildContext context, String itemName, String catName, String catImg) {
     return GetBuilder<HomeController>(
       builder: (ctrl) {
+        final index = ctrl.categoryList.indexWhere((category) => category.categoryName == itemName);
+        final isComingSoon = index == 3 || index == 5;
+
         return Card(
           color: Colors.blue[100],
           shadowColor: Colors.cyan,
@@ -366,68 +369,100 @@ class _HomePageState extends State<HomePage> {
           elevation: 4,
           margin: EdgeInsets.all(5),
           child: Center(
-            child: GetBuilder<ExteriorServiceController>(builder: (exCtrl) {
-              return GestureDetector(
-                onTap: () {
-                  if(ctrl.isLoggedIn.value){
-                    // print(ctrl.userDetails.pincode);
-                    print(ctrl.store.read("user_token"));
-                    exCtrl.gotoService(catName, itemName, ctrl.userDetails.pincode );
-                  }
-                  else{
-                    LoginSnackBar().loginSnackBar(context);
-                  }
-
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        RippleAnimation(
-                          color: Colors.blue,
-                          delay: const Duration(milliseconds: 3000),
-                          repeat: true,
-                          minRadius: 50,
-                          ripplesCount: 4,
-                          duration: const Duration(milliseconds: 7000),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            // radius: 50,
-                            maxRadius: 55,
-                            minRadius: 40,
-                            child:CachedNetworkImage(
-                              placeholder: (context, url) => const CircularProgressIndicator(),
-
-                              imageUrl: catImg,
-                            fit: BoxFit.cover,
-                            ),
+            child: GetBuilder<ExteriorServiceController>(
+              builder: (exCtrl) {
+                return GestureDetector(
+                  onTap: () {
+                    if (ctrl.isLoggedIn.value && !isComingSoon) {
+                      exCtrl.gotoService(catName, itemName, ctrl.userDetails.pincode);
+                    } else if (isComingSoon) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          Get.snackbar(
+                            'Info',
+                            'This item is coming soon!',
+                            snackPosition: SnackPosition.BOTTOM,
+                            colorText: Color(0xffffffff),
+                            backgroundColor: AppStyle().gradientColor2,
+                            duration: Duration(seconds: 2),
+                          ) as SnackBar
+                       /* SnackBar(
+                          content: Text("This item is coming soon!"),
+                        ),*/
+                      );
+                    } else {
+                      LoginSnackBar().loginSnackBar(context);
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              RippleAnimation(
+                                color: Colors.blue,
+                                delay: const Duration(milliseconds: 3000),
+                                repeat: true,
+                                minRadius: 50,
+                                ripplesCount: 4,
+                                duration: const Duration(milliseconds: 7000),
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  maxRadius: 55,
+                                  minRadius: 40,
+                                  child: CachedNetworkImage(
+                                    placeholder: (context, url) => const CircularProgressIndicator(),
+                                    imageUrl: catImg,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              if (isComingSoon)
+                                Positioned(
+                                  child: Container(
+                                    color: Colors.blue[100], // Background color of the "Coming Soon" label
+                                    padding: EdgeInsets.all(8),
+                                    child: Text(
+                                      "Coming Soon",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue[900], // Text color of the "Coming Soon" label
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                            ],
                           ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          itemName,
-                          style: GoogleFonts.poppins(
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            itemName,
+                            style: GoogleFonts.poppins(
                               fontSize: 16,
-                              // fontWeight: FontWeight.w600,
-                              color: Colors.blue[900]),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                              color: Colors.blue[900],
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            }),
+                );
+              },
+            ),
           ),
         );
-      }
+      },
     );
   }
+
+
 
   Widget locationWidget(BuildContext context) {
     return GetBuilder<HomeController>(builder: (ctrl) {

@@ -536,7 +536,7 @@ class SignUpSnackBar {
                     onTap: ()async{
                       DateTime? pickedDate = await showDatePicker(
                           context: context, initialDate: DateTime.now(),
-                          firstDate: DateTime(2000), //DateTime.now() - not to allow to choose before today.
+                          firstDate: DateTime(1960), //DateTime.now() - not to allow to choose before today.
                           lastDate: DateTime(2101)
                       );
 
