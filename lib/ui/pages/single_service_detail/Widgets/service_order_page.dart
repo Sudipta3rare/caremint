@@ -200,7 +200,7 @@ class SingleOrderPage{
                               formFeild("Address",ctrl.address),
                               // formFeild("Pin Code",ctrl.pincode),
                               formFeild("City",ctrl.city),
-                              formFeild("Sate",ctrl.state),
+                              formFeild("State",ctrl.state),
                               formFeild("Pincode", ctrl.pincode),
                               formFeild("Vehicle Company Name",ctrl.vName),
                               formFeild("Vehicle Model",ctrl.vModel),

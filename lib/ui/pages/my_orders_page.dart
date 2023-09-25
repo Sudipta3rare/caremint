@@ -73,79 +73,84 @@ class MyOrdersPage extends StatelessWidget {
             Center(
               child: ElevatedButton.icon(
                 onPressed: (){
-                  
-                  showModalBottomSheet(useSafeArea: true,
+                  showModalBottomSheet(
+                      useSafeArea: true,
                       backgroundColor: Colors.transparent,
-                      context: context, builder: (context){
-                    return Container(
-                      decoration: BoxDecoration(
-                    color: AppStyle.backgroundColor,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20.0),
-                          topRight: Radius.circular(20.0),
-                        )
-                      ),
-                      padding: EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Text("Add a review", style: AppStyle().subHeadBlueTextStyle,),
-                            SizedBox(height: 20),
-                            RatingBar.builder(
-                            initialRating: 0,
-                            minRating: 0,
-                            direction: Axis.horizontal,
-                            allowHalfRating: true,
-                            itemCount: 5,
-                            itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
-                            itemBuilder: (context, _) => Icon(
-                              Icons.star,
-                              color: AppStyle.buttonColor,
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context){
+                        return FractionallySizedBox(
+                          heightFactor: 0.9,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: AppStyle.backgroundColor,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20.0),
+                                  topRight: Radius.circular(20.0),
+                                )
                             ),
-                            onRatingUpdate: (rating) {
-                              // print(rating);
-                              ordCtrl.rating = rating;
-                            },
-                          ),
-                          SizedBox(height: 20.0),
-
-                          TextField(
-                            controller: ordCtrl.review,
-                            maxLines: null,
-                            maxLength: 500,
-                            style: AppStyle().paraTextStyle,
-                            decoration: InputDecoration(
-                              labelText: 'Write your review',
-                              contentPadding: EdgeInsets.all(10),
-                              labelStyle: AppStyle().paraTextStyle,
+                            padding: EdgeInsets.all(16.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text("Add a review", style: AppStyle().subHeadBlueTextStyle,),
+                                SizedBox(height: 20),
+                                RatingBar.builder(
+                                  initialRating: 0,
+                                  minRating: 0,
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 5,
+                                  itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
+                                  itemBuilder: (context, _) => Icon(
+                                    Icons.star,
+                                    color: AppStyle.buttonColor,
+                                  ),
+                                  onRatingUpdate: (rating) {
+                                    ordCtrl.rating = rating;
+                                  },
+                                ),
+                                SizedBox(height: 20.0),
+                                TextField(
+                                  controller: ordCtrl.review,
+                                  maxLines: null,
+                                  maxLength: 500,
+                                  style: AppStyle().paraTextStyle,
+                                  decoration: InputDecoration(
+                                    labelText: 'Write your review',
+                                    contentPadding: EdgeInsets.all(10),
+                                    labelStyle: AppStyle().paraTextStyle,
+                                  ),
+                                ),
+                                SizedBox(height: 20.0),
+                                ElevatedButton(
+                                  onPressed: (){
+                                    ordCtrl.postReview(index);
+                                  },
+                                  child: Text("Submit"),
+                                  style: AppStyle.primaryButtonStyle,
+                                ),
+                                Row(
+                                  children: [
+                                    Spacer(),
+                                    IconButton(
+                                      icon: Icon(Icons.cancel, color:  AppStyle.buttonColor,),
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(height: 20.0),
-                          ElevatedButton(onPressed: (){
-                            ordCtrl.postReview(index);
-                          }, child: Text("Submit"),
-                          style: AppStyle.primaryButtonStyle,),
-                          Row(
-                            children: [
-                              Spacer(),
-                              IconButton(
-                                icon: Icon(Icons.cancel, color:  AppStyle.buttonColor,),
-
-                                onPressed: () {
-                                  Get.back();
-
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-
-                  });
-                  
-                  
-                },icon:  Icon(Icons.border_color), label: Text("Add Review"), ),
+                        );
+                      }
+                  );
+                },
+                icon: Icon(Icons.border_color),
+                label: Text("Add Review"),
+              ),
             )
 
 
