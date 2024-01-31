@@ -35,7 +35,7 @@ class ExteriorServiceController extends GetxController{
   RxBool isLoading = true.obs;
 
   late String city,pincode;
-
+///
 
   Future<void> getProviders () async {
     isLoading.value = true;
