@@ -43,7 +43,6 @@ class LoginSnackBar {
                 color: AppStyle.buttonColor)
           ],
           content: Container(
-            color: Colors.blue[50],
             margin: EdgeInsets.only(right: 8, left: 8, top: 10),
             // padding: EdgeInsets.all(8),
             child: SingleChildScrollView(

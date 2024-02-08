@@ -158,7 +158,7 @@ class SingleOrderPage{
                               // ]),
                               CalendarDatePicker(initialDate: DateTime.now(),
                                 firstDate: DateTime.now(),
-                                lastDate: DateTime(2024),
+                                lastDate: DateTime(2025),
                                 onDateChanged: (DateTime value)
                                 {
                                   isDateSelected = true;
@@ -211,9 +211,6 @@ class SingleOrderPage{
                                   return GestureDetector(
                                       onTap: () async {
 
-
-
-
                                       if (ctrl.formKey.currentState!.validate()) {
 
                                         print("all key validated");
@@ -247,10 +244,7 @@ class SingleOrderPage{
                                                   product.id.toString(),
                                                   product.price!, providerId,ctrl.timingSelected);
 
-
-
                                                 // await auth.signOut().then((value) => Get.offAllNamed('/home'));
-
 
                                               },);
                                           }
@@ -269,12 +263,13 @@ class SingleOrderPage{
                                                   .gradientColor2,
                                               duration: Duration(seconds: 2),);
                                           }
-                                      } else
+                                      } else {
                                         Get.snackbar("Submition form empty", "Please fill all fields of the form",
                                           snackPosition: SnackPosition.BOTTOM,
                                           colorText: Color(0xffffffff),
                                           backgroundColor: AppStyle().gradientColor2,
                                           duration: Duration(seconds: 2),);
+                                      }
 
 
                           },

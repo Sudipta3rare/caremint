@@ -15,20 +15,19 @@ RxBool isLoading = true.obs;
   String providerName = '';
   String providerAddress = "";
   String providerId = "";
+  String categoryId = "";
   // var  serviceResponse;
   List<Service>  serviceList= [];
   List<Service> searchList=[];
-Future<void> getProviderService(String id)async{
+
+Future<void> getProviderService(String id, String serviceId) async{
   isLoading.value = true;
   // update();
-
- await ApiRequest(url: Constant.baseUrl+'/api/get-provider-service/${id}', data: null).getToken(beforeSend: (){},
+ await ApiRequest(url: Constant.baseUrl+'/api/get-provider-service/${id}/${serviceId}', data: null).getToken(beforeSend: (){},
       onSuccess: (onSuccess){
-
   var   serviceResponse = ServicesResponse.fromJson(onSuccess);
       serviceList.clear();
       serviceList.addAll(serviceResponse.body?.services as Iterable<Service>);
-
       searchList = serviceList;
       update();
       },
@@ -45,14 +44,7 @@ Future<void> getProviderService(String id)async{
   isLoading.value = false;
   update();
 
-
-
 }
-
-
-
-
-
 
 //
 //   List<Provider> itemList=[];
@@ -64,23 +56,11 @@ Future<void> getProviderService(String id)async{
     providerName = personDetail.displayName.toString();
     providerAddress = personDetail.userAddress.toString();
     providerId = personDetail.userId.toString();
+    categoryId = personDetail.categoryId.toString();
     print(providerId)
-;   getProviderService(personDetail.userId!);
+;   getProviderService(personDetail.userId!,personDetail.categoryId!);
    Get.to(SingleServiceDetail());
-
-   
   }
-
-
-
-
-
-
-
-
-
-
-
 
 
 //
