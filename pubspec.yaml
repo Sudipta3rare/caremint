@@ -82,6 +82,14 @@ flutter:
       fonts:
         - asset: assets/fonts/Cinzel_Regular.ttf
           weight: 400
+    - family: PoppinsSemiBold
+      fonts:
+        - asset: assets/fonts/PoppinsSemiBold.ttf
+          weight: 600
+    - family: PoppinsBold
+      fonts:
+        - asset: assets/fonts/PoppinsBold.ttf
+          weight: 700
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
