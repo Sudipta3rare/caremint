@@ -1,7 +1,6 @@
 import 'package:caremint/controllers/categories_controller/category_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../widget/bottom_oval_clipper.dart';
 import '../../widget/custom_app_bar.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -172,43 +171,6 @@ class CategoryPage extends StatelessWidget {
                           ],
                         ),
                       ),
-
-
-                      /* Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Image.asset(
-                        "assets/images/exteriorimg.png",
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Image.asset(
-                        "assets/images/interiorandexteriorimg.png",
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Image.asset(
-                        "assets/images/deepcleaningimg.png",
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Image.asset(
-                        "assets/images/monthlysubimg.png",
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Image.asset(
-                        "assets/images/ceramicimg.png",
-                        fit: BoxFit.fill,
-                      ),
-                    ),*/
                     ],
                   ),
                 )

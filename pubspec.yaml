@@ -80,7 +80,7 @@ flutter:
   fonts:
     - family: Cinzel
       fonts:
-        - asset: assets/fonts/Cinzel_Regular.ttf
+        - asset: assets/fonts/CinzelRegular.ttf
           weight: 400
     - family: PoppinsSemiBold
       fonts:
@@ -90,6 +90,10 @@ flutter:
       fonts:
         - asset: assets/fonts/PoppinsBold.ttf
           weight: 700
+    - family: PoppinsRegular
+      fonts:
+        - asset: assets/fonts/PoppinsRegular.ttf
+          weight: 400
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
