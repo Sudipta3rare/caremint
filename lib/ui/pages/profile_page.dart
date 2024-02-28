@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../widget/custom_app_bar.dart';
+import '../widget/custom_bottom_bar.dart';
 
 
 class ProfilePage extends StatelessWidget {
@@ -19,6 +19,7 @@ class ProfilePage extends StatelessWidget {
           color:  const Color(0XFF164378),
           child:  Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -79,6 +80,12 @@ class ProfilePage extends StatelessWidget {
             ],
 
           ),
+        ),
+        bottomNavigationBar: CustomBottomBar(
+          onChanged: (type) {
+            String route = getCurrentRoute(type);
+            Get.offAllNamed(route);
+          },
         ),
       ),
     );

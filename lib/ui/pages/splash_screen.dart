@@ -5,6 +5,8 @@ import '../../controllers/splash_controller.dart';
 
 import 'package:get/get.dart';
 
+import '../widget/custom_bottom_bar.dart';
+
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -18,7 +20,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   // final AuthController authCtrl = AuthController.to;
 
 
-  @override
+ /* @override
   void initState() {
     super.initState();
     welcomeController.controller = AnimationController(
@@ -47,7 +49,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
       }
     });
-  }
+  }*/
 
 
   @override
@@ -89,7 +91,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                   Text("BRAND",style: TextStyle(color:Color(0XFFB5F446),fontSize:25,fontFamily:"Cinzel",fontWeight: FontWeight.bold)),
                 ],
               ),
-              SizedBox(height: 15),
+             /* SizedBox(height: 15),
               Stack(
                 alignment: Alignment.center,
                 children: [
@@ -105,9 +107,15 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                     height: 54,
                   ))
                 ],
-              )
+              )*/
             ],
           ),
+        ),
+        bottomNavigationBar: CustomBottomBar(
+          onChanged: (type) {
+            String route = getCurrentRoute(type);
+            Get.offAllNamed(route);
+          },
         ),
       ),
     );
