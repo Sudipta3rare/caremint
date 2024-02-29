@@ -1,8 +1,8 @@
 import 'package:caremint/controllers/categories_controller/category_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../bottombar/custom_bottom_bar.dart';
 import '../../widget/custom_app_bar.dart';
-import '../../widget/custom_bottom_bar.dart';
 
 class CategoryPage extends StatelessWidget {
   final CategoryPageController controller = Get.put(CategoryPageController());
@@ -179,12 +179,7 @@ class CategoryPage extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: CustomBottomBar(
-          onChanged: (type) {
-            String route = getCurrentRoute(type);
-            Get.offAllNamed(route);
-          },
-        ),
+        bottomNavigationBar: CustomBottomBar(),
       ),
     );
   }

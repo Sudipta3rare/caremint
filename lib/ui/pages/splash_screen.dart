@@ -1,11 +1,9 @@
+import 'package:caremint/bottombar/custom_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../controllers/splash_controller.dart';
-
 import 'package:get/get.dart';
 
-import '../widget/custom_bottom_bar.dart';
 
 
 class SplashPage extends StatefulWidget {
@@ -111,12 +109,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
             ],
           ),
         ),
-        bottomNavigationBar: CustomBottomBar(
-          onChanged: (type) {
-            String route = getCurrentRoute(type);
-            Get.offAllNamed(route);
-          },
-        ),
+        bottomNavigationBar: CustomBottomBar(),
       ),
     );
   }
