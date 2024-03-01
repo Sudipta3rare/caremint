@@ -1,3 +1,6 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,111 +60,273 @@ class HomePageNew extends StatelessWidget {
                           color: Color(0XFF005797),
                           fontSize: 18,
                           fontFamily: "PoppinsSemiBold")),
-                 SizedBox(height: 10),
-                 Row(
-                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                   children: [
-                     Padding(padding: EdgeInsets.only(left: 15,bottom: 15),
-                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                       children: [
-                         Text("Caremint helps protect",
-                             style: TextStyle(color:Colors.black,
-                                 fontSize:13.3,
-                                 fontFamily:"PoppinsSemiBold")),
-                         Text("your car from",
-                             style: TextStyle(color:Colors.black,
-                                 fontSize:13.3,
-                                 fontFamily:"PoppinsSemiBold")),
-                         SizedBox(height: 10),
-                         Column(crossAxisAlignment: CrossAxisAlignment.start,
-                           children: [
-                             Row(
-                               mainAxisAlignment: MainAxisAlignment.center,
-                               children: [
-                                 Image.asset(
-                                   "assets/images/righticon.png",
-                                   width: 12,
-                                   height: 13.33,
-                                 ),
-                                 SizedBox(width: 10),
-                                 Text("Rusting",
-                                     style: TextStyle(color:Colors.black,
-                                         fontSize:10,
-                                         fontFamily:"PoppinsSemiBold")),
-                               ],
-                             ),
-                             Row(
-                               mainAxisAlignment: MainAxisAlignment.center,
-                               children: [
-                                 Image.asset(
-                                   "assets/images/righticon.png",
-                                   width: 12,
-                                   height: 13.33,
-                                 ),
-                                 SizedBox(width: 10),
-                                 Text("Paint Fading",
-                                     style: TextStyle(color:Colors.black,
-                                         fontSize:10,
-                                         fontFamily:"PoppinsSemiBold")),
-                               ],
-                             ),
-                             Row(
-                               mainAxisAlignment: MainAxisAlignment.center,
-                               children: [
-                                 Image.asset(
-                                   "assets/images/righticon.png",
-                                   width: 12,
-                                   height: 13.33,
-                                 ),
-                                 SizedBox(width: 10),
-                                 Text("Swirl Marks",
-                                     style: TextStyle(color:Colors.black,
-                                         fontSize:10,
-                                         fontFamily:"PoppinsSemiBold")),
-                               ],
-                             ),
-                             Row(
-                               mainAxisAlignment: MainAxisAlignment.center,
-                               children: [
-                                 Image.asset(
-                                   "assets/images/righticon.png",
-                                   width: 12,
-                                   height: 13.33,
-                                 ),
-                                 SizedBox(width: 10),
-                                 Text("Water Spots  ",
-                                     style: TextStyle(color:Colors.black,
-                                         fontSize:10,
-                                         fontFamily:"PoppinsSemiBold")),
-                               ],
-                             ),
-                           ],
-                         ),
-                         SizedBox(height: 10),
-                         Text("Contributes to the society",
-                             style: TextStyle(color:Color(0XFF005797),
-                                 fontSize:12,
-                                 fontFamily:"PoppinsSemiBold")),
-                         Text("by saving water",
-                             style: TextStyle(color:Color(0XFF005797),
-                                 fontSize:12,
-                                 fontFamily:"PoppinsSemiBold")),
-                       ],
-                     ),),
-                     Image.asset(
-                       "assets/images/savewater.png",
-                       width: 171,
-                       height: 171,
-                     ),
-                   ],
-                 )
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 15, bottom: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Caremint helps protect",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 13.3,
+                                    fontFamily: "PoppinsSemiBold")),
+                            Text("your car from",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 13.3,
+                                    fontFamily: "PoppinsSemiBold")),
+                            SizedBox(height: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/righticon.png",
+                                      width: 12,
+                                      height: 13.33,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("Rusting",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10,
+                                            fontFamily: "PoppinsSemiBold")),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/righticon.png",
+                                      width: 12,
+                                      height: 13.33,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("Paint Fading",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10,
+                                            fontFamily: "PoppinsSemiBold")),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/righticon.png",
+                                      width: 12,
+                                      height: 13.33,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("Swirl Marks",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10,
+                                            fontFamily: "PoppinsSemiBold")),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/righticon.png",
+                                      width: 12,
+                                      height: 13.33,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text("Water Spots  ",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10,
+                                            fontFamily: "PoppinsSemiBold")),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 10),
+                            Text("Contributes to the society",
+                                style: TextStyle(
+                                    color: Color(0XFF005797),
+                                    fontSize: 12,
+                                    fontFamily: "PoppinsSemiBold")),
+                            Text("by saving water",
+                                style: TextStyle(
+                                    color: Color(0XFF005797),
+                                    fontSize: 12,
+                                    fontFamily: "PoppinsSemiBold")),
+                          ],
+                        ),
+                      ),
+                      Image.asset(
+                        "assets/images/savewater.png",
+                        width: 171,
+                        height: 171,
+                      ),
+                    ],
+                  ),
+                  Padding(
+                      padding: EdgeInsets.all(20),
+                      child: categoryWidget(context)),
                 ],
               ),
             )),
         bottomNavigationBar: CustomBottomBar(),
       ),
     );
+  }
+
+  Widget categoryWidget(BuildContext context) {
+    return GetBuilder<HomeController>(builder: (ctrl) {
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: 300,
+        decoration: BoxDecoration(
+            color: Color(0XFF164378),
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(2, 2),
+                blurRadius: 20,
+                color: Colors.blueGrey.withOpacity(0.6),
+              )
+            ],
+            gradient: LinearGradient(
+                begin: Alignment.topCenter, // Start from the top
+                end: Alignment.bottomCenter,
+                colors: [Color(0XFF2768B4), Color(0XFFBCE886)])),
+        child: Column(
+          children: [
+            SizedBox(height: 20),
+            Text("Categories",
+                style: GoogleFonts.poppins(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white)),
+            Expanded(
+                child: GridView(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+              ),
+              children: <Widget>[
+                Column(
+                  children: [
+                    Image.asset(
+                      "assets/images/interior.png",
+                      fit: BoxFit.fill,
+                      height: 80,
+                      width: 80,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text("Interior Service",
+                          style: GoogleFonts.poppins(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white)),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Image.asset(
+                      "assets/images/exterior.png",
+                      fit: BoxFit.fill,
+                      height: 80,
+                      width: 80,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text("Exterior Service",
+                          style: GoogleFonts.poppins(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white)),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Image.asset(
+                      "assets/images/interiorandexterior.png",
+                      fit: BoxFit.fill,
+                      height: 80,
+                      width: 80,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text("Interior + Exterior",
+                          style: GoogleFonts.poppins(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white)),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Image.asset(
+                      "assets/images/deepcleaning.png",
+                      fit: BoxFit.fill,
+                      height: 63,
+                      width: 63,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text("Deep Cleaning",
+                          style: GoogleFonts.poppins(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white)),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Image.asset(
+                      "assets/images/monthlysub.png",
+                      fit: BoxFit.fill,
+                      height: 63,
+                      width: 63,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text("Monthly Subscription",
+                          style: GoogleFonts.poppins(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white)),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Image.asset(
+                      "assets/images/ceramic.png",
+                      fit: BoxFit.fill,
+                      height: 63,
+                      width: 63,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text("Ceramic Coating",
+                          style: GoogleFonts.poppins(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white)),
+                    ),
+                  ],
+                ),
+              ],
+            )),
+          ],
+        ),
+      );
+    });
   }
 
   Widget locationWidget(BuildContext context) {
