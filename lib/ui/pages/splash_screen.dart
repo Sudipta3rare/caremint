@@ -18,7 +18,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   // final AuthController authCtrl = AuthController.to;
 
 
- /* @override
+  @override
   void initState() {
     super.initState();
     welcomeController.controller = AnimationController(
@@ -42,12 +42,12 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           welcomeController.goToProvider();
         }
         else{
-          Get.offAndToNamed('/home');
+          Get.offAndToNamed('/homenew');
         }
 
       }
     });
-  }*/
+  }
 
 
   @override
@@ -108,22 +108,7 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               )*/
             ],
           ),
-        ),
-        bottomNavigationBar: CustomBottomBar(),
-      ),
-    );
-  }
-
-  Widget _buildBody() {
-    return FadeTransition(
-      opacity: welcomeController.animation,
-      child: Container(
-        padding: EdgeInsets.all(20),
-        alignment: Alignment.center,
-        child: Image.asset(
-          'assets/images/logo.png',
-          width: Get.width,
-        ),
+        )
       ),
     );
   }

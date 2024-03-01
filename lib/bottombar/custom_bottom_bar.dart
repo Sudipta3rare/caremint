@@ -55,7 +55,7 @@ class CustomBottomBar extends StatelessWidget {
                   controller.selectedIndex.value = index;
                   String route = controller.getCurrentRoute(
                       controller.bottomMenuList[index].type);
-                  if (route == "/") {
+                  if (route == "/homenew") {
                     Get.offAllNamed(route);
                   } else {
                     Get.toNamed(route);

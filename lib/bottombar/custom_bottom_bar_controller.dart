@@ -28,7 +28,7 @@ class CustomBottomBarController extends GetxController {
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.Home:
-        return "/";
+        return "/homenew";
       case BottomBarEnum.Category:
         return "/category";
       case BottomBarEnum.Profile:

@@ -10,23 +10,22 @@ class CustomButton{
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
           // color: const Color.fromARGB(255, 112, 91, 222),
-          // color: Colors.blue.shade900,
-          gradient:  LinearGradient(colors: [
+          color: Color(0XFFB5F446),
+          /*gradient:  LinearGradient(colors: [
             // Colors.blueAccent,
             // Colors.lightBlueAccent
             AppStyle().gradientColor1,
             AppStyle().gradientColor2,
-          ])),
+          ])*/
+      ),
       child: Center(
         child: Text(
           '$title',
           style:
             GoogleFonts.poppins(
-              color: Colors.white,
+              color: Color(0XFF164378),
               fontWeight: FontWeight.w600,
               fontSize: 20,
-
-
           ),
           textAlign: TextAlign.center,
         ),
