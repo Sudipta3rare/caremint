@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../bottombar/custom_bottom_bar.dart';
@@ -173,12 +172,177 @@ class HomePageNew extends StatelessWidget {
                   Padding(
                       padding: EdgeInsets.all(20),
                       child: categoryWidget(context)),
+                  Padding(padding: EdgeInsets.only(right: 20,left: 20),child: serviceWidget(context)),
+                  SizedBox(height: 50),
                 ],
               ),
             )),
         bottomNavigationBar: CustomBottomBar(),
       ),
     );
+  }
+
+  /// Section Widget
+/*  Widget _buildJobListingSlider() {
+    return Obx(
+          () => CarouselSlider.builder(
+        options: CarouselOptions(
+          initialPage: 0,
+          autoPlay: true,
+          autoPlayInterval: Duration(seconds: 2),
+          viewportFraction: 0.7,
+          enableInfiniteScroll: true,
+          scrollDirection: Axis.horizontal,
+          onPageChanged: (index, reason) {
+
+          },
+        ),
+        itemCount: ,
+        itemBuilder: (context, index, realIndex) {
+        },
+      ),
+    );
+  }*/
+
+  Widget serviceWidget(BuildContext context) {
+    return GetBuilder<HomeController>(builder: (ctrl) {
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: 250,
+        decoration: BoxDecoration(
+            color: Color(0XFFFFFFFF),
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(2, 2),
+                blurRadius: 20,
+                color: Colors.blueGrey.withOpacity(0.6),
+              )
+            ]),
+        child: Column(
+          children: [
+            SizedBox(height: 20),
+            Text("Service Process",
+                style: TextStyle(
+                    color: Color(0XFF005797),
+                    fontSize: 18,
+                    fontFamily: "PoppinsSemiBold")),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Stack(
+                  children: [
+                    Image.asset(
+                      "assets/images/chooseandscheduleservices.png",
+                      fit: BoxFit.fill,
+                      height: 136,
+                      width: 113,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 15.50,
+                      child: Container(
+                        height: 65,
+                        width: 100,
+                        color: Colors.black.withOpacity(0.75),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Choose Services",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white)),
+                            Image.asset(
+                              "assets/images/splasharrow.png",
+                              fit: BoxFit.fill,
+                              height: 24,
+                              width: 34,
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Stack(
+                  children: [
+                    Image.asset(
+                      "assets/images/doorstepservices.png",
+                      fit: BoxFit.fill,
+                      height: 136,
+                      width: 120,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 10,
+                      child: Container(
+                        height: 65,
+                        width: 100,
+                        color: Colors.black.withOpacity(0.75),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Doorstep Services",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white)),
+                            Image.asset(
+                              "assets/images/splasharrow.png",
+                              fit: BoxFit.fill,
+                              height: 24,
+                              width: 34,
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Stack(
+                  children: [
+                    Image.asset(
+                      "assets/images/payonlineorcod.png",
+                      fit: BoxFit.fill,
+                      height: 136,
+                      width: 113,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      child: Container(
+                        height: 65,
+                        width: 98,
+                        color: Colors.black.withOpacity(0.75),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Pay Online",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white)),
+                            Image.asset(
+                              "assets/images/splasharrow.png",
+                              fit: BoxFit.fill,
+                              height: 24,
+                              width: 34,
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
+      );
+    });
   }
 
   Widget categoryWidget(BuildContext context) {
