@@ -18,43 +18,147 @@ class HomePageNew extends StatelessWidget {
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
         body: Container(
-          width: double.maxFinite,
-          height: double.maxFinite,
-          color: const Color(0XFFFFFFF),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    Image.asset(
-                      "assets/images/homepageheader.png",
-                    ),
-                    Padding(padding: EdgeInsets.only(left: 2,right: 20,top: 30),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset(
-                            "assets/images/logo.png",
-                            width: 90,
-                            height: 41.29,
-                          ),
-                          Image.asset(
-                            "assets/images/drawernavicon.png",
-                            width: 30,
-                            height: 30,
-                          ),
-                        ],
+            width: double.maxFinite,
+            height: double.maxFinite,
+            color: const Color(0XFFFFFFF),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Image.asset(
+                        "assets/images/homepageheader.png",
                       ),
-                    )
-                  ],
-                ),
-                Padding(padding: EdgeInsets.all(20),
-                child: locationWidget(context),)
-
-              ],
-            ),
-          )
-        ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 2, right: 20, top: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Image.asset(
+                              "assets/images/logo.png",
+                              width: 90,
+                              height: 41.29,
+                            ),
+                            Image.asset(
+                              "assets/images/drawernavicon.png",
+                              width: 30,
+                              height: 30,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Padding(
+                      padding: EdgeInsets.all(20),
+                      child: locationWidget(context)),
+                  Text("Why Choose Us?",
+                      style: TextStyle(
+                          color: Color(0XFF005797),
+                          fontSize: 18,
+                          fontFamily: "PoppinsSemiBold")),
+                 SizedBox(height: 10),
+                 Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                   children: [
+                     Padding(padding: EdgeInsets.only(left: 15,bottom: 15),
+                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                       children: [
+                         Text("Caremint helps protect",
+                             style: TextStyle(color:Colors.black,
+                                 fontSize:13.3,
+                                 fontFamily:"PoppinsSemiBold")),
+                         Text("your car from",
+                             style: TextStyle(color:Colors.black,
+                                 fontSize:13.3,
+                                 fontFamily:"PoppinsSemiBold")),
+                         SizedBox(height: 10),
+                         Column(crossAxisAlignment: CrossAxisAlignment.start,
+                           children: [
+                             Row(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 Image.asset(
+                                   "assets/images/righticon.png",
+                                   width: 12,
+                                   height: 13.33,
+                                 ),
+                                 SizedBox(width: 10),
+                                 Text("Rusting",
+                                     style: TextStyle(color:Colors.black,
+                                         fontSize:10,
+                                         fontFamily:"PoppinsSemiBold")),
+                               ],
+                             ),
+                             Row(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 Image.asset(
+                                   "assets/images/righticon.png",
+                                   width: 12,
+                                   height: 13.33,
+                                 ),
+                                 SizedBox(width: 10),
+                                 Text("Paint Fading",
+                                     style: TextStyle(color:Colors.black,
+                                         fontSize:10,
+                                         fontFamily:"PoppinsSemiBold")),
+                               ],
+                             ),
+                             Row(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 Image.asset(
+                                   "assets/images/righticon.png",
+                                   width: 12,
+                                   height: 13.33,
+                                 ),
+                                 SizedBox(width: 10),
+                                 Text("Swirl Marks",
+                                     style: TextStyle(color:Colors.black,
+                                         fontSize:10,
+                                         fontFamily:"PoppinsSemiBold")),
+                               ],
+                             ),
+                             Row(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 Image.asset(
+                                   "assets/images/righticon.png",
+                                   width: 12,
+                                   height: 13.33,
+                                 ),
+                                 SizedBox(width: 10),
+                                 Text("Water Spots  ",
+                                     style: TextStyle(color:Colors.black,
+                                         fontSize:10,
+                                         fontFamily:"PoppinsSemiBold")),
+                               ],
+                             ),
+                           ],
+                         ),
+                         SizedBox(height: 10),
+                         Text("Contributes to the society",
+                             style: TextStyle(color:Color(0XFF005797),
+                                 fontSize:12,
+                                 fontFamily:"PoppinsSemiBold")),
+                         Text("by saving water",
+                             style: TextStyle(color:Color(0XFF005797),
+                                 fontSize:12,
+                                 fontFamily:"PoppinsSemiBold")),
+                       ],
+                     ),),
+                     Image.asset(
+                       "assets/images/savewater.png",
+                       width: 171,
+                       height: 171,
+                     ),
+                   ],
+                 )
+                ],
+              ),
+            )),
         bottomNavigationBar: CustomBottomBar(),
       ),
     );
@@ -92,10 +196,18 @@ class HomePageNew extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  formBuild(context, Icon(Icons.location_city_outlined,color: Color(0XFFB5F446)), "City", ctrl.city),
+                  formBuild(
+                      context,
+                      Icon(Icons.location_city_outlined,
+                          color: Color(0XFFB5F446)),
+                      "City",
+                      ctrl.city),
                   // formBuild(context, Icon(Icons.category), "Category"),
                   formBuild(
-                      context, Icon(Icons.pin_drop_outlined,color: Color(0XFFB5F446)), "Pin code", ctrl.pincode),
+                      context,
+                      Icon(Icons.pin_drop_outlined, color: Color(0XFFB5F446)),
+                      "Pin code",
+                      ctrl.pincode),
                 ],
               ),
             ),
@@ -104,8 +216,8 @@ class HomePageNew extends StatelessWidget {
               child: DropdownButtonFormField(
                 dropdownColor: Color(0XFF164378),
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.category_outlined,
-                      color: Color(0XFFB5F446)),
+                  prefixIcon:
+                      Icon(Icons.category_outlined, color: Color(0XFFB5F446)),
                 ),
                 hint: Text(
                   "Select Category",
@@ -115,14 +227,14 @@ class HomePageNew extends StatelessWidget {
                 items: ctrl.selectItems
                     .map<DropdownMenuItem<String>>(
                       (e) => DropdownMenuItem(
-                    value: e,
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                      overflow: TextOverflow.clip,
-                    ),
-                  ),
-                )
+                        value: e,
+                        child: Text(
+                          e,
+                          style: TextStyle(color: Colors.white),
+                          overflow: TextOverflow.clip,
+                        ),
+                      ),
+                    )
                     .toList(),
                 onChanged: (String? value) {
                   ctrl.currentItem = value!;
@@ -133,26 +245,32 @@ class HomePageNew extends StatelessWidget {
             GetBuilder<ExteriorServiceController>(builder: (exCtrl) {
               return GestureDetector(
                   onTap: () {
-                    if(ctrl.isLoggedIn.value){
-                      if(ctrl.pincode.text.isEmpty || ctrl.city.text.isEmpty || ctrl.currentItem=='Category'){
-                        Get.snackbar("Error", "Please enter proper value in all fields",
+                    if (ctrl.isLoggedIn.value) {
+                      if (ctrl.pincode.text.isEmpty ||
+                          ctrl.city.text.isEmpty ||
+                          ctrl.currentItem == 'Category') {
+                        Get.snackbar(
+                          "Error",
+                          "Please enter proper value in all fields",
                           snackPosition: SnackPosition.BOTTOM,
                           colorText: Color(0xffffffff),
                           backgroundColor: AppStyle().gradientColor2,
-                          duration: Duration(seconds: 2),);
+                          duration: Duration(seconds: 2),
+                        );
                         ctrl.update();
+                      } else {
+                        exCtrl.gotoService(
+                            ctrl.selectItems
+                                .indexOf(ctrl.currentItem)
+                                .toString(),
+                            ctrl.city.text,
+                            ctrl.pincode.text);
                       }
-                      else {
-
-                        exCtrl.gotoService(ctrl.selectItems.indexOf(ctrl.currentItem).toString(), ctrl.city.text,ctrl.pincode.text);
-                      }
-                    }
-                    else{
+                    } else {
                       LoginSnackBar().loginSnackBar(context);
                     }
                   },
-                  child: CustomButton()
-                      .customButton200(context, "Search"));
+                  child: CustomButton().customButton200(context, "Search"));
             }),
             SizedBox(
               height: 2,
@@ -187,5 +305,4 @@ class HomePageNew extends StatelessWidget {
       ),
     );
   }
-
 }
