@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../bottombar/custom_bottom_bar.dart';
 import '../widget/custom_app_bar.dart';
 
@@ -89,10 +90,15 @@ class ProfilePage extends StatelessWidget {
       leadingWidth: 40,
       leading: Padding(
           padding: EdgeInsets.only(left: 20),
-          child: Image.asset(
-            "assets/images/backbutton.png",
-            width: 20,
-            height: 20,
+          child: GestureDetector(
+            onTap: () {
+              Get.offAllNamed("/homenew");
+            },
+            child: Image.asset(
+              "assets/images/backbutton.png",
+              width: 20,
+              height: 20,
+            ),
           )),
       centerTitle: true,
       title: Text("Profile",

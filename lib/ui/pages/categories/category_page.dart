@@ -40,7 +40,13 @@ class CategoryPage extends StatelessWidget {
                               bottom: 0, // Align the container to the bottom
                               child: Container(
                                 alignment: Alignment.center,
-                                color: Colors.white,
+                                decoration: BoxDecoration(
+                                  color: Color(0XFFFFFFFF),
+                                  borderRadius: const BorderRadius.only(
+                                    bottomRight: Radius.circular(12),
+                                    bottomLeft: Radius.circular(12),
+                                  ),
+                                ),
                                 width: 130,
                                 height: 50,
                                 child:Text("Interior Service",
@@ -64,9 +70,15 @@ class CategoryPage extends StatelessWidget {
                               bottom: 0, // Align the container to the bottom
                               child: Container(
                                 alignment: Alignment.center,
-                                color: Colors.white,
                                 width: 130,
                                 height: 50,
+                                decoration: BoxDecoration(
+                                  color: Color(0XFFFFFFFF),
+                                  borderRadius: const BorderRadius.only(
+                                    bottomRight: Radius.circular(12),
+                                    bottomLeft: Radius.circular(12),
+                                  ),
+                                ),
                                 child:Text("Exterior Service",
                                     style: TextStyle(color:Color(0XFF005797),
                                         fontSize:12,
@@ -88,8 +100,13 @@ class CategoryPage extends StatelessWidget {
                               bottom: 0, // Align the container to the bottom
                               child: Container(
                                 alignment: Alignment.center,
-                                color: Colors.white,
-                                width: 130,
+                                decoration: BoxDecoration(
+                                  color: Color(0XFFFFFFFF),
+                                  borderRadius: const BorderRadius.only(
+                                    bottomRight: Radius.circular(12),
+                                    bottomLeft: Radius.circular(12),
+                                  ),
+                                ),                                width: 130,
                                 height: 50,
                                 child:Text("Interior + Exterior",
                                     style: TextStyle(color:Color(0XFF005797),
@@ -112,8 +129,13 @@ class CategoryPage extends StatelessWidget {
                               bottom: 0, // Align the container to the bottom
                               child: Container(
                                 alignment: Alignment.center,
-                                color: Colors.white,
-                                width: 130,
+                                decoration: BoxDecoration(
+                                  color: Color(0XFFFFFFFF),
+                                  borderRadius: const BorderRadius.only(
+                                    bottomRight: Radius.circular(12),
+                                    bottomLeft: Radius.circular(12),
+                                  ),
+                                ),                                width: 130,
                                 height: 50,
                                 child:Text("Deep Cleaning",
                                     style: TextStyle(color:Color(0XFF005797),
@@ -136,8 +158,13 @@ class CategoryPage extends StatelessWidget {
                               bottom: 0, // Align the container to the bottom
                               child: Container(
                                 alignment: Alignment.center,
-                                color: Colors.white,
-                                width: 130,
+                                decoration: BoxDecoration(
+                                  color: Color(0XFFFFFFFF),
+                                  borderRadius: const BorderRadius.only(
+                                    bottomRight: Radius.circular(12),
+                                    bottomLeft: Radius.circular(12),
+                                  ),
+                                ),                                width: 130,
                                 height: 50,
                                 child:Text("Monthly Subscription",
                                     style: TextStyle(color:Color(0XFF005797),
@@ -160,8 +187,13 @@ class CategoryPage extends StatelessWidget {
                               bottom: 0, // Align the container to the bottom
                               child: Container(
                                 alignment: Alignment.center,
-                                color: Colors.white,
-                                width: 130,
+                                decoration: BoxDecoration(
+                                  color: Color(0XFFFFFFFF),
+                                  borderRadius: const BorderRadius.only(
+                                    bottomRight: Radius.circular(12),
+                                    bottomLeft: Radius.circular(12),
+                                  ),
+                                ),                                width: 130,
                                 height: 50,
                                 child:Text("Ceramic Coating",
                                     style: TextStyle(color:Color(0XFF005797),
@@ -189,10 +221,15 @@ class CategoryPage extends StatelessWidget {
       leadingWidth: 40,
       leading: Padding(
           padding: EdgeInsets.only(left: 20),
-          child: Image.asset(
-            "assets/images/backbutton.png",
-            width: 20,
-            height: 20,
+          child: GestureDetector(
+            onTap: () {
+              Get.offAllNamed("/homenew");
+            },
+            child: Image.asset(
+              "assets/images/backbutton.png",
+              width: 20,
+              height: 20,
+            ),
           )),
       centerTitle: true,
       title: Text("Category",
