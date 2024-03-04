@@ -36,12 +36,12 @@ class ProfilePage extends StatelessWidget {
               Container(
                 alignment: Alignment.center,
                 width: 305,
-                height: 69,
+                height: 50,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all( Radius.circular(25.0)),
                 ),
-                child:Text("Email Id",style: TextStyle(color:Color(0XFF164378),fontSize:25,fontFamily:"PoppinsRegular"))
+                child:Text("Email Id",style: TextStyle(color:Color(0XFF164378),fontSize:20,fontFamily:"PoppinsRegular"))
               ),
 
               SizedBox(height: 25),
@@ -49,12 +49,12 @@ class ProfilePage extends StatelessWidget {
               Container(
                   alignment: Alignment.center,
                   width: 305,
-                  height: 69,
+                  height: 50,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all( Radius.circular(25.0)),
                   ),
-                  child:Text("Phone",style: TextStyle(color:Color(0XFF164378),fontSize:25,fontFamily:"PoppinsRegular"))
+                  child:Text("Phone",style: TextStyle(color:Color(0XFF164378),fontSize:20,fontFamily:"PoppinsRegular"))
               ),
 
               SizedBox(height: 25),
@@ -62,12 +62,12 @@ class ProfilePage extends StatelessWidget {
               Container(
                   alignment: Alignment.center,
                   width: 305,
-                  height: 69,
+                  height: 50,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all( Radius.circular(25.0)),
                   ),
-                  child:Text("Pin Code",style: TextStyle(color:Color(0XFF164378),fontSize:25,fontFamily:"PoppinsRegular"))
+                  child:Text("Pin Code",style: TextStyle(color:Color(0XFF164378),fontSize:20,fontFamily:"PoppinsRegular"))
               ),
 
               SizedBox(height: 40),

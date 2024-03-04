@@ -60,6 +60,8 @@ class SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           height: double.maxFinite,
           color:  const Color(0XFF164378),
           child:  Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 60),
               Text("Welcome",style: TextStyle(color:Color(0XFFFFFFFF),fontSize:25,fontFamily:"Cinzel",fontWeight: FontWeight.bold)),
