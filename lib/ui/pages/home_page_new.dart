@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -169,10 +171,10 @@ class HomePageNew extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Padding(
-                      padding: EdgeInsets.all(20),
-                      child: categoryWidget(context)),
-                  Padding(padding: EdgeInsets.only(right: 20,left: 20),child: serviceWidget(context)),
+                  Padding(padding: EdgeInsets.all(20), child: categoryWidget(context)),
+                  serviceWidget(context),
+                  testimonialsWidget(context),
+                  clientReviewWidget(context),
                   SizedBox(height: 50),
                 ],
               ),
@@ -204,12 +206,169 @@ class HomePageNew extends StatelessWidget {
     );
   }*/
 
+
+  Widget clientReviewWidget(BuildContext context) {
+    return GetBuilder<HomeController>(builder: (ctrl) {
+      return Column(
+        children: [
+          SizedBox(height: 20),
+          Text("What clients say",
+              style: TextStyle(
+                  color: Color(0XFF005797),
+                  fontSize: 18,
+                  fontFamily: "PoppinsSemiBold")),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              width: 850,
+              height: 150,
+              child: Column(
+                children: [
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        height: 115,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          color: Color(0XFFB5F446),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            bottomRight: Radius.circular(25),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            Text("Contributes to the society",
+                                style: TextStyle(
+                                    color: Color(0XFF005797),
+                                    fontSize: 10,
+                                    fontFamily: "PoppinsSemiBold")),
+                          ],
+                        ),
+                      ),
+                      /*Container(
+                        height: 115,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          color: Color(0XFFB5F446),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            bottomRight: Radius.circular(25),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 115,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          color: Color(0XFFB5F446),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            bottomRight: Radius.circular(25),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 115,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          color: Color(0XFFB5F446),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            bottomRight: Radius.circular(25),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 115,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          color: Color(0XFFB5F446),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            bottomRight: Radius.circular(25),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 115,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          color: Color(0XFFB5F446),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            bottomRight: Radius.circular(25),
+                          ),
+                        ),
+                      ),*/
+                    ],
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
+      );
+    });
+  }
+
+  Widget testimonialsWidget(BuildContext context) {
+    return GetBuilder<HomeController>(builder: (ctrl) {
+      return Column(
+        children: [
+          SizedBox(height: 20),
+          Text("Testimonials",
+              style: TextStyle(
+                  color: Color(0XFF005797),
+                  fontSize: 18,
+                  fontFamily: "PoppinsSemiBold")),
+        SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Container(
+          height: 150,
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image.asset(
+                    "assets/images/testimonialsa.png",
+                    fit: BoxFit.fill,
+                    height: 120,
+                    width: 193,
+                  ),
+                  Image.asset(
+                    "assets/images/testimonialsb.png",
+                    fit: BoxFit.fill,
+                    height: 115,
+                    width: 193,
+                  ),
+                  Image.asset(
+                    "assets/images/testimonialsc.png",
+                    fit: BoxFit.fill,
+                    height: 123,
+                    width: 193,
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      )
+        ],
+      );
+    });
+  }
+
   Widget serviceWidget(BuildContext context) {
     return GetBuilder<HomeController>(builder: (ctrl) {
       return Container(
         width: MediaQuery.of(context).size.width,
         height: 250,
-        decoration: BoxDecoration(
+        /*decoration: BoxDecoration(
             color: Color(0XFFFFFFFF),
             boxShadow: [
               BoxShadow(
@@ -217,7 +376,7 @@ class HomePageNew extends StatelessWidget {
                 blurRadius: 20,
                 color: Colors.blueGrey.withOpacity(0.6),
               )
-            ]),
+            ]),*/
         child: Column(
           children: [
             SizedBox(height: 20),
@@ -271,15 +430,15 @@ class HomePageNew extends StatelessWidget {
                     Image.asset(
                       "assets/images/doorstepservices.png",
                       fit: BoxFit.fill,
-                      height: 136,
-                      width: 120,
+                      height: 176,
+                      width: 160,
                     ),
                     Positioned(
                       bottom: 0,
-                      left: 10,
+                      left: 14,
                       child: Container(
                         height: 65,
-                        width: 100,
+                        width: 132,
                         color: Colors.black.withOpacity(0.75),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
