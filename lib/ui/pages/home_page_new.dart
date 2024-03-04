@@ -669,7 +669,6 @@ class HomePageNew extends StatelessWidget {
   Widget serviceWidget(BuildContext context) {
     return GetBuilder<HomeController>(builder: (ctrl) {
       return Container(
-        width: MediaQuery.of(context).size.width,
         height: 300,
         /*decoration: BoxDecoration(
             color: Color(0XFFFFFFFF),
@@ -688,118 +687,124 @@ class HomePageNew extends StatelessWidget {
                     color: Color(0XFF005797),
                     fontSize: 18,
                     fontFamily: "PoppinsSemiBold")),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Stack(
-                  children: [
-                    Image.asset(
-                      "assets/images/chooseandscheduleservices.png",
-                      fit: BoxFit.fill,
-                      height: 136,
-                      width: 113,
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      left: 15.50,
-                      child: Container(
-                        height: 65,
-                        width: 100,
-                        color: Colors.black.withOpacity(0.75),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Choose Services",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white)),
-                            Image.asset(
-                              "assets/images/splasharrow.png",
-                              fit: BoxFit.fill,
-                              height: 24,
-                              width: 34,
-                            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Column(
+                children: [
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Stack(
+                        children: [
+                          Image.asset(
+                            "assets/images/chooseandscheduleservices.png",
+                            fit: BoxFit.fill,
+                            height: 136,
+                            width: 113,
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            left: 15.50,
+                            child: Container(
+                              height: 65,
+                              width: 100,
+                              color: Colors.black.withOpacity(0.75),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Choose Services",
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white)),
+                                  Image.asset(
+                                    "assets/images/splasharrow.png",
+                                    fit: BoxFit.fill,
+                                    height: 24,
+                                    width: 34,
+                                  ),
 
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                Stack(
-                  children: [
-                    Image.asset(
-                      "assets/images/doorstepservices.png",
-                      fit: BoxFit.fill,
-                      height: 176,
-                      width: 160,
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      left: 14,
-                      child: Container(
-                        height: 65,
-                        width: 132,
-                        color: Colors.black.withOpacity(0.75),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Doorstep Services",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white)),
-                            Image.asset(
-                              "assets/images/splasharrow.png",
-                              fit: BoxFit.fill,
-                              height: 24,
-                              width: 34,
+                                ],
+                              ),
                             ),
-
-                          ],
-                        ),
+                          )
+                        ],
                       ),
-                    )
-                  ],
-                ),
-                Stack(
-                  children: [
-                    Image.asset(
-                      "assets/images/payonlineorcod.png",
-                      fit: BoxFit.fill,
-                      height: 136,
-                      width: 113,
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      child: Container(
-                        height: 65,
-                        width: 98,
-                        color: Colors.black.withOpacity(0.75),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Pay Online",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white)),
-                            Image.asset(
-                              "assets/images/splasharrow.png",
-                              fit: BoxFit.fill,
-                              height: 24,
-                              width: 34,
+                      Stack(
+                        children: [
+                          Image.asset(
+                            "assets/images/doorstepservices.png",
+                            fit: BoxFit.fill,
+                            height: 176,
+                            width: 160,
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            left: 14,
+                            child: Container(
+                              height: 65,
+                              width: 132,
+                              color: Colors.black.withOpacity(0.75),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Doorstep Services",
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white)),
+                                  Image.asset(
+                                    "assets/images/splasharrow.png",
+                                    fit: BoxFit.fill,
+                                    height: 24,
+                                    width: 34,
+                                  ),
+
+                                ],
+                              ),
                             ),
-
-                          ],
-                        ),
+                          )
+                        ],
                       ),
-                    )
-                  ],
-                ),
-              ],
+                      Stack(
+                        children: [
+                          Image.asset(
+                            "assets/images/payonlineorcod.png",
+                            fit: BoxFit.fill,
+                            height: 136,
+                            width: 113,
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            child: Container(
+                              height: 65,
+                              width: 98,
+                              color: Colors.black.withOpacity(0.75),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Pay Online",
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white)),
+                                  Image.asset(
+                                    "assets/images/splasharrow.png",
+                                    fit: BoxFit.fill,
+                                    height: 24,
+                                    width: 34,
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  )],
+              ),
             ),
             SizedBox(height: 15),
             Row(

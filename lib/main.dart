@@ -16,7 +16,11 @@ import 'controllers/home_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    systemNavigationBarColor: Color(0XFFB5F446), // Set the background color here
+    systemNavigationBarIconBrightness: Brightness.dark, // Set icon color
+  ));
 
   GetStorage.init();
   // await Firebase.initializeApp(
