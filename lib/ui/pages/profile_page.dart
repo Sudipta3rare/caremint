@@ -16,69 +16,71 @@ class ProfilePage extends StatelessWidget {
           width:double.maxFinite,
           height: double.maxFinite,
           color:  const Color(0XFF164378),
-          child:  Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                 // border: Border.all(color: Colors.white, width: 2.0),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset('assets/images/profilepicture.png',height: 200, width: 200,
-                    fit: BoxFit.cover) // Replace 'default_image.png' with your actual default image asset path
-                ),
-              ),
-              Text("Username",style: TextStyle(color:Colors.white,fontSize:25,fontFamily:"PoppinsRegular")),
-              SizedBox(height: 50),
-              Container(
-                alignment: Alignment.center,
-                width: 305,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all( Radius.circular(25.0)),
-                ),
-                child:Text("Email Id",style: TextStyle(color:Color(0XFF164378),fontSize:20,fontFamily:"PoppinsRegular"))
-              ),
-
-              SizedBox(height: 25),
-
-              Container(
-                  alignment: Alignment.center,
-                  width: 305,
-                  height: 50,
+          child:  SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all( Radius.circular(25.0)),
+                    borderRadius: BorderRadius.circular(100),
+                    // border: Border.all(color: Colors.white, width: 2.0),
                   ),
-                  child:Text("Phone",style: TextStyle(color:Color(0XFF164378),fontSize:20,fontFamily:"PoppinsRegular"))
-              ),
-
-              SizedBox(height: 25),
-
-              Container(
-                  alignment: Alignment.center,
-                  width: 305,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all( Radius.circular(25.0)),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.asset('assets/images/profilepicture.png',height: 200, width: 200,
+                          fit: BoxFit.cover) // Replace 'default_image.png' with your actual default image asset path
                   ),
-                  child:Text("Pin Code",style: TextStyle(color:Color(0XFF164378),fontSize:20,fontFamily:"PoppinsRegular"))
-              ),
+                ),
+                Text("Username",style: TextStyle(color:Colors.white,fontSize:25,fontFamily:"PoppinsRegular")),
+                SizedBox(height: 50),
+                Container(
+                    alignment: Alignment.center,
+                    width: 305,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all( Radius.circular(25.0)),
+                    ),
+                    child:Text("Email Id",style: TextStyle(color:Color(0XFF164378),fontSize:20,fontFamily:"PoppinsRegular"))
+                ),
 
-              SizedBox(height: 40),
+                SizedBox(height: 25),
 
-              Divider(
-                  indent: 135,
-                  endIndent: 135,
-                  color: Colors.white),
-            ],
+                Container(
+                    alignment: Alignment.center,
+                    width: 305,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all( Radius.circular(25.0)),
+                    ),
+                    child:Text("Phone",style: TextStyle(color:Color(0XFF164378),fontSize:20,fontFamily:"PoppinsRegular"))
+                ),
 
-          ),
+                SizedBox(height: 25),
+
+                Container(
+                    alignment: Alignment.center,
+                    width: 305,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all( Radius.circular(25.0)),
+                    ),
+                    child:Text("Pin Code",style: TextStyle(color:Color(0XFF164378),fontSize:20,fontFamily:"PoppinsRegular"))
+                ),
+
+                SizedBox(height: 40),
+
+                Divider(
+                    indent: 135,
+                    endIndent: 135,
+                    color: Colors.white),
+              ],
+
+            ),
+          )
         ),
         bottomNavigationBar: CustomBottomBar(),
       ),

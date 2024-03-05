@@ -19,199 +19,80 @@ class CategoryPage extends StatelessWidget {
           color: const Color(0XFF164378),
           child: Column(
             children: [
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(left: 15),
-                  child: GridView(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.90,
-                    mainAxisSpacing: 0.10),
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              "assets/images/interiorimg.png",
-                              fit: BoxFit.fill,
-                            ),
-                            Positioned(
-                              bottom: 0, // Align the container to the bottom
-                              child: Container(
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: Color(0XFFFFFFFF),
-                                  borderRadius: const BorderRadius.only(
-                                    bottomRight: Radius.circular(12),
-                                    bottomLeft: Radius.circular(12),
-                                  ),
-                                ),
-                                width: 130,
-                                height: 50,
-                                child:Text("Interior Service",
-                                    style: TextStyle(color:Color(0XFF005797),
-                                        fontSize:12,
-                                        fontFamily:"PoppinsSemiBold"),textAlign: TextAlign.center),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              "assets/images/exteriorimg.png",
-                              fit: BoxFit.fill,
-                            ),
-                            Positioned(
-                              bottom: 0, // Align the container to the bottom
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: 130,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: Color(0XFFFFFFFF),
-                                  borderRadius: const BorderRadius.only(
-                                    bottomRight: Radius.circular(12),
-                                    bottomLeft: Radius.circular(12),
-                                  ),
-                                ),
-                                child:Text("Exterior Service",
-                                    style: TextStyle(color:Color(0XFF005797),
-                                        fontSize:12,
-                                        fontFamily:"PoppinsSemiBold"),textAlign: TextAlign.center),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              "assets/images/interiorandexteriorimg.png",
-                              fit: BoxFit.fill,
-                            ),
-                            Positioned(
-                              bottom: 0, // Align the container to the bottom
-                              child: Container(
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: Color(0XFFFFFFFF),
-                                  borderRadius: const BorderRadius.only(
-                                    bottomRight: Radius.circular(12),
-                                    bottomLeft: Radius.circular(12),
-                                  ),
-                                ),                                width: 130,
-                                height: 50,
-                                child:Text("Interior + Exterior",
-                                    style: TextStyle(color:Color(0XFF005797),
-                                        fontSize:12,
-                                        fontFamily:"PoppinsSemiBold"),textAlign: TextAlign.center),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              "assets/images/deepcleaningimg.png",
-                              fit: BoxFit.fill,
-                            ),
-                            Positioned(
-                              bottom: 0, // Align the container to the bottom
-                              child: Container(
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: Color(0XFFFFFFFF),
-                                  borderRadius: const BorderRadius.only(
-                                    bottomRight: Radius.circular(12),
-                                    bottomLeft: Radius.circular(12),
-                                  ),
-                                ),                                width: 130,
-                                height: 50,
-                                child:Text("Deep Cleaning",
-                                    style: TextStyle(color:Color(0XFF005797),
-                                        fontSize:12,
-                                        fontFamily:"PoppinsSemiBold"),textAlign: TextAlign.center),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              "assets/images/monthlysubimg.png",
-                              fit: BoxFit.fill,
-                            ),
-                            Positioned(
-                              bottom: 0, // Align the container to the bottom
-                              child: Container(
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: Color(0XFFFFFFFF),
-                                  borderRadius: const BorderRadius.only(
-                                    bottomRight: Radius.circular(12),
-                                    bottomLeft: Radius.circular(12),
-                                  ),
-                                ),                                width: 130,
-                                height: 50,
-                                child:Text("Monthly Subscription",
-                                    style: TextStyle(color:Color(0XFF005797),
-                                        fontSize:12,
-                                        fontFamily:"PoppinsSemiBold"),textAlign: TextAlign.center),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Stack(
-                          children: [
-                            Image.asset(
-                              "assets/images/ceramicimg.png",
-                              fit: BoxFit.fill,
-                            ),
-                            Positioned(
-                              bottom: 0, // Align the container to the bottom
-                              child: Container(
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: Color(0XFFFFFFFF),
-                                  borderRadius: const BorderRadius.only(
-                                    bottomRight: Radius.circular(12),
-                                    bottomLeft: Radius.circular(12),
-                                  ),
-                                ),                                width: 130,
-                                height: 50,
-                                child:Text("Ceramic Coating",
-                                    style: TextStyle(color:Color(0XFF005797),
-                                        fontSize:12,
-                                        fontFamily:"PoppinsSemiBold"),textAlign: TextAlign.center),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              )
+              SizedBox(height: 30),
+              categoryWidget(context)
             ],
           ),
         ),
         bottomNavigationBar: CustomBottomBar(),
+      ),
+    );
+  }
+
+  Widget categoryWidget(BuildContext context) {
+    return Container(
+      child: Expanded(
+        child: Padding(
+          padding: EdgeInsets.only(left: 15),
+          child: GridView(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.90,
+              mainAxisSpacing: 0.10,
+            ),
+            children: <Widget>[
+              buildCategoryItem(context,"assets/images/interiorimg.png", "Interior Service"),
+              buildCategoryItem(context,"assets/images/exteriorimg.png", "Exterior Service"),
+              buildCategoryItem(context,"assets/images/interiorandexteriorimg.png", "Interior + Exterior"),
+              buildCategoryItem(context,"assets/images/deepcleaningimg.png", "Deep Cleaning"),
+              buildCategoryItem(context,"assets/images/monthlysubimg.png", "Monthly Subscription"),
+              buildCategoryItem(context,"assets/images/ceramicimg.png", "Ceramic Coating"),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildCategoryItem(BuildContext context, String imagePath, String label) {
+    double containerHeight = MediaQuery.of(context).size.height * 0.3; // Adjust as needed
+    double containerWidth = MediaQuery.of(context).size.width * 0.4; // Adjust as needed
+
+    return Padding(
+      padding: EdgeInsets.all(10), // Adjust as needed
+      child: Stack(
+        children: [
+          Image.asset(
+            imagePath,
+            fit: BoxFit.fill, // Use BoxFit.cover to fill the container
+            height: containerHeight,
+            width: containerWidth,
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              alignment: Alignment.center,
+              width: containerWidth,
+              height: 50,
+              decoration: BoxDecoration(
+                color: Color(0XFFFFFFFF),
+                borderRadius: const BorderRadius.only(
+                  bottomRight: Radius.circular(12),
+                  bottomLeft: Radius.circular(12),
+                ),
+              ),
+              child: Text(
+                label,
+                style: TextStyle(
+                  color: Color(0XFF005797),
+                  fontSize: 12,
+                  fontFamily: "PoppinsSemiBold",
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -240,4 +121,8 @@ class CategoryPage extends StatelessWidget {
           )),
     );
   }
+
 }
+
+
+

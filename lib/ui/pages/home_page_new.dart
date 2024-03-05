@@ -873,9 +873,10 @@ class HomePageNew extends StatelessWidget {
                     Image.asset(
                       "assets/images/interior.png",
                       fit: BoxFit.fill,
-                      height: 80,
-                      width: 80,
+                      height: 63,
+                      width: 63,
                     ),
+                    SizedBox(height: 5),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Text("Interior Service",
@@ -891,9 +892,10 @@ class HomePageNew extends StatelessWidget {
                     Image.asset(
                       "assets/images/exterior.png",
                       fit: BoxFit.fill,
-                      height: 80,
-                      width: 80,
+                      height: 63,
+                      width: 63,
                     ),
+                    SizedBox(height: 5),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Text("Exterior Service",
@@ -909,9 +911,10 @@ class HomePageNew extends StatelessWidget {
                     Image.asset(
                       "assets/images/interiorandexterior.png",
                       fit: BoxFit.fill,
-                      height: 80,
-                      width: 80,
+                      height: 63,
+                      width: 63,
                     ),
+                    SizedBox(height: 5),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Text("Interior + Exterior",
@@ -930,6 +933,7 @@ class HomePageNew extends StatelessWidget {
                       height: 63,
                       width: 63,
                     ),
+                    SizedBox(height: 5),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Text("Deep Cleaning",
@@ -948,9 +952,10 @@ class HomePageNew extends StatelessWidget {
                       height: 63,
                       width: 63,
                     ),
+                    SizedBox(height: 5),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: Text("Monthly Subscription",
+                      child: Text(textAlign: TextAlign.center,"Monthly Subscription",
                           style: GoogleFonts.poppins(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
@@ -966,6 +971,7 @@ class HomePageNew extends StatelessWidget {
                       height: 63,
                       width: 63,
                     ),
+                    SizedBox(height: 5),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Text("Ceramic Coating",
@@ -1041,7 +1047,6 @@ class HomePageNew extends StatelessWidget {
                 ),
                 hint: Text(
                   "Select Category",
-                  style: AppStyle().paraTextStyle,
                 ),
                 value: ctrl.currentItem,
                 items: ctrl.selectItems
