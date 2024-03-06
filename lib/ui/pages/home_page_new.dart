@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:caremint/ui/pages/testimonial_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -9,18 +8,194 @@ import '../../../bottombar/custom_bottom_bar.dart';
 import '../../constants/app_colors.dart';
 import '../../controllers/categories_controller/exterior_service_controller.dart';
 import '../../controllers/home_controller.dart';
-import '../../controllers/home_page_new_controller.dart';
+import '../../controllers/my_orders_controller/my_order_controller.dart';
+import '../../models/userDataModel.dart';
 import '../components/custom_button.dart';
 import '../widget/login_snackbar.dart';
+import '../widget/signup_snackbar.dart';
 
 class HomePageNew extends StatelessWidget {
-  final HomePageNewController controller = Get.put(HomePageNewController());
+  final HomeController ctrl = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
+        endDrawer: Drawer(
+          width: MediaQuery.of(context).size.width * 0.5,
+          surfaceTintColor: Colors.blue[900],
+          backgroundColor: Colors.blue[50],
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+
+                  // borderRadius: BorderRadius.circular(10),
+                    gradient: LinearGradient(colors: [
+                      AppStyle().gradientColor1,
+                      AppStyle().gradientColor2
+                    ])),
+                child: Visibility(
+                  child: Center(
+                    child: Text("${ctrl.showName(ctrl.userDetails)}",style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                  ),
+                  visible: ctrl.isLoggedIn.value,
+                  replacement: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Account',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                                onTap: () {
+                                  LoginSnackBar().loginSnackBar(context);
+                                },
+                                child: CustomButton()
+                                    .customButtonWhiteB(context, "Log In")),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  SignUpSnackBar().signUpSnackBar(context);
+                                },
+                                child: CustomButton()
+                                    .customButtonWhiteB(context, "Sign Up")),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              GetBuilder<MyOrderController>(
+                  builder: (ordCtrl) {
+                    return Visibility(
+                      visible: ctrl.isLoggedIn.value,
+                      child: ListTile(
+                        title: const Text('My Orders'),
+                        onTap: () {
+                          // ordCtrl.isLoading.value = true;
+
+                          // ordCtrl.getUserOrders();
+                          // Update the state of the app.
+                          // ...
+                          ordCtrl.gotoMyOrders();
+                        },
+                      ),
+                    );
+                  }
+              ),
+
+              // Note: For blogs Tile
+
+              // ListTile(
+              //   title: const Text('Blogs'),
+              //   onTap: () {
+              //     // Update the state of the app.
+              //     // ...
+              //     Get.to(BlogPage());
+              //   },
+              // ),
+
+              ListTile(
+                title: const Text('Testimonials'),
+                onTap: () {
+                  Get.to(Testimonials());
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              Visibility(
+                visible: ctrl.isLoggedIn.value,
+                child: ListTile(
+                  title: const Text('Logout'),
+                  onTap: () {
+                    Get.defaultDialog(
+                      title: 'Account',
+                      titleStyle: TextStyle(
+                        color: AppStyle().gradientColor2, // Replace with your desired color
+                      ),
+                      middleTextStyle: AppStyle().subHeadBlueTextStyle,
+                      content: Text(
+                        'Do you want to exit?',
+                        style: AppStyle().paraTextStyle,
+                      ),
+                      textCancel: 'Cancel',
+                      textConfirm: 'OK',
+                      buttonColor: AppStyle().gradientColor3,
+                      cancelTextColor: AppStyle().gradientColor1,
+                      confirmTextColor: AppStyle().gradientColor1,
+                      onCancel: () {
+                        Get.back();
+                      },
+                      onConfirm: () async {
+                        ctrl.userDetails = UserDataModel();
+                        ctrl.store.write("user_token", "");
+                        ctrl.store.write("user_name", "");
+                        ctrl.store.write("user_email","");
+                        ctrl.store.write("user_pincode", "");
+                        ctrl.store.write("user_role", "");
+                        ctrl.store.write("user_phone", "");
+                        ctrl.isLoggedIn.value = false;
+                        Get.offAllNamed('/home');
+                        ctrl.update();
+                        // perform logout
+                        //   print(ctrl.store.read("user_token"));
+                        // ApiRequest(url: Constant.baseUrl+"/api/user-logout", frmData: null).postToken(
+                        //     beforeSend: () => {},
+                        //     onSuccess: (response){
+                        //   print(response.data);
+                        //       ctrl.userDetails = UserDataModel();
+                        //       ctrl.store.write("user_token", "");
+                        //       ctrl.store.write("user_name", "");
+                        //       ctrl.store.write("user_email","");
+                        //       ctrl.store.write("user_pincode", "");
+                        //       ctrl.store.write("user_role", "");
+                        //       ctrl.store.write("user_phone", "");
+                        //       ctrl.isLoggedIn.value =false;
+                        //       Get.offAllNamed('/home');
+                        //     ctrl.update();
+                        //     },
+                        //     onError: (error) => {
+                        //       print("error")
+                        //     });
+
+
+
+
+
+                        // await auth.signOut().then((value) => Get.offAllNamed('/home'));
+
+
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
         body: Container(
             width: double.maxFinite,
             height: double.maxFinite,
