@@ -22,6 +22,37 @@ class HomePageNew extends StatelessWidget {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(50.0),
+          child: AppBar(
+            elevation: 0,
+            actions: [
+              Builder(
+                builder: (context) => IconButton(
+                  icon: Image.asset(
+                    "assets/images/drawernavicon.png",
+                    width: 30,
+                    height: 30,
+                    color: AppStyle().gradientColor1,
+                  ),
+                  onPressed: () {
+                    Scaffold.of(context).openEndDrawer();
+                  },
+                ),
+              ),
+            ],
+            backgroundColor: Colors.white,
+            title: Row(
+              children: [
+                Image.asset(
+                  "assets/images/logo.png",
+                  width: 80,
+                  height: 80,
+                ),
+              ],
+            ),
+          ),
+        ),
         endDrawer: Drawer(
           width: MediaQuery.of(context).size.width * 0.5,
           surfaceTintColor: Colors.blue[900],
@@ -208,24 +239,6 @@ class HomePageNew extends StatelessWidget {
                       Image.asset(
                         "assets/images/homepageheader.png",
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 2, right: 20, top: 30),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image.asset(
-                              "assets/images/logo.png",
-                              width: 90,
-                              height: 41.29,
-                            ),
-                            Image.asset(
-                              "assets/images/drawernavicon.png",
-                              width: 30,
-                              height: 30,
-                            ),
-                          ],
-                        ),
-                      )
                     ],
                   ),
                   Padding(

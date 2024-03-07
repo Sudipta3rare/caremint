@@ -14,9 +14,9 @@ class AppStyle{
   );
 
 
-  static  Color buttonColor= Colors.amber[800]!;
-  Color gradientColor1 = Colors.amber[500]!;
-  Color gradientColor2 = Colors.amber[800]!;
+  static  Color buttonColor= Color(0XFF609404)!;
+  Color gradientColor1 = Color(0XFFB5F446)!;
+  Color gradientColor2 = Color(0XFF609404)!;
   Color gradientColor3 = Colors.blue[50]!;
   static Color backgroundColor = Colors.blue[50]!;
   static Color blue900 = Colors.blue[900]!;

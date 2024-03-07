@@ -29,7 +29,7 @@ class LoginSnackBar {
     return Get.dialog(
         useSafeArea: false,
         AlertDialog(
-          backgroundColor: Colors.blue[50],
+          backgroundColor: Colors.white,
           shadowColor: Colors.blue[900]?.withOpacity(0.5),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0))),
@@ -98,7 +98,7 @@ class LoginSnackBar {
                       decoration: InputDecoration(
                         prefixIcon: Icon(
                           Icons.email,
-                          color: AppStyle.buttonColor,
+                          color: Color(0XFF609404),
                         ),
                         contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
                         labelText: "Email",
@@ -128,7 +128,7 @@ class LoginSnackBar {
                       decoration: InputDecoration(
                         prefixIcon: Icon(
                           Icons.lock,
-                          color: AppStyle.buttonColor,
+                          color: Color(0XFF609404),
                         ),
                         contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
                         labelText: "Password",
