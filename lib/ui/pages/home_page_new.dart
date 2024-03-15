@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:caremint/controllers/testimonials_controller.dart';
 import 'package:caremint/ui/pages/testimonial_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,7 @@ import '../widget/signup_snackbar.dart';
 
 class HomePageNew extends StatelessWidget {
   final HomeController ctrl = Get.put(HomeController());
+  final TestimonialsController testimonialsCtrl = Get.put(TestimonialsController());
 
   @override
   Widget build(BuildContext context) {
@@ -802,22 +805,22 @@ class HomePageNew extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Image.asset(
-                    "assets/images/testimonialsa.png",
+                  CachedNetworkImage(
+                    imageUrl:testimonialsCtrl.image ?? "",
                     fit: BoxFit.fill,
                     height: 120,
                     width: 193,
                   ),
-                  Image.asset(
-                    "assets/images/testimonialsb.png",
+                  CachedNetworkImage(
+                    imageUrl:testimonialsCtrl.image ?? "",
                     fit: BoxFit.fill,
-                    height: 115,
+                    height: 120,
                     width: 193,
                   ),
-                  Image.asset(
-                    "assets/images/testimonialsc.png",
+                  CachedNetworkImage(
+                    imageUrl:testimonialsCtrl.image ?? "",
                     fit: BoxFit.fill,
-                    height: 123,
+                    height: 120,
                     width: 193,
                   ),
                 ],

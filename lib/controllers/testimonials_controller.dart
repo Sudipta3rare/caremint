@@ -8,6 +8,10 @@ import '../ui/pages/testimonial_page.dart';
 class TestimonialsController extends GetxController {
   RxList<Widget> testimonials = <Widget>[].obs;
 
+  String description = "";
+  String name = "";
+  String image = "";
+
   @override
   void onInit() {
     fetchTestimonials();
@@ -29,9 +33,9 @@ class TestimonialsController extends GetxController {
       List<dynamic> body = response.data['body'];
       testimonials.clear();
       body.forEach((testimonialData) {
-        String description = testimonialData['des'];
-        String name = testimonialData['name'];
-        String image = testimonialData['img'];
+        description = testimonialData['des'];
+        name = testimonialData['name'];
+        image = testimonialData['img'];
 
         testimonials.add(testimonialCard(description, name, image));
       });
