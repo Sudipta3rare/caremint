@@ -15,9 +15,6 @@ import '../models/user_model.dart';
 class HomeController extends GetxController {
   static HomeController to = Get.find();
 
-
-
-
   var store = GetStorage();
  late  String token ;
   String currentItem = 'Category';
