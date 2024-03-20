@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:caremint/app_routes.dart';
 import 'package:caremint/controllers/testimonials_controller.dart';
+import 'package:caremint/ui/pages/categories/category_page.dart';
 import 'package:caremint/ui/pages/testimonial_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -787,75 +789,73 @@ class HomePageNew extends StatelessWidget {
   }
 
   Widget testimonialsWidget(BuildContext context) {
-    return GetBuilder<HomeController>(builder: (ctrl) {
-      return Column(
-        children: [
-          Text("Testimonials",
-              style: TextStyle(
-                  color: Color(0XFF005797),
-                  fontSize: 18,
-                  fontFamily: "PoppinsSemiBold")),
-        SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Container(
-          height: 143,
-          child: Column(
-            children: [
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  CachedNetworkImage(
-                    imageUrl:testimonialsCtrl.image ?? "",
-                    fit: BoxFit.fill,
-                    height: 120,
-                    width: 193,
-                  ),
-                  CachedNetworkImage(
-                    imageUrl:testimonialsCtrl.image ?? "",
-                    fit: BoxFit.fill,
-                    height: 120,
-                    width: 193,
-                  ),
-                  CachedNetworkImage(
-                    imageUrl:testimonialsCtrl.image ?? "",
-                    fit: BoxFit.fill,
-                    height: 120,
-                    width: 193,
-                  ),
-                ],
-              ),
-            ],
+    final TestimonialsController testimonialsCtrl = Get.put(TestimonialsController());
+    return Column(
+      children: [
+        Text(
+          "Testimonials",
+          style: TextStyle(
+            color: Color(0XFF005797),
+            fontSize: 18,
+            fontFamily: "PoppinsSemiBold",
           ),
         ),
-      ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/images/loadingindecator.png",
-                color: Color(0XFF164378),
-                width: 24,
-                height: 24,
-              ),
-              Image.asset(
-                "assets/images/loadingindecator.png",
-                color: Color(0XFFB5F446),
-                width: 24,
-                height: 24,
-              ),
-              Image.asset(
-                "assets/images/loadingindecator.png",
-                color: Color(0XFF164378),
-                width: 24,
-                height: 24,
-              ),
-            ],
-          )
-        ],
-      );
-    });
+        SizedBox(height: 10),
+        Container( // Wrap ListView.builder with Container
+          height: 150, // Specify a height for the ListView
+          child: Obx(() => ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: testimonialsCtrl.imageUrls.length,
+            itemBuilder: (context, index) {
+              return Container(
+                height: 120,
+                width: 190,
+                margin: EdgeInsets.all(8), // Add margin between images
+                decoration: BoxDecoration(
+                  color: Color(0XFFFFFF),
+                  borderRadius: BorderRadius.circular(25),
+                  border: Border.all(
+                    color: Color(0XFFB5F446),
+                    width: 2,
+                  ),
+                ),
+                child: Image.network(
+                  testimonialsCtrl.imageUrls[index],
+                  fit: BoxFit.cover,
+                ),
+              );
+            },
+          ))
+        ),
+        SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/images/loadingindecator.png",
+              color: Color(0XFF164378),
+              width: 24,
+              height: 24,
+            ),
+            Image.asset(
+              "assets/images/loadingindecator.png",
+              color: Color(0XFFB5F446),
+              width: 24,
+              height: 24,
+            ),
+            Image.asset(
+              "assets/images/loadingindecator.png",
+              color: Color(0XFF164378),
+              width: 24,
+              height: 24,
+            ),
+          ],
+        )
+      ],
+    );
   }
+
+
 
   Widget serviceWidget(BuildContext context) {
     return GetBuilder<HomeController>(builder: (ctrl) {
@@ -940,7 +940,7 @@ class HomePageNew extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("Doorstep Services",
+                                  Text("Upcoming Services",
                                       style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w600,
@@ -1031,7 +1031,7 @@ class HomePageNew extends StatelessWidget {
     return GetBuilder<HomeController>(builder: (ctrl) {
       return Container(
         width: MediaQuery.of(context).size.width,
-        height: 300,
+        height: 320,
         decoration: BoxDecoration(
             color: Color(0XFF164378),
             boxShadow: [
@@ -1053,6 +1053,7 @@ class HomePageNew extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: Colors.white)),
+            SizedBox(height: 20),
             Expanded(
                 child: GridView(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -1061,8 +1062,8 @@ class HomePageNew extends StatelessWidget {
               children: <Widget>[
                 Column(
                   children: [
-                    Image.asset(
-                      "assets/images/interior.png",
+                    Image.network(
+                ctrl.categoryList[0].img.toString(),
                       fit: BoxFit.fill,
                       height: 63,
                       width: 63,
@@ -1070,7 +1071,7 @@ class HomePageNew extends StatelessWidget {
                     SizedBox(height: 5),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: Text("Interior Service",
+                      child: Text(ctrl.categoryList[0].categoryName.toString(),
                           style: GoogleFonts.poppins(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
@@ -1080,8 +1081,8 @@ class HomePageNew extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Image.asset(
-                      "assets/images/exterior.png",
+                    Image.network(
+                       ctrl.categoryList[1].img.toString(),
                       fit: BoxFit.fill,
                       height: 63,
                       width: 63,
@@ -1089,7 +1090,7 @@ class HomePageNew extends StatelessWidget {
                     SizedBox(height: 5),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: Text("Exterior Service",
+                      child: Text(ctrl.categoryList[1].categoryName.toString(),
                           style: GoogleFonts.poppins(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
@@ -1099,8 +1100,8 @@ class HomePageNew extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Image.asset(
-                      "assets/images/interiorandexterior.png",
+                    Image.network(
+                      ctrl.categoryList[2].img.toString(),
                       fit: BoxFit.fill,
                       height: 63,
                       width: 63,
@@ -1108,7 +1109,26 @@ class HomePageNew extends StatelessWidget {
                     SizedBox(height: 5),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: Text("Interior + Exterior",
+                      child: Text(ctrl.categoryList[2].categoryName.toString(),
+                          style: GoogleFonts.poppins(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white),textAlign: TextAlign.center,),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Image.network(
+                      ctrl.categoryList[3].img.toString(),
+                      fit: BoxFit.fill,
+                      height: 63,
+                      width: 63,
+                    ),
+                    SizedBox(height: 5),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(ctrl.categoryList[0].categoryName.toString(),
                           style: GoogleFonts.poppins(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
@@ -1118,8 +1138,8 @@ class HomePageNew extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Image.asset(
-                      "assets/images/deepcleaning.png",
+                    Image.network(
+                      ctrl.categoryList[4].img.toString(),
                       fit: BoxFit.fill,
                       height: 63,
                       width: 63,
@@ -1127,7 +1147,7 @@ class HomePageNew extends StatelessWidget {
                     SizedBox(height: 5),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: Text("Deep Cleaning",
+                      child: Text(textAlign: TextAlign.center,ctrl.categoryList[0].categoryName.toString(),
                           style: GoogleFonts.poppins(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
@@ -1137,8 +1157,8 @@ class HomePageNew extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Image.asset(
-                      "assets/images/monthlysub.png",
+                    Image.network(
+                     ctrl.categoryList[5].img.toString(),
                       fit: BoxFit.fill,
                       height: 63,
                       width: 63,
@@ -1146,26 +1166,7 @@ class HomePageNew extends StatelessWidget {
                     SizedBox(height: 5),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: Text(textAlign: TextAlign.center,"Monthly Subscription",
-                          style: GoogleFonts.poppins(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white)),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Image.asset(
-                      "assets/images/ceramic.png",
-                      fit: BoxFit.fill,
-                      height: 63,
-                      width: 63,
-                    ),
-                    SizedBox(height: 5),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text("Ceramic Coating",
+                      child: Text(ctrl.categoryList[0].categoryName.toString(),
                           style: GoogleFonts.poppins(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
@@ -1175,6 +1176,17 @@ class HomePageNew extends StatelessWidget {
                 ),
               ],
             )),
+            GestureDetector(
+              onTap: () {
+                Get.to(CategoryPage());
+              },
+              child: Text("Show All",
+                  style: GoogleFonts.poppins(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0XFF164378))),
+            ),
+            SizedBox(height: 10)
           ],
         ),
       );

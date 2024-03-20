@@ -11,6 +11,8 @@ class TestimonialsController extends GetxController {
   String description = "";
   String name = "";
   String image = "";
+  RxList<String> imageUrls = <String>[].obs;
+
 
   @override
   void onInit() {
@@ -36,6 +38,13 @@ class TestimonialsController extends GetxController {
         description = testimonialData['des'];
         name = testimonialData['name'];
         image = testimonialData['img'];
+
+        List<String> urls = body.map((testimonialData) {
+          return testimonialData['img'] as String;
+        }).toList();
+
+        // Store the image URLs
+        imageUrls.assignAll(urls);
 
         testimonials.add(testimonialCard(description, name, image));
       });
