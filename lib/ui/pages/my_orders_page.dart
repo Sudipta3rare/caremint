@@ -148,8 +148,8 @@ class MyOrdersPage extends StatelessWidget {
                       }
                   );
                 },
-                icon: Icon(Icons.border_color),
-                label: Text("Add Review"),
+                icon: Icon(Icons.border_color,color: AppStyle().gradientColor2),
+                label: Text("Add Review",style: TextStyle(color: AppStyle().gradientColor2)),
               ),
             )
 

@@ -236,12 +236,10 @@ class HomePageNew extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Stack(
-                    children: [
-                      Image.asset(
-                        "assets/images/homepageheader.png",
-                      ),
-                    ],
+                  Image.asset(
+                    width: 650,
+                    height: 450,
+                    "assets/images/homepageheader.png",
                   ),
                   Padding(
                       padding: EdgeInsets.all(20),
