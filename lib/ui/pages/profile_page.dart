@@ -49,7 +49,7 @@ class ProfilePage extends StatelessWidget {
                             width: 305,
                             height: 50,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Colors.blue[50],
                               borderRadius: BorderRadius.all(Radius.circular(
                                   25.0)),
                             ),
@@ -67,7 +67,7 @@ class ProfilePage extends StatelessWidget {
                             width: 305,
                             height: 50,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color:Colors.blue[50],
                               borderRadius: BorderRadius.all(Radius.circular(
                                   25.0)),
                             ),
@@ -84,7 +84,7 @@ class ProfilePage extends StatelessWidget {
                             width: 305,
                             height: 50,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color:Colors.blue[50],
                               borderRadius: BorderRadius.all(Radius.circular(
                                   25.0)),
                             ),
@@ -100,7 +100,7 @@ class ProfilePage extends StatelessWidget {
                         Divider(
                             indent: 135,
                             endIndent: 135,
-                            color: Colors.white),
+                            color: Colors.blue[50]),
                       ],
 
                     ),

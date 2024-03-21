@@ -42,7 +42,7 @@ class ServiceDetailCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(22),
                     color:
-                        itemIndex.isEven ? Colors.blue[900] : Colors.amber[800],
+                        itemIndex.isEven ? Colors.blue[900] : AppStyle().gradientColor2,
                     // boxShadow: [
                     //   BoxShadow(
                     //     offset: Offset(5, 10),

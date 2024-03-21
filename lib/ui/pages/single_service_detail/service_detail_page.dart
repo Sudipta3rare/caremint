@@ -1,3 +1,4 @@
+import 'package:caremint/constants/app_colors.dart';
 import 'package:caremint/controllers/single_service_controller.dart';
 import 'package:caremint/models/service_person.dart';
 import 'package:caremint/ui/components/loading_overlay_components.dart';
@@ -22,7 +23,7 @@ class SingleServiceDetail extends StatelessWidget {
         return Scaffold(
           backgroundColor: Colors.blue[900],
           appBar: AppBar(
-            // iconTheme: IconThemeData(color: AppStyle().buttonColor),
+            iconTheme: IconThemeData(color: AppStyle().gradientColor1),
             backgroundColor: Colors.blue[900],
             elevation: 0,
             // actions: [
@@ -36,7 +37,7 @@ class SingleServiceDetail extends StatelessWidget {
             //   )
             // ],
             title:Text(ssCtrl.providerName,
-            style: GoogleFonts.poppins(
+            style: GoogleFonts.poppins(color: AppStyle().gradientColor1
             ),),
 
           ),

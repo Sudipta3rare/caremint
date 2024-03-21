@@ -113,7 +113,7 @@ ApiRequest(url: '${Constant.baseUrl}/api/add-cart/${serviceId}', frmData:
   print(onError);
   Get.snackbar(
     "Error",
-    "Order failed. Please try again!",
+    "Order failed. You provide wrong pin code!",
     snackPosition: SnackPosition
         .BOTTOM,
     colorText: Color(0xffffffff),

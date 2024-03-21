@@ -29,7 +29,7 @@ class LoginSnackBar {
     return Get.dialog(
         useSafeArea: false,
         AlertDialog(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.blue[50],
           shadowColor: Colors.blue[900]?.withOpacity(0.5),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0))),

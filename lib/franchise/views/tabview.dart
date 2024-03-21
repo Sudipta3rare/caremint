@@ -45,9 +45,9 @@ class TabView extends StatelessWidget {
                       ),
                       textCancel: 'Cancel',
                       textConfirm: 'OK',
-                      buttonColor: AppStyle().gradientColor3,
-                      cancelTextColor: AppStyle().gradientColor1,
-                      confirmTextColor: AppStyle().gradientColor1,
+                      buttonColor: AppStyle.buttonColor,
+                      cancelTextColor: AppStyle().gradientColor4,
+                      confirmTextColor: AppStyle().gradientColor4,
                       onCancel: () {
                         Get.back();
                       },
@@ -106,7 +106,7 @@ class TabView extends StatelessWidget {
                       },
                     );
                   },
-                    icon: Icon(Icons.logout_outlined),
+                    icon: Icon(Icons.logout_outlined,color: AppStyle().gradientColor1),
                     iconSize: 25,
                   );
                 }
@@ -132,6 +132,8 @@ class TabView extends StatelessWidget {
 
                   insets: EdgeInsets.symmetric(vertical: 5)
               ),
+              labelColor: AppStyle().gradientColor1, // Change text color here
+              unselectedLabelColor: AppStyle().gradientColor2,
               tabs: [
                 Tab(text: "Orders"),
                 Tab(text: "Ongoind Orders",),

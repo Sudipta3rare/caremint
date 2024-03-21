@@ -159,12 +159,13 @@ class SingleOrderPage{
                               // ]),
                               CalendarDatePicker(initialDate: DateTime.now(),
                                 firstDate: DateTime.now(),
-                                lastDate: DateTime(2025),
+                                lastDate: DateTime(2030),
                                 onDateChanged: (DateTime value)
                                 {
                                   isDateSelected = true;
                                   ctrl.selectedDate.value = value;
                                   ctrl.update();  },
+
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -230,12 +231,11 @@ class SingleOrderPage{
                                               ),
                                               textCancel: 'Cancel',
                                               textConfirm: 'Place Order',
-                                              buttonColor: AppStyle()
-                                                  .gradientColor3,
+                                              buttonColor: Colors.white,
                                               cancelTextColor: AppStyle()
-                                                  .gradientColor1,
+                                                  .gradientColor2,
                                               confirmTextColor: AppStyle()
-                                                  .gradientColor1,
+                                                  .gradientColor2,
                                               onCancel: () {
                                                 Get.back();
                                               },

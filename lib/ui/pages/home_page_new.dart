@@ -20,7 +20,8 @@ import '../widget/signup_snackbar.dart';
 
 class HomePageNew extends StatelessWidget {
   final HomeController ctrl = Get.put(HomeController());
-  final TestimonialsController testimonialsCtrl = Get.put(TestimonialsController());
+  final TestimonialsController testimonialsCtrl =
+      Get.put(TestimonialsController());
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class HomePageNew extends StatelessWidget {
                     "assets/images/drawernavicon.png",
                     width: 30,
                     height: 30,
-                    color: AppStyle().gradientColor1,
+                    color: AppStyle().gradientColor2,
                   ),
                   onPressed: () {
                     Scaffold.of(context).openEndDrawer();
@@ -46,7 +47,7 @@ class HomePageNew extends StatelessWidget {
                 ),
               ),
             ],
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.blue[50],
             title: Row(
               children: [
                 Image.asset(
@@ -69,18 +70,21 @@ class HomePageNew extends StatelessWidget {
               DrawerHeader(
                 decoration: BoxDecoration(
 
-                  // borderRadius: BorderRadius.circular(10),
+                    // borderRadius: BorderRadius.circular(10),
                     gradient: LinearGradient(colors: [
-                      AppStyle().gradientColor1,
-                      AppStyle().gradientColor2
-                    ])),
+                  AppStyle().gradientColor1,
+                  AppStyle().gradientColor2
+                ])),
                 child: Visibility(
                   child: Center(
-                    child: Text("${ctrl.showName(ctrl.userDetails)}",style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                    ),),
+                    child: Text(
+                      "${ctrl.showName(ctrl.userDetails)}",
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                   visible: ctrl.isLoggedIn.value,
                   replacement: Column(
@@ -124,24 +128,22 @@ class HomePageNew extends StatelessWidget {
                   ),
                 ),
               ),
-              GetBuilder<MyOrderController>(
-                  builder: (ordCtrl) {
-                    return Visibility(
-                      visible: ctrl.isLoggedIn.value,
-                      child: ListTile(
-                        title: const Text('My Orders'),
-                        onTap: () {
-                          // ordCtrl.isLoading.value = true;
+              GetBuilder<MyOrderController>(builder: (ordCtrl) {
+                return Visibility(
+                  visible: ctrl.isLoggedIn.value,
+                  child: ListTile(
+                    title: const Text('My Orders'),
+                    onTap: () {
+                      // ordCtrl.isLoading.value = true;
 
-                          // ordCtrl.getUserOrders();
-                          // Update the state of the app.
-                          // ...
-                          ordCtrl.gotoMyOrders();
-                        },
-                      ),
-                    );
-                  }
-              ),
+                      // ordCtrl.getUserOrders();
+                      // Update the state of the app.
+                      // ...
+                      ordCtrl.gotoMyOrders();
+                    },
+                  ),
+                );
+              }),
 
               // Note: For blogs Tile
 
@@ -154,14 +156,14 @@ class HomePageNew extends StatelessWidget {
               //   },
               // ),
 
-              ListTile(
+              /*ListTile(
                 title: const Text('Testimonials'),
                 onTap: () {
                   Get.to(Testimonials());
                   // Update the state of the app.
                   // ...
                 },
-              ),
+              ),*/
               Visibility(
                 visible: ctrl.isLoggedIn.value,
                 child: ListTile(
@@ -170,7 +172,8 @@ class HomePageNew extends StatelessWidget {
                     Get.defaultDialog(
                       title: 'Account',
                       titleStyle: TextStyle(
-                        color: AppStyle().gradientColor2, // Replace with your desired color
+                        color: AppStyle()
+                            .gradientColor2, // Replace with your desired color
                       ),
                       middleTextStyle: AppStyle().subHeadBlueTextStyle,
                       content: Text(
@@ -179,9 +182,9 @@ class HomePageNew extends StatelessWidget {
                       ),
                       textCancel: 'Cancel',
                       textConfirm: 'OK',
-                      buttonColor: AppStyle().gradientColor3,
-                      cancelTextColor: AppStyle().gradientColor1,
-                      confirmTextColor: AppStyle().gradientColor1,
+                      buttonColor: AppStyle.buttonColor,
+                      cancelTextColor: AppStyle().gradientColor4,
+                      confirmTextColor: AppStyle().gradientColor4,
                       onCancel: () {
                         Get.back();
                       },
@@ -189,7 +192,7 @@ class HomePageNew extends StatelessWidget {
                         ctrl.userDetails = UserDataModel();
                         ctrl.store.write("user_token", "");
                         ctrl.store.write("user_name", "");
-                        ctrl.store.write("user_email","");
+                        ctrl.store.write("user_email", "");
                         ctrl.store.write("user_pincode", "");
                         ctrl.store.write("user_role", "");
                         ctrl.store.write("user_phone", "");
@@ -217,13 +220,7 @@ class HomePageNew extends StatelessWidget {
                         //       print("error")
                         //     });
 
-
-
-
-
                         // await auth.signOut().then((value) => Get.offAllNamed('/home'));
-
-
                       },
                     );
                   },
@@ -235,7 +232,7 @@ class HomePageNew extends StatelessWidget {
         body: Container(
             width: double.maxFinite,
             height: double.maxFinite,
-            color: const Color(0XFFFFFFF),
+            color: Colors.blue[50],
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -364,7 +361,9 @@ class HomePageNew extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Padding(padding: EdgeInsets.all(20), child: categoryWidget(context)),
+                  Padding(
+                      padding: EdgeInsets.all(20),
+                      child: categoryWidget(context)),
                   serviceWidget(context),
                   testimonialsWidget(context),
                   clientReviewWidget(context),
@@ -376,7 +375,6 @@ class HomePageNew extends StatelessWidget {
       ),
     );
   }
-
 
   Widget clientReviewWidget(BuildContext context) {
     return GetBuilder<HomeController>(builder: (ctrl) {
@@ -419,25 +417,29 @@ class HomePageNew extends StatelessWidget {
                                   width: 49,
                                   height: 50,
                                 ),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
-                                child: Image.asset(
-                                  "assets/images/star.png",
-                                  width: 12,
-                                  height: 12,
-                                )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
+                                    child: Image.asset(
+                                      "assets/images/star.png",
+                                      width: 12,
+                                      height: 12,
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
@@ -445,16 +447,21 @@ class HomePageNew extends StatelessWidget {
                                     )),
                               ],
                             ),
-                            Padding(padding: EdgeInsets.only(left: 5),child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                style: TextStyle(
-                                    color: Color(0XFF005797),
-                                    fontSize: 8,
-                                    fontFamily: "PoppinsRegular"))),
-                            Padding(padding: EdgeInsets.only(left: 5,top:5),child: Text('"Lisa"',
-                                style: TextStyle(
-                                    color: Color(0XFF005797),
-                                    fontSize: 12,
-                                    fontFamily: "PoppinsBold"))),
+                            Padding(
+                                padding: EdgeInsets.only(left: 5),
+                                child: Text(
+                                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                                    style: TextStyle(
+                                        color: Color(0XFF005797),
+                                        fontSize: 8,
+                                        fontFamily: "PoppinsRegular"))),
+                            Padding(
+                                padding: EdgeInsets.only(left: 5, top: 5),
+                                child: Text('"Lisa"',
+                                    style: TextStyle(
+                                        color: Color(0XFF005797),
+                                        fontSize: 12,
+                                        fontFamily: "PoppinsBold"))),
                           ],
                         ),
                       ),
@@ -478,25 +485,29 @@ class HomePageNew extends StatelessWidget {
                                   width: 49,
                                   height: 50,
                                 ),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
@@ -504,16 +515,21 @@ class HomePageNew extends StatelessWidget {
                                     )),
                               ],
                             ),
-                            Padding(padding: EdgeInsets.only(left: 5),child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                style: TextStyle(
-                                    color: Color(0XFF005797),
-                                    fontSize: 8,
-                                    fontFamily: "PoppinsRegular"))),
-                            Padding(padding: EdgeInsets.only(left: 5,top:5),child: Text('"Lisa"',
-                                style: TextStyle(
-                                    color: Color(0XFF005797),
-                                    fontSize: 12,
-                                    fontFamily: "PoppinsBold"))),
+                            Padding(
+                                padding: EdgeInsets.only(left: 5),
+                                child: Text(
+                                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                                    style: TextStyle(
+                                        color: Color(0XFF005797),
+                                        fontSize: 8,
+                                        fontFamily: "PoppinsRegular"))),
+                            Padding(
+                                padding: EdgeInsets.only(left: 5, top: 5),
+                                child: Text('"Lisa"',
+                                    style: TextStyle(
+                                        color: Color(0XFF005797),
+                                        fontSize: 12,
+                                        fontFamily: "PoppinsBold"))),
                           ],
                         ),
                       ),
@@ -537,25 +553,29 @@ class HomePageNew extends StatelessWidget {
                                   width: 49,
                                   height: 50,
                                 ),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
@@ -563,16 +583,21 @@ class HomePageNew extends StatelessWidget {
                                     )),
                               ],
                             ),
-                            Padding(padding: EdgeInsets.only(left: 5),child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                style: TextStyle(
-                                    color: Color(0XFF005797),
-                                    fontSize: 8,
-                                    fontFamily: "PoppinsRegular"))),
-                            Padding(padding: EdgeInsets.only(left: 5,top:5),child: Text('"Lisa"',
-                                style: TextStyle(
-                                    color: Color(0XFF005797),
-                                    fontSize: 12,
-                                    fontFamily: "PoppinsBold"))),
+                            Padding(
+                                padding: EdgeInsets.only(left: 5),
+                                child: Text(
+                                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                                    style: TextStyle(
+                                        color: Color(0XFF005797),
+                                        fontSize: 8,
+                                        fontFamily: "PoppinsRegular"))),
+                            Padding(
+                                padding: EdgeInsets.only(left: 5, top: 5),
+                                child: Text('"Lisa"',
+                                    style: TextStyle(
+                                        color: Color(0XFF005797),
+                                        fontSize: 12,
+                                        fontFamily: "PoppinsBold"))),
                           ],
                         ),
                       ),
@@ -596,25 +621,29 @@ class HomePageNew extends StatelessWidget {
                                   width: 49,
                                   height: 50,
                                 ),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
@@ -622,16 +651,21 @@ class HomePageNew extends StatelessWidget {
                                     )),
                               ],
                             ),
-                            Padding(padding: EdgeInsets.only(left: 5),child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                style: TextStyle(
-                                    color: Color(0XFF005797),
-                                    fontSize: 8,
-                                    fontFamily: "PoppinsRegular"))),
-                            Padding(padding: EdgeInsets.only(left: 5,top:5),child: Text('"Lisa"',
-                                style: TextStyle(
-                                    color: Color(0XFF005797),
-                                    fontSize: 12,
-                                    fontFamily: "PoppinsBold"))),
+                            Padding(
+                                padding: EdgeInsets.only(left: 5),
+                                child: Text(
+                                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                                    style: TextStyle(
+                                        color: Color(0XFF005797),
+                                        fontSize: 8,
+                                        fontFamily: "PoppinsRegular"))),
+                            Padding(
+                                padding: EdgeInsets.only(left: 5, top: 5),
+                                child: Text('"Lisa"',
+                                    style: TextStyle(
+                                        color: Color(0XFF005797),
+                                        fontSize: 12,
+                                        fontFamily: "PoppinsBold"))),
                           ],
                         ),
                       ),
@@ -655,25 +689,29 @@ class HomePageNew extends StatelessWidget {
                                   width: 49,
                                   height: 50,
                                 ),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
@@ -681,16 +719,21 @@ class HomePageNew extends StatelessWidget {
                                     )),
                               ],
                             ),
-                            Padding(padding: EdgeInsets.only(left: 5),child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                style: TextStyle(
-                                    color: Color(0XFF005797),
-                                    fontSize: 8,
-                                    fontFamily: "PoppinsRegular"))),
-                            Padding(padding: EdgeInsets.only(left: 5,top:5),child: Text('"Lisa"',
-                                style: TextStyle(
-                                    color: Color(0XFF005797),
-                                    fontSize: 12,
-                                    fontFamily: "PoppinsBold"))),
+                            Padding(
+                                padding: EdgeInsets.only(left: 5),
+                                child: Text(
+                                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                                    style: TextStyle(
+                                        color: Color(0XFF005797),
+                                        fontSize: 8,
+                                        fontFamily: "PoppinsRegular"))),
+                            Padding(
+                                padding: EdgeInsets.only(left: 5, top: 5),
+                                child: Text('"Lisa"',
+                                    style: TextStyle(
+                                        color: Color(0XFF005797),
+                                        fontSize: 12,
+                                        fontFamily: "PoppinsBold"))),
                           ],
                         ),
                       ),
@@ -714,25 +757,29 @@ class HomePageNew extends StatelessWidget {
                                   width: 49,
                                   height: 50,
                                 ),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
                                       height: 12,
                                     )),
-                                Padding(padding: EdgeInsets.only(bottom: 12),
+                                Padding(
+                                    padding: EdgeInsets.only(bottom: 12),
                                     child: Image.asset(
                                       "assets/images/star.png",
                                       width: 12,
@@ -740,16 +787,21 @@ class HomePageNew extends StatelessWidget {
                                     )),
                               ],
                             ),
-                            Padding(padding: EdgeInsets.only(left: 5),child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                style: TextStyle(
-                                    color: Color(0XFF005797),
-                                    fontSize: 8,
-                                    fontFamily: "PoppinsRegular"))),
-                            Padding(padding: EdgeInsets.only(left: 5,top:5),child: Text('"Lisa"',
-                                style: TextStyle(
-                                    color: Color(0XFF005797),
-                                    fontSize: 12,
-                                    fontFamily: "PoppinsBold"))),
+                            Padding(
+                                padding: EdgeInsets.only(left: 5),
+                                child: Text(
+                                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                                    style: TextStyle(
+                                        color: Color(0XFF005797),
+                                        fontSize: 8,
+                                        fontFamily: "PoppinsRegular"))),
+                            Padding(
+                                padding: EdgeInsets.only(left: 5, top: 5),
+                                child: Text('"Lisa"',
+                                    style: TextStyle(
+                                        color: Color(0XFF005797),
+                                        fontSize: 12,
+                                        fontFamily: "PoppinsBold"))),
                           ],
                         ),
                       ),
@@ -789,7 +841,8 @@ class HomePageNew extends StatelessWidget {
   }
 
   Widget testimonialsWidget(BuildContext context) {
-    final TestimonialsController testimonialsCtrl = Get.put(TestimonialsController());
+    final TestimonialsController testimonialsCtrl =
+        Get.put(TestimonialsController());
     return Column(
       children: [
         Text(
@@ -801,32 +854,37 @@ class HomePageNew extends StatelessWidget {
           ),
         ),
         SizedBox(height: 10),
-        Container( // Wrap ListView.builder with Container
-          height: 150, // Specify a height for the ListView
-          child: Obx(() => ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: testimonialsCtrl.imageUrls.length,
-            itemBuilder: (context, index) {
-              return Container(
-                height: 120,
-                width: 190,
-                margin: EdgeInsets.all(8), // Add margin between images
-                decoration: BoxDecoration(
-                  color: Color(0XFFFFFF),
-                  borderRadius: BorderRadius.circular(25),
-                  border: Border.all(
-                    color: Color(0XFFB5F446),
-                    width: 2,
-                  ),
-                ),
-                child: Image.network(
-                  testimonialsCtrl.imageUrls[index],
-                  fit: BoxFit.cover,
-                ),
-              );
-            },
-          ))
-        ),
+        Container(
+            // Wrap ListView.builder with Container
+            height: 150, // Specify a height for the ListView
+            child: Obx(() => ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: testimonialsCtrl.imageUrls.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                        onTap: () {
+                          Get.to(Testimonials());
+                        },
+                        child: Container(
+                          height: 120,
+                          width: 190,
+                          margin: EdgeInsets.all(8),
+                          // Add margin between images
+                          decoration: BoxDecoration(
+                            color: Color(0XFFFFFF),
+                            borderRadius: BorderRadius.circular(25),
+                            border: Border.all(
+                              color: Color(0XFFB5F446),
+                              width: 2,
+                            ),
+                          ),
+                          child: Image.network(
+                            testimonialsCtrl.imageUrls[index],
+                            fit: BoxFit.cover,
+                          ),
+                        ));
+                  },
+                ))),
         SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -854,8 +912,6 @@ class HomePageNew extends StatelessWidget {
       ],
     );
   }
-
-
 
   Widget serviceWidget(BuildContext context) {
     return GetBuilder<HomeController>(builder: (ctrl) {
@@ -915,7 +971,6 @@ class HomePageNew extends StatelessWidget {
                                     height: 24,
                                     width: 34,
                                   ),
-
                                 ],
                               ),
                             ),
@@ -951,7 +1006,6 @@ class HomePageNew extends StatelessWidget {
                                     height: 24,
                                     width: 34,
                                   ),
-
                                 ],
                               ),
                             ),
@@ -986,7 +1040,6 @@ class HomePageNew extends StatelessWidget {
                                     height: 24,
                                     width: 34,
                                   ),
-
                                 ],
                               ),
                             ),
@@ -994,7 +1047,8 @@ class HomePageNew extends StatelessWidget {
                         ],
                       ),
                     ],
-                  )],
+                  )
+                ],
               ),
             ),
             SizedBox(height: 15),
@@ -1063,7 +1117,7 @@ class HomePageNew extends StatelessWidget {
                 Column(
                   children: [
                     Image.network(
-                ctrl.categoryList[0].img.toString(),
+                      ctrl.categoryList[0].img.toString(),
                       fit: BoxFit.fill,
                       height: 63,
                       width: 63,
@@ -1082,7 +1136,7 @@ class HomePageNew extends StatelessWidget {
                 Column(
                   children: [
                     Image.network(
-                       ctrl.categoryList[1].img.toString(),
+                      ctrl.categoryList[1].img.toString(),
                       fit: BoxFit.fill,
                       height: 63,
                       width: 63,
@@ -1109,11 +1163,14 @@ class HomePageNew extends StatelessWidget {
                     SizedBox(height: 5),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: Text(ctrl.categoryList[2].categoryName.toString(),
-                          style: GoogleFonts.poppins(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white),textAlign: TextAlign.center,),
+                      child: Text(
+                        ctrl.categoryList[2].categoryName.toString(),
+                        style: GoogleFonts.poppins(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ],
                 ),
@@ -1147,7 +1204,9 @@ class HomePageNew extends StatelessWidget {
                     SizedBox(height: 5),
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: Text(textAlign: TextAlign.center,ctrl.categoryList[0].categoryName.toString(),
+                      child: Text(
+                          textAlign: TextAlign.center,
+                          ctrl.categoryList[0].categoryName.toString(),
                           style: GoogleFonts.poppins(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
@@ -1158,7 +1217,7 @@ class HomePageNew extends StatelessWidget {
                 Column(
                   children: [
                     Image.network(
-                     ctrl.categoryList[5].img.toString(),
+                      ctrl.categoryList[5].img.toString(),
                       fit: BoxFit.fill,
                       height: 63,
                       width: 63,

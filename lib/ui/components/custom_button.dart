@@ -10,13 +10,12 @@ class CustomButton{
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
           // color: const Color.fromARGB(255, 112, 91, 222),
-          color: Color(0XFFB5F446),
-          /*gradient:  LinearGradient(colors: [
+          gradient:  LinearGradient(colors: [
             // Colors.blueAccent,
             // Colors.lightBlueAccent
             AppStyle().gradientColor1,
             AppStyle().gradientColor2,
-          ])*/
+          ])
       ),
       child: Center(
         child: Text(

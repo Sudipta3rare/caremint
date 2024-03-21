@@ -63,13 +63,13 @@ Widget testimonialCard(String description, String name, String image) {
         BoxShadow(
           offset: Offset(3, 3),
           blurRadius: 20,
-          color: Colors.blueAccent.withOpacity(0.5),
+          color: AppStyle().gradientColor2.withOpacity(0.5),
         ),
       ],
       gradient: LinearGradient(
         colors: [
-          Colors.blueAccent,
-          Colors.lightBlue[200]!,
+          AppStyle().gradientColor1,
+          AppStyle().gradientColor2,
         ],
         begin: Alignment.bottomLeft,
         end: Alignment.topRight,

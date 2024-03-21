@@ -151,6 +151,7 @@ class Orders extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TextButton(
+                    style: AppStyle.primaryButtonStyle,
                     onPressed: () {
                       Get.defaultDialog(
                         title: 'Cancel order request!',
@@ -164,9 +165,9 @@ class Orders extends StatelessWidget {
                         ),
                         textCancel: 'NO',
                         textConfirm: 'YES',
-                        buttonColor: AppStyle().gradientColor3,
-                        cancelTextColor: AppStyle().gradientColor1,
-                        confirmTextColor: AppStyle().gradientColor1,
+                        buttonColor: AppStyle.buttonColor,
+                        cancelTextColor: AppStyle().gradientColor4,
+                        confirmTextColor: AppStyle().gradientColor4,
                         onCancel: () {
                           Get.back();
                         },
@@ -179,6 +180,7 @@ class Orders extends StatelessWidget {
                     child: Text("Cancel Order"),
                   ),
                   ElevatedButton(
+                    style: AppStyle.primaryButtonStyle,
                     onPressed: () {
                       ordCtrl.isLoading.value = true;
                       ordCtrl.update();

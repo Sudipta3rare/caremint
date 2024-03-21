@@ -17,8 +17,9 @@ class SubmitPictures extends StatelessWidget {
     return Scaffold(
 
       appBar: AppBar(
+        iconTheme: IconThemeData(color: AppStyle().gradientColor1), // Set the color of the back button
         backgroundColor: Colors.blue[900],
-        title: Text("Submit Pictures", ),
+        title: Text("Submit Pictures",style: TextStyle(color: AppStyle().gradientColor1)),
         centerTitle: false,
         leadingWidth: 20,
         actions: [

@@ -18,6 +18,7 @@ class AppStyle{
   Color gradientColor1 = Color(0XFFB5F446)!;
   Color gradientColor2 = Color(0XFF609404)!;
   Color gradientColor3 = Colors.blue[50]!;
+  Color gradientColor4 = Colors.blue[900]!;
   static Color backgroundColor = Colors.blue[50]!;
   static Color blue900 = Colors.blue[900]!;
   TextStyle paraTextStyle = GoogleFonts.poppins(

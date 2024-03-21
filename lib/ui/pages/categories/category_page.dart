@@ -60,7 +60,7 @@ class CategoryPage extends StatelessWidget {
         final isComingSoon = index == 4 || index == 5;
 
         return Card(
-          color: Colors.white,
+          color: Colors.blue[50],
           shadowColor: Colors.cyan,
           semanticContainer: true,
           clipBehavior: Clip.antiAliasWithSaveLayer,
