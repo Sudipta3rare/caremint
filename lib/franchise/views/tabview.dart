@@ -62,7 +62,7 @@ class TabView extends StatelessWidget {
                         ctrl.store.write("user_phone", "");
                         hmCtrl.isLoggedIn.value =false;
                         ctrl.isLoading.value = false;
-                        Get.offAllNamed('/home');
+                        Get.offAllNamed('/homenew');
                         ctrl.update();
                         hmCtrl.update();
                         // perform logout

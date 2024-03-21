@@ -197,7 +197,7 @@ class HomePageNew extends StatelessWidget {
                         ctrl.store.write("user_role", "");
                         ctrl.store.write("user_phone", "");
                         ctrl.isLoggedIn.value = false;
-                        Get.offAllNamed('/home');
+                        Get.offAllNamed('/homenew');
                         ctrl.update();
                         // perform logout
                         //   print(ctrl.store.read("user_token"));
@@ -237,6 +237,7 @@ class HomePageNew extends StatelessWidget {
               child: Column(
                 children: [
                   Image.asset(
+                    fit: BoxFit.cover,
                     width: 650,
                     height: 450,
                     "assets/images/homepageheader.png",
@@ -1107,132 +1108,41 @@ class HomePageNew extends StatelessWidget {
                     color: Colors.white)),
             SizedBox(height: 20),
             Expanded(
-                child: GridView(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+              child: GridView(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                ),
+                children: List.generate(
+                  ctrl.categoryList.length,
+                      (index) => Column(
+                    children: [
+                      if (ctrl.categoryList[index].img != null)
+                        Image.network(
+                          ctrl.categoryList[index].img.toString(),
+                          fit: BoxFit.fill,
+                          height: 63,
+                          width: 63,
+                        ),
+                      SizedBox(height: 5),
+                      if (ctrl.categoryList[index].categoryName != null)
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            ctrl.categoryList[index].categoryName.toString(),
+                            style: GoogleFonts.poppins(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
               ),
-              children: <Widget>[
-                Column(
-                  children: [
-                    Image.network(
-                      ctrl.categoryList[0].img.toString(),
-                      fit: BoxFit.fill,
-                      height: 63,
-                      width: 63,
-                    ),
-                    SizedBox(height: 5),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(ctrl.categoryList[0].categoryName.toString(),
-                          style: GoogleFonts.poppins(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white)),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Image.network(
-                      ctrl.categoryList[1].img.toString(),
-                      fit: BoxFit.fill,
-                      height: 63,
-                      width: 63,
-                    ),
-                    SizedBox(height: 5),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(ctrl.categoryList[1].categoryName.toString(),
-                          style: GoogleFonts.poppins(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white)),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Image.network(
-                      ctrl.categoryList[2].img.toString(),
-                      fit: BoxFit.fill,
-                      height: 63,
-                      width: 63,
-                    ),
-                    SizedBox(height: 5),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(
-                        ctrl.categoryList[2].categoryName.toString(),
-                        style: GoogleFonts.poppins(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Image.network(
-                      ctrl.categoryList[3].img.toString(),
-                      fit: BoxFit.fill,
-                      height: 63,
-                      width: 63,
-                    ),
-                    SizedBox(height: 5),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(ctrl.categoryList[0].categoryName.toString(),
-                          style: GoogleFonts.poppins(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white)),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Image.network(
-                      ctrl.categoryList[4].img.toString(),
-                      fit: BoxFit.fill,
-                      height: 63,
-                      width: 63,
-                    ),
-                    SizedBox(height: 5),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(
-                          textAlign: TextAlign.center,
-                          ctrl.categoryList[0].categoryName.toString(),
-                          style: GoogleFonts.poppins(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white)),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Image.network(
-                      ctrl.categoryList[5].img.toString(),
-                      fit: BoxFit.fill,
-                      height: 63,
-                      width: 63,
-                    ),
-                    SizedBox(height: 5),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(ctrl.categoryList[0].categoryName.toString(),
-                          style: GoogleFonts.poppins(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white)),
-                    ),
-                  ],
-                ),
-              ],
-            )),
+            ),
+
             GestureDetector(
               onTap: () {
                 Get.to(CategoryPage());

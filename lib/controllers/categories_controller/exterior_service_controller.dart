@@ -41,7 +41,7 @@ class ExteriorServiceController extends GetxController{
     isLoading.value = true;
 
 
-    ApiRequest(url: Constant.baseUrl+"/api/get-providers/${2}/${700054}", data: null).getToken(beforeSend: (){},
+    ApiRequest(url: Constant.baseUrl+"/api/get-providers/${categoryId}/${pincode}", data: null).getToken(beforeSend: (){},
         onSuccess: (onSuccess){
         var providerResponse = ProviderResponse.fromJson(onSuccess);
       itemList.addAll(providerResponse.body as Iterable<Provider>);

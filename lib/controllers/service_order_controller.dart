@@ -106,7 +106,7 @@ ApiRequest(url: '${Constant.baseUrl}/api/add-cart/${serviceId}', frmData:
     clearFeilds();
     // Get.back();
     // Get.back();
-   Get.offAllNamed("/home");
+   Get.offAllNamed("/homenew");
   },
 
     onError: (onError){

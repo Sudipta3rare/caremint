@@ -189,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                             ctrl.store.write("user_role", "");
                             ctrl.store.write("user_phone", "");
                             ctrl.isLoggedIn.value = false;
-                            Get.offAllNamed('/home');
+                            Get.offAllNamed('/homenew');
                             ctrl.update();
                             // perform logout
                             //   print(ctrl.store.read("user_token"));

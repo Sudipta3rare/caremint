@@ -138,7 +138,10 @@ class ExteriorServices extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     backgroundColor: AppStyle.blue900.withOpacity(0.3),
-                    backgroundImage: CachedNetworkImageProvider(item.userUrl,),
+                    backgroundImage: item.userUrl != null
+                        ? CachedNetworkImageProvider(item.userUrl)
+                        : CachedNetworkImageProvider(
+                        'https://firebasestorage.googleapis.com/v0/b/caremint-d3d4a.appspot.com/o/imageAsset%2Fservice1.png?alt=media&token=f8d0ddb3-5780-4888-b4a3-fa0e1f2ecc3d'),
                     radius: 50,
                   ),
                   const SizedBox(
@@ -149,16 +152,16 @@ class ExteriorServices extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        item.displayName!,
+                        item.displayName ?? "",
                         // item.name,
                         style: AppStyle().subHeadBlueTextStyle,
                       ),
                       Text(
-                        item.userPhonenumber!,
+                        item.userPhonenumber ?? "",
                         style: AppStyle().paraTextStyle,
                       ),
                       Text(
-                        item.userAddress!,
+                        item.userAddress ?? "",
                         style: AppStyle().paraTextStyle,
                       ),
                     ],
@@ -240,18 +243,23 @@ class ExteriorServices extends StatelessWidget {
                         child: ClipRRect(
 
                             borderRadius: BorderRadius.circular(20),
-                            child: CachedNetworkImage(imageUrl: item.userUrl,fit: BoxFit.cover,
-                              placeholder: (context, url) => CircularProgressIndicator(),
-                            )
+                            child: CircleAvatar(
+                              backgroundColor: AppStyle.blue900.withOpacity(0.3),
+                              backgroundImage: item.userUrl != null
+                                  ? CachedNetworkImageProvider(item.userUrl)
+                                  : CachedNetworkImageProvider(
+                                  'https://firebasestorage.googleapis.com/v0/b/caremint-d3d4a.appspot.com/o/imageAsset%2Fservice1.png?alt=media&token=f8d0ddb3-5780-4888-b4a3-fa0e1f2ecc3d'),
+                              radius: 50,
+                            ),
                         ),
                       ),
                     )),
                 Text(
-                  item.displayName!,
+                  item.displayName ?? "",
                   style:AppStyle().paraTextStyle,
                 ),
                 Text(
-                  item.userPhonenumber!,
+                  item.userPhonenumber ?? "",
                   style:AppStyle().paraTextStyle,
                 ),
                 const SizedBox(

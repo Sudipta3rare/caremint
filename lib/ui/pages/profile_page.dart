@@ -40,7 +40,7 @@ class ProfilePage extends StatelessWidget {
                                       .cover) // Replace 'default_image.png' with your actual default image asset path
                           ),
                         ),
-                        Text(controller.store.read("user_name"), style: TextStyle(color: Colors.white,
+                        Text(controller.store.read("user_name") ?? "", style: TextStyle(color: Colors.white,
                             fontSize: 25,
                             fontFamily: "PoppinsRegular")),
                         SizedBox(height: 50),
@@ -54,7 +54,7 @@ class ProfilePage extends StatelessWidget {
                                   25.0)),
                             ),
                             child: Text(
-                                controller.store.read("user_email"), style: TextStyle(color: Color(
+                                controller.store.read("user_email") ?? "", style: TextStyle(color: Color(
                                 0XFF164378),
                                 fontSize: 20,
                                 fontFamily: "PoppinsRegular"))
@@ -71,7 +71,7 @@ class ProfilePage extends StatelessWidget {
                               borderRadius: BorderRadius.all(Radius.circular(
                                   25.0)),
                             ),
-                            child: Text(controller.store.read("user_phone"), style: TextStyle(color: Color(
+                            child: Text(controller.store.read("user_phone") ?? "", style: TextStyle(color: Color(
                                 0XFF164378),
                                 fontSize: 20,
                                 fontFamily: "PoppinsRegular"))
@@ -89,7 +89,7 @@ class ProfilePage extends StatelessWidget {
                                   25.0)),
                             ),
                             child: Text(
-                                controller.store.read("user_pincode"), style: TextStyle(color: Color(
+                                controller.store.read("user_pincode") ?? "", style: TextStyle(color: Color(
                                 0XFF164378),
                                 fontSize: 20,
                                 fontFamily: "PoppinsRegular"))

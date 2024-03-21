@@ -103,7 +103,7 @@ class MyOrderController extends GetxController{
     });
     isLoading.value = false;
     update();
-    Get.offAllNamed('/home');
+    Get.offAllNamed('/homenew');
 
   }
 

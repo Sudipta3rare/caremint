@@ -217,7 +217,7 @@ class LoginSnackBar {
                                           ctrl.update();
                                           hmCtrl.update();
                                           if(ctrl.store.read(("user_role")) == "2"){
-                                            Get.offAllNamed('/home');
+                                            Get.offAllNamed('/homenew');
                                           }
                                           else{
                                             ctrl.goToProvider();
