@@ -994,7 +994,7 @@ class HomePageNew extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("Upcoming Services",
+                                  Text("Schedule Services",
                                       style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w600,

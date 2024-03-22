@@ -7,6 +7,7 @@ import 'package:caremint/franchise/controllers/tabview_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sizer/sizer.dart';
@@ -15,6 +16,7 @@ import 'controllers/home_controller.dart';
 
 
 Future<void> main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -22,7 +24,6 @@ Future<void> main() async {
     systemNavigationBarDividerColor: Color(0XFF164378),// Set the background color here
     systemNavigationBarIconBrightness: Brightness.dark, // Set icon color
   ));
-
   GetStorage.init();
   // await Firebase.initializeApp(
   //   // options: DefaultFirebaseOptions.currentPlatform,

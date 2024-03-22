@@ -213,7 +213,7 @@ class SingleOrderPage{
                                   return GestureDetector(
                                       onTap: () async {
 
-                                      if (ctrl.formKey.currentState!.validate()) {
+                                     /* if (ctrl.formKey.currentState!.validate()) {
 
                                         print("all key validated");
                                           if(DateFormat.yMd().format(ctrl.selectedDate.value).toString() != '') {
@@ -270,7 +270,9 @@ class SingleOrderPage{
                                           colorText: Color(0xffffffff),
                                           backgroundColor: AppStyle().gradientColor2,
                                           duration: Duration(seconds: 2),);
-                                      }
+                                      }*/
+
+                                        Crctrl.openSession(amount: 1);
 
 
                           },
