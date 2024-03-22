@@ -19,7 +19,6 @@ class SingleOrderPage{
   late int index;
   late Service product;
   late String providerId;
-
   bool isDateSelected = false;
 
   String? numberValidator(String? value) {
@@ -213,7 +212,7 @@ class SingleOrderPage{
                                   return GestureDetector(
                                       onTap: () async {
 
-                                     /* if (ctrl.formKey.currentState!.validate()) {
+                                      if (ctrl.formKey.currentState!.validate()) {
 
                                         print("all key validated");
                                           if(DateFormat.yMd().format(ctrl.selectedDate.value).toString() != '') {
@@ -240,13 +239,15 @@ class SingleOrderPage{
                                                 Get.back();
                                               },
                                               onConfirm: () async {
+                                                // Assuming product.price is of type String?
+                                                // Convert String? to num using num.tryParse() and provide a default value if parsing fails
                                                 ctrl.onCheckout(
-                                                  product.name.toString(),
-                                                  product.id.toString(),
-                                                  product.price!, providerId,ctrl.timingSelected);
-
+                                                    product.name.toString(),
+                                                    product.id.toString(),
+                                                    product.price!, providerId,ctrl.timingSelected);
+                                                /*num parsedAmount = num.tryParse(product.price ?? '0') ?? 0;
+                                                ctrl.openSession(amount: parsedAmount);*/
                                                 // await auth.signOut().then((value) => Get.offAllNamed('/home'));
-
                                               },);
                                           }
 
@@ -270,9 +271,7 @@ class SingleOrderPage{
                                           colorText: Color(0xffffffff),
                                           backgroundColor: AppStyle().gradientColor2,
                                           duration: Duration(seconds: 2),);
-                                      }*/
-
-                                        Crctrl.openSession(amount: 1);
+                                      }
 
 
                           },

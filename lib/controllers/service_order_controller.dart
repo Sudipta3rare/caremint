@@ -1,14 +1,13 @@
-
 import 'package:caremint/constants/constants.dart';
 import 'package:caremint/models/timeslots_model.dart';
 import 'package:caremint/services/api_requests.dart';
-
-
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 import '../constants/app_colors.dart';
+import '../ui/pages/single_service_detail/razorpay_api_services.dart';
 
 class ServiceOrderController extends GetxController{
   static ServiceOrderController to = Get.find();
@@ -21,11 +20,80 @@ class ServiceOrderController extends GetxController{
   Rx<DateTime> selectedDate = DateTime.now().obs;
   List<Body> timeslot = <Body>[];
 
+  final Razorpay _razorpay = Razorpay();
+  final razorPayKey = dotenv.get("RAZOR_KEY");
+  final razorPaySecret = dotenv.get("RAZOR_SECRET");
+
+
   @override
   void onInit() {
-    // TODO: implement onInit
+    super.onInit();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
     getTimeslots();
+
   }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    Get.snackbar(
+      'Message',
+      'Payment Successful',
+      snackPosition: SnackPosition.BOTTOM,
+      colorText: AppStyle().gradientColor4,
+      backgroundColor: AppStyle().gradientColor1,
+      duration: Duration(seconds: 2),
+    );
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    Get.snackbar(
+      'Message',
+      'Payment Unsuccessful',
+      snackPosition: SnackPosition.BOTTOM,
+      colorText: AppStyle().gradientColor4 ,
+      backgroundColor: AppStyle().gradientColor1,
+      duration: Duration(seconds: 2),
+    );
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    // Do something when an external wallet is selected
+  }
+
+  openSession({required num amount}) {
+    createOrder(amount: amount).then((orderId) {
+      print(orderId);
+      if (orderId.toString().isNotEmpty) {
+        var options = {
+          'key': razorPayKey, //Razor pay API Key
+          'amount': amount, //in the smallest currency sub-unit.
+          'name': 'Caremint',
+          'order_id': orderId, // Generate order_id using Orders API
+          'description': 'Description for order', //Order Description to be shown in razor pay page
+          'timeout': 60, // in seconds
+          /* 'prefill': {
+            'contact': '1234567890',
+            'email': 'example@gmail.com'
+          } //contact number and email id of user*/
+        };
+        _razorpay.open(options);
+      } else {}
+    });
+  }
+
+  createOrder({
+    required num amount,
+  }) async {
+    final myData = await RazorpayApiServices().razorPayApi(amount, "rcp_id_1");
+    if (myData["status"] == "success") {
+      print(myData);
+      return myData["body"]["id"];
+    } else {
+      return "";
+    }
+  }
+
 
   Future<void> getTimeslots() async{
     ApiRequest(url: '${Constant.baseUrl}/api/timeslots', data: null).get(beforeSend: (){}, onSuccess: (data) async {
@@ -68,7 +136,7 @@ String timingSelected ="";
   TextEditingController vModel = TextEditingController();
 
 
-  
+
   Future<void> onCheckout(String sName, String serviceId , String price, String providerId, String timeslotId) async {
 
 
