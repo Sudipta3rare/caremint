@@ -210,72 +210,89 @@ class SingleOrderPage{
                               GetBuilder<MyOrderController>(
                                 builder: (Crctrl) {
                                   return GestureDetector(
-                                      onTap: () async {
-
+                                    onTap: () async {
                                       if (ctrl.formKey.currentState!.validate()) {
-
                                         print("all key validated");
-                                          if(DateFormat.yMd().format(ctrl.selectedDate.value).toString() != '') {
-                                            Get.defaultDialog(
-                                              title: 'Confirm Order',
-                                              titleStyle: TextStyle(
-                                                color: AppStyle()
-                                                    .gradientColor2, // Replace with your desired color
-                                              ),
-                                              middleTextStyle: AppStyle()
-                                                  .subHeadBlueTextStyle,
-                                              content: Text(
-                                                'Confirm order with COD',
-                                                style: AppStyle().paraTextStyle,
-                                              ),
-                                              textCancel: 'Cancel',
-                                              textConfirm: 'Place Order',
-                                              buttonColor: Colors.white,
-                                              cancelTextColor: AppStyle()
-                                                  .gradientColor2,
-                                              confirmTextColor: AppStyle()
-                                                  .gradientColor2,
-                                              onCancel: () {
-                                                Get.back();
-                                              },
-                                              onConfirm: () async {
-                                                // Assuming product.price is of type String?
-                                                // Convert String? to num using num.tryParse() and provide a default value if parsing fails
-                                                ctrl.onCheckout(
-                                                    product.name.toString(),
-                                                    product.id.toString(),
-                                                    product.price!, providerId,ctrl.timingSelected);
-                                                /*num parsedAmount = num.tryParse(product.price ?? '0') ?? 0;
-                                                ctrl.openSession(amount: parsedAmount);*/
-                                                // await auth.signOut().then((value) => Get.offAllNamed('/home'));
-                                              },);
-                                          }
-
-                                            // Crctrl.getCartItems();
-
-
-                                          else {
-                                            Get.snackbar(
-                                              "Date Time Not Selected",
-                                              "Please Select Date Time for service",
-                                              snackPosition: SnackPosition
-                                                  .BOTTOM,
-                                              colorText: Color(0xffffffff),
-                                              backgroundColor: AppStyle()
-                                                  .gradientColor2,
-                                              duration: Duration(seconds: 2),);
-                                          }
+                                        if (DateFormat.yMd().format(ctrl.selectedDate.value).toString() != '') {
+                                          Get.defaultDialog(
+                                            title: 'Confirm Order',
+                                            titleStyle: TextStyle(
+                                              color: AppStyle().gradientColor2, // Replace with your desired color
+                                            ),
+                                            middleTextStyle: AppStyle().subHeadBlueTextStyle,
+                                            content: Text(
+                                              'Confirm order with COD',
+                                              style: AppStyle().paraTextStyle,
+                                            ),
+                                            textCancel: 'Cancel',
+                                            textConfirm: 'Place Order',
+                                            buttonColor: Colors.white,
+                                            cancelTextColor: AppStyle().gradientColor2,
+                                            confirmTextColor: AppStyle().gradientColor2,
+                                            onCancel: () {
+                                              Get.back();
+                                            },
+                                            onConfirm: () async {
+                                              // Assuming product.price is of type String?
+                                              // Convert String? to num using num.tryParse() and provide a default value if parsing fails
+                                              num parsedAmount = num.tryParse(product.price ?? '0') ?? 0;
+                                              ctrl.openSession(amount: parsedAmount);
+                                              // await auth.signOut().then((value) => Get.offAllNamed('/home'));
+                                            },
+                                          ).then((value) {
+                                            if (value != null && value) {
+                                              // Show dialog with "Place Order" button
+                                              Get.dialog(
+                                                AlertDialog(
+                                                  backgroundColor: AppStyle.backgroundColor,
+                                                  title: Text('Payment Successful',style: TextStyle(color: AppStyle().gradientColor4),),
+                                                  actions: [
+                                                    Center(
+                                                      child: ElevatedButton(
+                                                        style: AppStyle.primaryButtonStyle,
+                                                        onPressed: () {
+                                                          // Execute ctrl.onCheckout in the UI
+                                                          ctrl.onCheckout(
+                                                            product.name.toString(),
+                                                            product.id.toString(),
+                                                            product.price!,
+                                                            providerId,
+                                                            ctrl.timingSelected,
+                                                          );
+                                                          Get.back();
+                                                        },
+                                                        child: Text('Place Order',textAlign: TextAlign.center,),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              );
+                                            }
+                                          });
+                                        } else {
+                                          Get.snackbar(
+                                            "Date Time Not Selected",
+                                            "Please Select Date Time for service",
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            colorText: Color(0xffffffff),
+                                            backgroundColor: AppStyle().gradientColor2,
+                                            duration: Duration(seconds: 2),
+                                          );
+                                        }
                                       } else {
-                                        Get.snackbar("Submition form empty", "Please fill all fields of the form",
+                                        Get.snackbar(
+                                          "Submission form empty",
+                                          "Please fill all fields of the form",
                                           snackPosition: SnackPosition.BOTTOM,
                                           colorText: Color(0xffffffff),
                                           backgroundColor: AppStyle().gradientColor2,
-                                          duration: Duration(seconds: 2),);
+                                          duration: Duration(seconds: 2),
+                                        );
                                       }
+                                    },
+                                    child: CustomButton().customButton200(context, "Checkout"),
+                                  );
 
-
-                          },
-                                      child: CustomButton().customButton200(context, "Checkout"));
                                 }
                               ),
                             ],

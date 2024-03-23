@@ -36,6 +36,7 @@ class ServiceOrderController extends GetxController{
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    Get.back(result: true);
     Get.snackbar(
       'Message',
       'Payment Successful',
