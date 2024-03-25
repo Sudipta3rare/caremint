@@ -1,5 +1,6 @@
-import 'package:caremint/controllers/firebase_controller.dart';
+import 'package:caremint/constants/constants.dart';
 import 'package:caremint/data/api_category_provider.dart';
+import 'package:dio/dio.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ import 'dart:core';
 import 'package:caremint/models/category_model.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../models/review_model.dart';
 import '../models/userDataModel.dart';
 import '../models/user_model.dart';
 
@@ -28,12 +30,48 @@ class HomeController extends GetxController {
 
   TextEditingController city = TextEditingController();
   TextEditingController pincode = TextEditingController();
-
-
   List<Category> categoryList = [];
-
-
   List categoryId = [];
+  final Dio dio = Dio();
+
+  String reviewText = "";
+  String rating = "";
+  String userLogin = "";
+  List<Review> reviews = [];
+
+  @override
+  void onInit() async {
+    super.onInit();
+
+    await fetchReviews();
+    getCategory();
+    await getUserData();
+    // Call update here if necessary
+  }
+
+  Future<List<Review>> fetchReviews() async {
+    try {
+      final response = await dio.get(
+        Constant.baseUrl + "/api/review-list",
+        options: Options(headers: {'Authorization': 'Bearer 704|frOQj4qYOOXV6lSIw6OWGwTfAL7ZRTpuUp9AJgHd'}),
+      );
+      List<dynamic> data = response.data['body'];
+        reviews = data.map((review) {
+        userLogin = review['user_login'] ?? "";
+        rating = review['rating'] ?? 0;
+        reviewText = review['review'] ?? "";
+        return Review(review: reviewText,rating: rating, userLogin: userLogin);
+      }).toList();
+
+      print('Review: ${reviewText}, Rating: ${rating}, User Name: ${userLogin}');
+      return reviews;
+    } catch (e) {
+      print(e.toString());
+      return [];
+    }
+  }
+
+
 
 
   Future<void> getUserData() async {
@@ -71,15 +109,6 @@ class HomeController extends GetxController {
     return user.firstName;
   }
 
-  @override
-  void onInit() async {
-    super.onInit();
-
-
-    getCategory();
-    await getUserData();
-    // Call update here if necessary
-  }
 
   @override
   void onClose() {

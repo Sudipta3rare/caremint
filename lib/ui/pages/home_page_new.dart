@@ -388,15 +388,16 @@ class HomePageNew extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Container(
-              width: 850,
               height: 150,
               child: Column(
                 children: [
                   SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
+                    children: ctrl.reviews.map((review) {
+
+                      return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),child: Container(
                         height: 115,
                         width: 120,
                         decoration: BoxDecoration(
@@ -417,394 +418,35 @@ class HomePageNew extends StatelessWidget {
                                   height: 50,
                                 ),
                                 Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                              ],
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(left: 5),
-                                child: Text(
-                                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                    style: TextStyle(
-                                        color: Color(0XFF005797),
-                                        fontSize: 8,
-                                        fontFamily: "PoppinsRegular"))),
-                            Padding(
-                                padding: EdgeInsets.only(left: 5, top: 5),
-                                child: Text('"Lisa"',
-                                    style: TextStyle(
-                                        color: Color(0XFF005797),
-                                        fontSize: 12,
-                                        fontFamily: "PoppinsBold"))),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 115,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          color: Color(0XFFB5F446),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(25),
-                            bottomRight: Radius.circular(25),
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  "assets/images/lisa.png",
-                                  width: 49,
-                                  height: 50,
+                                  padding: EdgeInsets.only(bottom: 12),
+                                  child: Row(
+                                    children: List.generate(double.parse(review.rating).toInt(), (index) {
+                                      return Icon(Icons.star, color: Color(0XFFFFD700), size: 12);
+                                    }),
+                                  ),
                                 ),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
+
                               ],
                             ),
                             Padding(
                                 padding: EdgeInsets.only(left: 5),
                                 child: Text(
-                                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                                    review.review,
                                     style: TextStyle(
                                         color: Color(0XFF005797),
                                         fontSize: 8,
                                         fontFamily: "PoppinsRegular"))),
                             Padding(
                                 padding: EdgeInsets.only(left: 5, top: 5),
-                                child: Text('"Lisa"',
+                                child: Text('"${review.userLogin}"',
                                     style: TextStyle(
                                         color: Color(0XFF005797),
                                         fontSize: 12,
                                         fontFamily: "PoppinsBold"))),
                           ],
                         ),
-                      ),
-                      Container(
-                        height: 115,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          color: Color(0XFFB5F446),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(25),
-                            bottomRight: Radius.circular(25),
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  "assets/images/lisa.png",
-                                  width: 49,
-                                  height: 50,
-                                ),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                              ],
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(left: 5),
-                                child: Text(
-                                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                    style: TextStyle(
-                                        color: Color(0XFF005797),
-                                        fontSize: 8,
-                                        fontFamily: "PoppinsRegular"))),
-                            Padding(
-                                padding: EdgeInsets.only(left: 5, top: 5),
-                                child: Text('"Lisa"',
-                                    style: TextStyle(
-                                        color: Color(0XFF005797),
-                                        fontSize: 12,
-                                        fontFamily: "PoppinsBold"))),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 115,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          color: Color(0XFFB5F446),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(25),
-                            bottomRight: Radius.circular(25),
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  "assets/images/lisa.png",
-                                  width: 49,
-                                  height: 50,
-                                ),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                              ],
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(left: 5),
-                                child: Text(
-                                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                    style: TextStyle(
-                                        color: Color(0XFF005797),
-                                        fontSize: 8,
-                                        fontFamily: "PoppinsRegular"))),
-                            Padding(
-                                padding: EdgeInsets.only(left: 5, top: 5),
-                                child: Text('"Lisa"',
-                                    style: TextStyle(
-                                        color: Color(0XFF005797),
-                                        fontSize: 12,
-                                        fontFamily: "PoppinsBold"))),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 115,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          color: Color(0XFFB5F446),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(25),
-                            bottomRight: Radius.circular(25),
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  "assets/images/lisa.png",
-                                  width: 49,
-                                  height: 50,
-                                ),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                              ],
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(left: 5),
-                                child: Text(
-                                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                    style: TextStyle(
-                                        color: Color(0XFF005797),
-                                        fontSize: 8,
-                                        fontFamily: "PoppinsRegular"))),
-                            Padding(
-                                padding: EdgeInsets.only(left: 5, top: 5),
-                                child: Text('"Lisa"',
-                                    style: TextStyle(
-                                        color: Color(0XFF005797),
-                                        fontSize: 12,
-                                        fontFamily: "PoppinsBold"))),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 115,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          color: Color(0XFFB5F446),
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(25),
-                            bottomRight: Radius.circular(25),
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  "assets/images/lisa.png",
-                                  width: 49,
-                                  height: 50,
-                                ),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                                Padding(
-                                    padding: EdgeInsets.only(bottom: 12),
-                                    child: Image.asset(
-                                      "assets/images/star.png",
-                                      width: 12,
-                                      height: 12,
-                                    )),
-                              ],
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(left: 5),
-                                child: Text(
-                                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                    style: TextStyle(
-                                        color: Color(0XFF005797),
-                                        fontSize: 8,
-                                        fontFamily: "PoppinsRegular"))),
-                            Padding(
-                                padding: EdgeInsets.only(left: 5, top: 5),
-                                child: Text('"Lisa"',
-                                    style: TextStyle(
-                                        color: Color(0XFF005797),
-                                        fontSize: 12,
-                                        fontFamily: "PoppinsBold"))),
-                          ],
-                        ),
-                      ),
-                    ],
+                      ));
+                    }).toList(),
                   )
                 ],
               ),
@@ -838,6 +480,7 @@ class HomePageNew extends StatelessWidget {
       );
     });
   }
+
 
   Widget testimonialsWidget(BuildContext context) {
     final TestimonialsController testimonialsCtrl =
