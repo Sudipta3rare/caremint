@@ -216,14 +216,13 @@ class LoginSnackBar {
                                           hmCtrl.isLoading.value = false;
                                           ctrl.update();
                                           hmCtrl.update();
-                                          if(ctrl.store.read(("user_role")) == "2"){
+
+                                          //LOGIN CONDITION CHECK TO PERSIST USER LOGIN
+                                          if (ctrl.store.read("user_role") == "2" && userResponse.token != null) {
                                             Get.offAllNamed('/homenew');
-                                          }
-                                          else{
+                                          } else {
                                             ctrl.goToProvider();
                                           }
-
-
 
                                         } else if (response.statusCode == 401) {
                                           print("Unauthorized"); // Handle unauthorized login
