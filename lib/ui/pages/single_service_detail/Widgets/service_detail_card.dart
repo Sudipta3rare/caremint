@@ -21,10 +21,6 @@ class ServiceDetailCard extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
 
-
-
-
-
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         height: 160,

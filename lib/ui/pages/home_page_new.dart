@@ -401,7 +401,7 @@ class HomePageNew extends StatelessWidget {
                         height: 115,
                         width: 120,
                         decoration: BoxDecoration(
-                          color: Color(0XFFB5F446),
+                          color: Colors.white,
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(25),
                             bottomRight: Radius.circular(25),
@@ -727,7 +727,7 @@ class HomePageNew extends StatelessWidget {
     return GetBuilder<HomeController>(builder: (ctrl) {
       return Container(
         width: MediaQuery.of(context).size.width,
-        height: 320,
+        height: 300,
         decoration: BoxDecoration(
             color: Color(0XFF164378),
             boxShadow: [
@@ -760,11 +760,16 @@ class HomePageNew extends StatelessWidget {
                       (index) => Column(
                     children: [
                       if (ctrl.categoryList[index].img != null)
-                        Image.network(
-                          ctrl.categoryList[index].img.toString(),
-                          fit: BoxFit.fill,
-                          height: 63,
-                          width: 63,
+                        GestureDetector(
+                          child: Image.network(
+                            ctrl.categoryList[index].img.toString(),
+                            fit: BoxFit.fill,
+                            height: 63,
+                            width: 63,
+                          ),
+                          onTap: () {
+                            Get.to(CategoryPage());
+                          },
                         ),
                       SizedBox(height: 5),
                       if (ctrl.categoryList[index].categoryName != null)
@@ -784,17 +789,6 @@ class HomePageNew extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-
-            GestureDetector(
-              onTap: () {
-                Get.to(CategoryPage());
-              },
-              child: Text("Show All",
-                  style: GoogleFonts.poppins(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0XFF164378))),
             ),
             SizedBox(height: 10)
           ],

@@ -61,7 +61,7 @@ class CategoryPage extends StatelessWidget {
 
         return Card(
           color: Colors.blue[50],
-          shadowColor: Colors.cyan,
+          shadowColor: AppStyle().gradientColor1,
           semanticContainer: true,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           shape: RoundedRectangleBorder(
