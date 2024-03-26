@@ -432,10 +432,15 @@ class HomePageNew extends StatelessWidget {
                                 padding: EdgeInsets.only(left: 5),
                                 child: Text(
                                     review.review,
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         color: Color(0XFF005797),
                                         fontSize: 8,
-                                        fontFamily: "PoppinsRegular"))),
+                                        fontFamily: "PoppinsRegular"
+                                    )
+                                ),
+                            ),
                             Padding(
                                 padding: EdgeInsets.only(left: 5, top: 5),
                                 child: Text('"${review.userLogin}"',
