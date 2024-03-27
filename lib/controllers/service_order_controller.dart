@@ -98,7 +98,7 @@ class ServiceOrderController extends GetxController{
 
   Future<void> getTimeslots() async{
     ApiRequest(url: '${Constant.baseUrl}/api/timeslots', data: null).get(beforeSend: (){}, onSuccess: (data) async {
-     timeslot =  await Timeslots.fromJson(data as Map<String, dynamic>).body;
+     timeslot =  Timeslots.fromJson(data as Map<String, dynamic>).body;
       for (var item in timeslot){
         timings.add(item.slots);
       }

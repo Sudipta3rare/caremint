@@ -766,11 +766,14 @@ class HomePageNew extends StatelessWidget {
                     children: [
                       if (ctrl.categoryList[index].img != null)
                         GestureDetector(
-                          child: Image.network(
-                            ctrl.categoryList[index].img.toString(),
-                            fit: BoxFit.fill,
-                            height: 63,
-                            width: 63,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(31.5),
+                            child: Image.network(
+                              ctrl.categoryList[index].img.toString(),
+                              fit: BoxFit.fill,
+                              height: 63,
+                              width: 63,
+                            ),
                           ),
                           onTap: () {
                             Get.to(CategoryPage());
