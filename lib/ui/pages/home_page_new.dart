@@ -1,6 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:caremint/app_routes.dart';
 import 'package:caremint/controllers/testimonials_controller.dart';
+import 'package:caremint/controllers/testimonials_video_controller.dart';
 import 'package:caremint/ui/pages/categories/category_page.dart';
 import 'package:caremint/ui/pages/testimonial_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:video_player/video_player.dart';
 import '../../../bottombar/custom_bottom_bar.dart';
 import '../../constants/app_colors.dart';
 import '../../controllers/categories_controller/exterior_service_controller.dart';
@@ -365,6 +365,8 @@ class HomePageNew extends StatelessWidget {
                       child: categoryWidget(context)),
                   serviceWidget(context),
                   testimonialsWidget(context),
+                  SizedBox(height: 20),
+                  testimonialsVideoWidget(context),
                   clientReviewWidget(context),
                   SizedBox(height: 20),
                 ],
@@ -485,7 +487,75 @@ class HomePageNew extends StatelessWidget {
       );
     });
   }
-
+  Widget testimonialsVideoWidget(BuildContext context) {
+    final TestimonialsVideoController vCtrl = Get.put(TestimonialsVideoController());
+    final videoCtrl = Get.put(VideoPlayerController.networkUrl(Uri.parse("https://admindashboard.caremint.in/public/storage/vdo_testimonial/C7NWmy91c8WzYwCVtgWk9wqSN0ybcfw9voZkaxHa.mp4")));
+    final Future<void> initializeVideoPlayerFuture = videoCtrl.initialize();
+    return  Column(
+      children: [
+        Text(
+          "Testimonials Video",
+          style: TextStyle(
+            color: Color(0XFF005797),
+            fontSize: 18,
+            fontFamily: "PoppinsSemiBold",
+          ),
+        ),
+        SizedBox(height: 10),
+        Container(
+          height: 300,
+          child:GestureDetector(
+            child: FutureBuilder(
+              future: initializeVideoPlayerFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return AspectRatio(
+                    aspectRatio: videoCtrl.value.aspectRatio,
+                    child: VideoPlayer(videoCtrl),
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
+            onTap: (){
+              if (videoCtrl.value.isPlaying) {
+                videoCtrl.pause();
+              } else {
+                videoCtrl.play();
+              }
+            },
+          ) ,
+        ),
+        SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/images/loadingindecator.png",
+              color: Color(0XFF164378),
+              width: 24,
+              height: 24,
+            ),
+            Image.asset(
+              "assets/images/loadingindecator.png",
+              color: Color(0XFFB5F446),
+              width: 24,
+              height: 24,
+            ),
+            Image.asset(
+              "assets/images/loadingindecator.png",
+              color: Color(0XFF164378),
+              width: 24,
+              height: 24,
+            ),
+          ],
+        )
+      ],
+    );
+  }
 
   Widget testimonialsWidget(BuildContext context) {
     final TestimonialsController testimonialsCtrl =
