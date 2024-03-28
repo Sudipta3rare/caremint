@@ -13,6 +13,7 @@ import '../../constants/app_colors.dart';
 import '../../controllers/categories_controller/exterior_service_controller.dart';
 import '../../controllers/home_controller.dart';
 import '../../controllers/my_orders_controller/my_order_controller.dart';
+import '../../controllers/video_item.dart';
 import '../../models/userDataModel.dart';
 import '../components/custom_button.dart';
 import '../widget/login_snackbar.dart';
@@ -21,7 +22,7 @@ import '../widget/signup_snackbar.dart';
 class HomePageNew extends StatelessWidget {
   final HomeController ctrl = Get.put(HomeController());
   final TestimonialsController testimonialsCtrl =
-      Get.put(TestimonialsController());
+  Get.put(TestimonialsController());
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +35,18 @@ class HomePageNew extends StatelessWidget {
             elevation: 0,
             actions: [
               Builder(
-                builder: (context) => IconButton(
-                  icon: Image.asset(
-                    "assets/images/drawernavicon.png",
-                    width: 30,
-                    height: 30,
-                    color: AppStyle().gradientColor2,
-                  ),
-                  onPressed: () {
-                    Scaffold.of(context).openEndDrawer();
-                  },
-                ),
+                builder: (context) =>
+                    IconButton(
+                      icon: Image.asset(
+                        "assets/images/drawernavicon.png",
+                        width: 30,
+                        height: 30,
+                        color: AppStyle().gradientColor2,
+                      ),
+                      onPressed: () {
+                        Scaffold.of(context).openEndDrawer();
+                      },
+                    ),
               ),
             ],
             backgroundColor: Colors.blue[50],
@@ -60,7 +62,10 @@ class HomePageNew extends StatelessWidget {
           ),
         ),
         endDrawer: Drawer(
-          width: MediaQuery.of(context).size.width * 0.5,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * 0.5,
           surfaceTintColor: Colors.blue[900],
           backgroundColor: Colors.blue[50],
           child: ListView(
@@ -70,11 +75,11 @@ class HomePageNew extends StatelessWidget {
               DrawerHeader(
                 decoration: BoxDecoration(
 
-                    // borderRadius: BorderRadius.circular(10),
+                  // borderRadius: BorderRadius.circular(10),
                     gradient: LinearGradient(colors: [
-                  AppStyle().gradientColor1,
-                  AppStyle().gradientColor2
-                ])),
+                      AppStyle().gradientColor1,
+                      AppStyle().gradientColor2
+                    ])),
                 child: Visibility(
                   child: Center(
                     child: Text(
@@ -397,62 +402,75 @@ class HomePageNew extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: ctrl.reviews.map((review) {
-
                       return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),child: Container(
-                        height: 115,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(25),
-                            bottomRight: Radius.circular(25),
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  "assets/images/lisa.png",
-                                  width: 49,
-                                  height: 50,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 12),
-                                  child: Row(
-                                    children: List.generate(double.parse(review.rating).toInt(), (index) {
-                                      return Icon(Icons.star, color: Color(0XFFFFD700), size: 12);
-                                    }),
-                                  ),
-                                ),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Container(
+                            height: 115,
+                            width: 120,
 
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(25),
+                                bottomRight: Radius.circular(25),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppStyle().gradientColor2, // Add a green shadow color
+                                  spreadRadius: 2, // Spread radius
+                                  blurRadius: 5, // Blur radius
+                                  offset: Offset(0, 3), // Shadow offset
+                                ),
                               ],
                             ),
-                            Padding(
-                                padding: EdgeInsets.only(left: 5),
-                                child: Text(
-                                    review.review,
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Color(0XFF005797),
-                                        fontSize: 8,
-                                        fontFamily: "PoppinsRegular"
-                                    )
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/lisa.png",
+                                      width: 49,
+                                      height: 50,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(bottom: 12),
+                                      child: Row(
+                                        children: List.generate(
+                                            double.parse(review.rating)
+                                                .toInt(), (index) {
+                                          return Icon(Icons.star,
+                                              color: Color(0XFFFFD700),
+                                              size: 12);
+                                        }),
+                                      ),
+                                    ),
+
+                                  ],
                                 ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 5),
+                                  child: Text(
+                                      review.review,
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Color(0XFF005797),
+                                          fontSize: 8,
+                                          fontFamily: "PoppinsRegular"
+                                      )
+                                  ),
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.only(left: 5, top: 5),
+                                    child: Text('"${review.userLogin}"',
+                                        style: TextStyle(
+                                            color: Color(0XFF005797),
+                                            fontSize: 12,
+                                            fontFamily: "PoppinsBold"))),
+                              ],
                             ),
-                            Padding(
-                                padding: EdgeInsets.only(left: 5, top: 5),
-                                child: Text('"${review.userLogin}"',
-                                    style: TextStyle(
-                                        color: Color(0XFF005797),
-                                        fontSize: 12,
-                                        fontFamily: "PoppinsBold"))),
-                          ],
-                        ),
-                      ));
+                          ));
                     }).toList(),
                   )
                 ],
@@ -487,47 +505,35 @@ class HomePageNew extends StatelessWidget {
       );
     });
   }
+
   Widget testimonialsVideoWidget(BuildContext context) {
     final TestimonialsVideoController vCtrl = Get.put(TestimonialsVideoController());
-    final videoCtrl = Get.put(VideoPlayerController.networkUrl(Uri.parse("https://admindashboard.caremint.in/public/storage/vdo_testimonial/C7NWmy91c8WzYwCVtgWk9wqSN0ybcfw9voZkaxHa.mp4")));
-    final Future<void> initializeVideoPlayerFuture = videoCtrl.initialize();
-    return  Column(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          "Testimonials Video",
-          style: TextStyle(
-            color: Color(0XFF005797),
-            fontSize: 18,
-            fontFamily: "PoppinsSemiBold",
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Text(
+            "Testimonials Video",
+            style: TextStyle(
+              color: Color(0XFF005797),
+              fontSize: 18,
+              fontFamily: "PoppinsSemiBold",
+            ),
           ),
         ),
         SizedBox(height: 10),
-        Container(
-          height: 300,
-          child:GestureDetector(
-            child: FutureBuilder(
-              future: initializeVideoPlayerFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return AspectRatio(
-                    aspectRatio: videoCtrl.value.aspectRatio,
-                    child: VideoPlayer(videoCtrl),
-                  );
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
-            onTap: (){
-              if (videoCtrl.value.isPlaying) {
-                videoCtrl.pause();
-              } else {
-                videoCtrl.play();
-              }
-            },
-          ) ,
+        Obx(() =>
+              Container(
+                height: 200,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: vCtrl.videoUrls.length,
+                  itemBuilder: (context, index) {
+                    return VideoItem(url: vCtrl.videoUrls[index]);
+                  },
+                ),
+              ),
         ),
         SizedBox(height: 10),
         Row(
@@ -553,13 +559,14 @@ class HomePageNew extends StatelessWidget {
             ),
           ],
         )
+
       ],
     );
   }
+}
 
   Widget testimonialsWidget(BuildContext context) {
-    final TestimonialsController testimonialsCtrl =
-        Get.put(TestimonialsController());
+    final TestimonialsController testimonialsCtrl = Get.put(TestimonialsController());
     return Column(
       children: [
         Text(
@@ -572,36 +579,44 @@ class HomePageNew extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Container(
-            // Wrap ListView.builder with Container
-            height: 150, // Specify a height for the ListView
-            child: Obx(() => ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: testimonialsCtrl.imageUrls.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                        onTap: () {
-                          Get.to(Testimonials());
-                        },
-                        child: Container(
-                          height: 120,
-                          width: 190,
-                          margin: EdgeInsets.all(8),
-                          // Add margin between images
-                          decoration: BoxDecoration(
-                            color: Color(0XFFFFFF),
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(
-                              color: Color(0XFFB5F446),
-                              width: 2,
-                            ),
-                          ),
-                          child: Image.network(
-                            testimonialsCtrl.imageUrls[index],
-                            fit: BoxFit.cover,
-                          ),
-                        ));
-                  },
-                ))),
+          height: 150,
+          child: Obx(() => ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: testimonialsCtrl.imageUrls.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  Get.to(Testimonials());
+                },
+                child: Container(
+                  height: 120,
+                  width: 190,
+                  margin: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Color(0XFFFFFF),
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+                      color: AppStyle().gradientColor1, // Add a green border
+                      width: 2,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppStyle().gradientColor2.withOpacity(0.5), // Shadow color
+                        spreadRadius: 2, // Spread radius
+                        blurRadius: 5, // Blur radius
+                        offset: Offset(0, 3), // Shadow offset
+                      ),
+                    ],
+                  ),
+                  child: Image.network(
+                    testimonialsCtrl.imageUrls[index],
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              );
+            },
+          )),
+        ),
         SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -804,6 +819,7 @@ class HomePageNew extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 300,
         decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
             color: Color(0XFF164378),
             boxShadow: [
               BoxShadow(
@@ -827,6 +843,7 @@ class HomePageNew extends StatelessWidget {
             SizedBox(height: 20),
             Expanded(
               child: GridView(
+                physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                 ),
@@ -855,7 +872,7 @@ class HomePageNew extends StatelessWidget {
                           alignment: Alignment.bottomCenter,
                           child: Text(
                             textAlign: TextAlign.center,
-                            ctrl.categoryList[index].categoryName.toString(),
+                            ctrl.categoryList[index].categoryName.toString()+"s",
                             style: GoogleFonts.poppins(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
@@ -1015,4 +1032,3 @@ class HomePageNew extends StatelessWidget {
       ),
     );
   }
-}

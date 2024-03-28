@@ -40,7 +40,7 @@ class HomeController extends GetxController {
     super.onInit();
 
     await fetchReviews();
-    getCategory();
+    await getCategory();
     await getUserData();
     // Call update here if necessary
   }
@@ -112,7 +112,7 @@ class HomeController extends GetxController {
     categoryList=[];
   }
 
-  void getCategory() async {
+  Future<void> getCategory() async {
     isLoading.value = true;
     CategoryProvider().getCategory
       (onSuccess: (categoryItems){
@@ -126,13 +126,13 @@ class HomeController extends GetxController {
         }
         print(categoryList[0].categoryName);
       }
+      update();
     },
         onError: (error){
           categoryList.clear();
 
         });
     isLoading.value = false;
-    update();
   }
 
 
