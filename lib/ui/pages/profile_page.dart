@@ -20,89 +20,91 @@ class ProfilePage extends StatelessWidget {
                   width: double.maxFinite,
                   height: double.maxFinite,
                   color: const Color(0XFF164378),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            // border: Border.all(color: Colors.white, width: 2.0),
-                          ),
-                          child: ClipRRect(
+                  child: Center(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
-                              child: Image.asset(
-                                  'assets/images/profilepicture.png',
-                                  height: 200,
-                                  width: 200,
-                                  fit: BoxFit
-                                      .cover) // Replace 'default_image.png' with your actual default image asset path
+                              // border: Border.all(color: Colors.white, width: 2.0),
+                            ),
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.asset(
+                                    'assets/images/profilepicture.png',
+                                    height: 200,
+                                    width: 200,
+                                    fit: BoxFit
+                                        .cover) // Replace 'default_image.png' with your actual default image asset path
+                            ),
                           ),
-                        ),
-                        Text(controller.store.read("user_name") ?? "", style: TextStyle(color: Colors.white,
-                            fontSize: 25,
-                            fontFamily: "PoppinsRegular")),
-                        SizedBox(height: 50),
-                        Container(
-                            alignment: Alignment.center,
-                            width: 305,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.blue[50],
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                  25.0)),
-                            ),
-                            child: Text(
-                                controller.store.read("user_email") ?? "", style: TextStyle(color: Color(
-                                0XFF164378),
-                                fontSize: 20,
-                                fontFamily: "PoppinsRegular"))
-                        ),
+                          Text(controller.store.read("user_name") ?? "", style: TextStyle(color: Colors.white,
+                              fontSize: 25,
+                              fontFamily: "PoppinsRegular")),
+                          SizedBox(height: 50),
+                          Container(
+                              alignment: Alignment.center,
+                              width: 305,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.blue[50],
+                                borderRadius: BorderRadius.all(Radius.circular(
+                                    25.0)),
+                              ),
+                              child: Text(
+                                  controller.store.read("user_email") ?? "", style: TextStyle(color: Color(
+                                  0XFF164378),
+                                  fontSize: 20,
+                                  fontFamily: "PoppinsRegular"))
+                          ),
 
-                        SizedBox(height: 25),
+                          SizedBox(height: 25),
 
-                        Container(
-                            alignment: Alignment.center,
-                            width: 305,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color:Colors.blue[50],
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                  25.0)),
-                            ),
-                            child: Text(controller.store.read("user_phone") ?? "", style: TextStyle(color: Color(
-                                0XFF164378),
-                                fontSize: 20,
-                                fontFamily: "PoppinsRegular"))
-                        ),
+                          Container(
+                              alignment: Alignment.center,
+                              width: 305,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color:Colors.blue[50],
+                                borderRadius: BorderRadius.all(Radius.circular(
+                                    25.0)),
+                              ),
+                              child: Text(controller.store.read("user_phone") ?? "", style: TextStyle(color: Color(
+                                  0XFF164378),
+                                  fontSize: 20,
+                                  fontFamily: "PoppinsRegular"))
+                          ),
 
-                        SizedBox(height: 25),
+                          SizedBox(height: 25),
 
-                        Container(
-                            alignment: Alignment.center,
-                            width: 305,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color:Colors.blue[50],
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                  25.0)),
-                            ),
-                            child: Text(
-                                controller.store.read("user_pincode") ?? "", style: TextStyle(color: Color(
-                                0XFF164378),
-                                fontSize: 20,
-                                fontFamily: "PoppinsRegular"))
-                        ),
+                          Container(
+                              alignment: Alignment.center,
+                              width: 305,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color:Colors.blue[50],
+                                borderRadius: BorderRadius.all(Radius.circular(
+                                    25.0)),
+                              ),
+                              child: Text(
+                                  controller.store.read("user_pincode") ?? "", style: TextStyle(color: Color(
+                                  0XFF164378),
+                                  fontSize: 20,
+                                  fontFamily: "PoppinsRegular"))
+                          ),
 
-                        SizedBox(height: 40),
+                          SizedBox(height: 40),
 
-                        Divider(
-                            indent: 135,
-                            endIndent: 135,
-                            color: Colors.blue[50]),
-                      ],
+                          Divider(
+                              indent: 135,
+                              endIndent: 135,
+                              color: Colors.blue[50]),
+                        ],
 
+                      ),
                     ),
                   )
               ),
