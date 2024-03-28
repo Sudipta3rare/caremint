@@ -1,7 +1,6 @@
 import 'package:caremint/franchise/views/tabview.dart';
 import 'package:caremint/ui/pages/categories/category_page.dart';
 import 'package:caremint/ui/pages/categories/exterior_services.dart';
-import 'package:caremint/ui/pages/home_page.dart';
 import 'package:caremint/ui/pages/home_page_new.dart';
 import 'package:caremint/ui/pages/my_orders_page.dart';
 import 'package:caremint/ui/pages/profile_page.dart';

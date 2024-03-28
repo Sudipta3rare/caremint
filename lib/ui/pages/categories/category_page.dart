@@ -60,8 +60,8 @@ class CategoryPage extends StatelessWidget {
         final isComingSoon = index == 4 || index == 5;
 
         return Card(
-          color: Colors.blue[50],
-          shadowColor: AppStyle().gradientColor1,
+          color: AppStyle().gradientColor1,
+          shadowColor: AppStyle().gradientColor2,
           semanticContainer: true,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           shape: RoundedRectangleBorder(
@@ -105,33 +105,39 @@ class CategoryPage extends StatelessWidget {
                             alignment: Alignment.center,
                             children: [
                               RippleAnimation(
-                                color: Color(0XFFB5F446),
+                                color: AppStyle().gradientColor4,
                                 delay: const Duration(milliseconds: 3000),
                                 repeat: true,
                                 minRadius: 50,
                                 ripplesCount: 4,
                                 duration: const Duration(milliseconds: 7000),
-                                child: ClipOval(
-                                  child: CachedNetworkImage(
-                                    placeholder: (context, url) => const CircularProgressIndicator(),
-                                    imageUrl: catImg,
-                                    fit: BoxFit.cover, // Use cover to fill the circular area
-                                    width: 120, // Specify width
-                                    height: 120, // Specify height
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(color: AppStyle().gradientColor2, width: 2), // Add a green border
                                   ),
-                                )
+                                  child: ClipOval(
+                                    child: CachedNetworkImage(
+                                      placeholder: (context, url) => const CircularProgressIndicator(),
+                                      imageUrl: catImg,
+                                      fit: BoxFit.cover,
+                                      width: 120,
+                                      height: 120,
+                                    ),
+                                  ),
+                                ),
                               ),
                               if (isComingSoon)
                                 Positioned(
                                   child: Container(
-                                    color: Color(0XFFB5F446), // Background color of the "Coming Soon" label
+                                    color: AppStyle().gradientColor4, // Background color of the "Coming Soon" label
                                     padding: EdgeInsets.all(8),
                                     child: Text(
                                       "Coming Soon",
                                       style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.blue[900], // Text color of the "Coming Soon" label
+                                        color: AppStyle().gradientColor3, // Text color of the "Coming Soon" label
                                       ),
                                     ),
                                   ),

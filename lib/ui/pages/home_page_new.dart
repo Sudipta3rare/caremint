@@ -872,7 +872,7 @@ class HomePageNew extends StatelessWidget {
                           alignment: Alignment.bottomCenter,
                           child: Text(
                             textAlign: TextAlign.center,
-                            ctrl.categoryList[index].categoryName.toString()+"s",
+                            ctrl.categoryList[index].categoryName.toString(),
                             style: GoogleFonts.poppins(
                               fontSize: 10,
                               fontWeight: FontWeight.w600,
